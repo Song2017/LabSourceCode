@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Lesson 15 - List and Table Properties</title>
+  <style>
+
+#table1 {
+  border:1px solid black;
+  border-spacing:1.5em; 
+  caption-side:bottom;
+}  
+
+#table2 td {
+  border:1px solid black;
+  border-spacing:1px;
+}
+
+tr.firstrow {
+  border:1px solid black;
+  border-spacing:1px;
+  background-color:#999999;
+}
+
+
+col.firstcolumn {
+  border:1px solid black;
+  border-spacing:1px;
+  background-color:#999999;
+}
+
+
+#table5 {border-collapse: seperate; border-spacing: 0px; border: 2px solid black; caption-side:top;}
+#table5 thead th{}
+#table5 thead td{}
+#table5 tfoot th{}
+#table5 tfoot td{}
+#table5 tbody th{}
+#table5 tbody td{border-width: 1px; border-style:solid; border-color: blue;}
+
+
+#table6 {border-collapse: collapse;  border: 2px solid black; caption-side:top;}
+#table6 thead{}
+#table6 tbody tr{}
+#table6 tbody td{border: 1px solid blue;}
+#table6 colgroup{}
+#table6 col{}
+#table6 td{}
+#table6 th{}
+#table6 tfoot{}
+
+
+  </style>
+</head>
+<body>
+
+<h1>Lists</h1>
+
+<h2>list-style-type</h2>
+
+<ul>
+  <li style="list-style-type:none;">list-style-type:none;</li>
+  <li style="list-style-type:disc;">list-style-type:disc;</li>
+  <li style="list-style-type:circle;">list-style-type:circle;</li>
+  <li style="list-style-type:square;">list-style-type:square;</li>
+  <li style="list-style-type:decimal-leading-zero;">list-style-type:decimal-leading-zero;</li>
+  <li style="list-style-type:upper-roman;">list-style-type:upper-roman;</li>
+  <li style="list-style-type:upper-alpha;">list-style-type:upper-alpha;</li>
+  <li style="list-style-type:lower-alpha;">list-style-type:lower-alpha;</li>
+  <li style="list-style-type:lower-greek;">list-style-type:lower-greek;</li>
+</ul>
+
+<h2>list-style-image</h2>
+
+<ul>
+  <li style="list-style-image:none;">list-style-image:none;</li>
+  <li style="list-style-image:url(http://placekitten.com/10/10);">list-style-image:url(http://placekitten.com/10/10);</li>
+  <li style="list-style-image:url(http://placekitten.com/50/50);">list-style-image:url(http://placekitten.com/50/50);</li>
+</ul>
+
+<h2>line-style-position</h2>
+
+<ul>
+  <li style="list-style-position:outside;">list-style-position:outside;</li>
+  <li style="list-style-position:inside;">list-style-position:inside;</li>
+</ul>
+
+<h2>Shortcut for list-styles</h2>
+
+
+list-style: [list-style-type] [list-style-position] [list-style-image]
+
+
+
+<h1>Creating a horizontal menu with unordered lists</h1>
+
+<p>The key is &quot;float:left;&quot;</p>
+
+<ul>
+  <li style="list-style-type:none;float:left;margin-right:10px;">Home</li>
+  <li style="list-style-type:none;float:left;margin-right:10px;">About</li>
+  <li style="list-style-type:none;float:left;margin-right:10px;">Contact Us</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<hr>
+
+<h1>Tables</h1>
+
+<p>Styling tables is a bit more involved than working with fonts, text, lists, etc.  There are so many ways to slice and dice the formatting of cells, rows, columns and the table itself.  Here's a few examples to understand the IMPACT of various settings.  A fully styled table is the domain of a talented designer.
+
+<h2>Example 1</h2>
+
+<p>I've put a border around the entire table (border:1px solid black), AND set added a &quot;margin&quot; between the various borders (border-spacing:1.5em;)  Caption is on bottom (caption:bottom;)
+
+<table id="table1">
+  <caption>This is the caption, the style is set to caption-side:bottom;
+  <tr>
+    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut imperdiet tempor nisl sed ultricies. Aenean accumsan dolor et libero iaculis adipiscing. Suspendisse quis ante sit amet dui tempor scelerisque in a lorem. Aenean mi odio, sodales in lacinia nec, feugiat id magna. Quisque pretium nisl nec massa porttitor venenatis. Quisque quis lacus sed nisi ultrices tincidunt. Nam mollis tortor vel lacus fermentum feugiat. Sed laoreet bibendum felis, sit amet euismod lectus vulputate in. Donec felis leo, auctor eu faucibus a, molestie sed tellus. 
+    <td>Lorem ipsum dolor sit amet,
+    <td>Lorem
+  <tr>
+    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut imperdiet tempor nisl sed ultricies. Aenean accumsan dolor et libero iaculis adipiscing. Suspendisse quis ante sit amet dui tempor scelerisque in a lorem. Aenean mi odio, sodales in lacinia nec, feugiat id magna. Quisque pretium nisl nec massa porttitor venenatis. Quisque quis lacus sed nisi ultrices tincidunt. Nam mollis tortor vel lacus fermentum feugiat. Sed laoreet bibendum felis, sit amet euismod lectus vulputate in. Donec felis leo, auctor eu faucibus a, molestie sed tellus. 
+    <td>Lorem ipsum dolor sit amet,
+    <td>Lorem
+</table>
+
+<hr>
+
+<h2>Example 2</h2>
+
+<p>Here I applied the border to the cells instead of the entire table.  You can see a 1px border space.  This <strong>could</strong> be removed using the table's cellspacing='0' attribute.</p>
+
+<table id="table2" cellspacing="0">
+  <tr>
+    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut imperdiet tempor nisl sed ultricies. Aenean accumsan dolor et libero iaculis adipiscing. Suspendisse quis ante sit amet dui tempor scelerisque in a lorem. Aenean mi odio, sodales in lacinia nec, feugiat id magna. Quisque pretium nisl nec massa porttitor venenatis. Quisque quis lacus sed nisi ultrices tincidunt. Nam mollis tortor vel lacus fermentum feugiat. Sed laoreet bibendum felis, sit amet euismod lectus vulputate in. Donec felis leo, auctor eu faucibus a, molestie sed tellus. 
+    <td>Lorem ipsum dolor sit amet,
+    <td>Lorem
+  <tr>
+    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut imperdiet tempor nisl sed ultricies. Aenean accumsan dolor et libero iaculis adipiscing. Suspendisse quis ante sit amet dui tempor scelerisque in a lorem. Aenean mi odio, sodales in lacinia nec, feugiat id magna. Quisque pretium nisl nec massa porttitor venenatis. Quisque quis lacus sed nisi ultrices tincidunt. Nam mollis tortor vel lacus fermentum feugiat. Sed laoreet bibendum felis, sit amet euismod lectus vulputate in. Donec felis leo, auctor eu faucibus a, molestie sed tellus. 
+    <td>Lorem ipsum dolor sit amet,
+    <td>Lorem
+</table>
+
+<hr>
+
+<h2>Example 3</h2>
+
+<p>Here I'm applying a background-color to an entire row.  Notice, we still have the 1px border space (per above).  We will fix that in the next example.</p>
+
+<table id="table3">
+  <tr class="firstrow">
+    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut imperdiet tempor nisl sed ultricies. Aenean accumsan dolor et libero iaculis adipiscing. Suspendisse quis ante sit amet dui tempor scelerisque in a lorem. Aenean mi odio, sodales in lacinia nec, feugiat id magna. Quisque pretium nisl nec massa porttitor venenatis. Quisque quis lacus sed nisi ultrices tincidunt. Nam mollis tortor vel lacus fermentum feugiat. Sed laoreet bibendum felis, sit amet euismod lectus vulputate in. Donec felis leo, auctor eu faucibus a, molestie sed tellus. 
+    <td>Lorem ipsum dolor sit amet,
+    <td>Lorem
+  <tr>
+    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut imperdiet tempor nisl sed ultricies. Aenean accumsan dolor et libero iaculis adipiscing. Suspendisse quis ante sit amet dui tempor scelerisque in a lorem. Aenean mi odio, sodales in lacinia nec, feugiat id magna. Quisque pretium nisl nec massa porttitor venenatis. Quisque quis lacus sed nisi ultrices tincidunt. Nam mollis tortor vel lacus fermentum feugiat. Sed laoreet bibendum felis, sit amet euismod lectus vulputate in. Donec felis leo, auctor eu faucibus a, molestie sed tellus. 
+    <td>Lorem ipsum dolor sit amet,
+    <td>Lorem
+</table>
+
+
+<hr>
+
+<h2>Example 4</h2>
+
+<p>Here I'm applying a background-color to an entire column.  I also set the cellspacing attribute to 0 on the table to remove the default 1px space between cells.</p>
+
+<table id="table4" cellspacing="0">
+  <col class="firstcolumn">
+  <col>
+  <col class="lastcolumn">
+  <tr>
+    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut imperdiet tempor nisl sed ultricies. Aenean accumsan dolor et libero iaculis adipiscing. Suspendisse quis ante sit amet dui tempor scelerisque in a lorem. Aenean mi odio, sodales in lacinia nec, feugiat id magna. Quisque pretium nisl nec massa porttitor venenatis. Quisque quis lacus sed nisi ultrices tincidunt. Nam mollis tortor vel lacus fermentum feugiat. Sed laoreet bibendum felis, sit amet euismod lectus vulputate in. Donec felis leo, auctor eu faucibus a, molestie sed tellus. 
+    <td>Lorem ipsum dolor sit amet,
+    <td>Lorem
+  <tr>
+    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut imperdiet tempor nisl sed ultricies. Aenean accumsan dolor et libero iaculis adipiscing. Suspendisse quis ante sit amet dui tempor scelerisque in a lorem. Aenean mi odio, sodales in lacinia nec, feugiat id magna. Quisque pretium nisl nec massa porttitor venenatis. Quisque quis lacus sed nisi ultrices tincidunt. Nam mollis tortor vel lacus fermentum feugiat. Sed laoreet bibendum felis, sit amet euismod lectus vulputate in. Donec felis leo, auctor eu faucibus a, molestie sed tellus. 
+    <td>Lorem ipsum dolor sit amet,
+    <td>Lorem
+</table>
+
+<hr>
+
+<h2>Example 5</h2>
+
+<p>In examples 5 and 6, we play with the border-collapse attribute.  Setting it to separate will double the borders between the cells.</p>
+
+<table id="table5">
+<col>
+<col>
+<col>
+<thead>
+  <tr>
+    <th>Header 1
+    <th>H2
+    <th>H3
+<tfoot>
+  <tr>
+    <td>Footer 1
+    <td>F2
+    <td>F3
+<tbody>
+  <tr>
+    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut imperdiet tempor nisl sed ultricies. Aenean accumsan dolor et libero iaculis adipiscing. Suspendisse quis ante sit amet dui tempor scelerisque in a lorem. Aenean mi odio, sodales in lacinia nec, feugiat id magna. Quisque pretium nisl nec massa porttitor venenatis. Quisque quis lacus sed nisi ultrices tincidunt. Nam mollis tortor vel lacus fermentum feugiat. Sed laoreet bibendum felis, sit amet euismod lectus vulputate in. Donec felis leo, auctor eu faucibus a, molestie sed tellus. 
+    <td>Lorem ipsum dolor sit amet,
+    <td>Lorem
+  <tr>
+    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut imperdiet tempor nisl sed ultricies. Aenean accumsan dolor et libero iaculis adipiscing. Suspendisse quis ante sit amet dui tempor scelerisque in a lorem. Aenean mi odio, sodales in lacinia nec, feugiat id magna. Quisque pretium nisl nec massa porttitor venenatis. Quisque quis lacus sed nisi ultrices tincidunt. Nam mollis tortor vel lacus fermentum feugiat. Sed laoreet bibendum felis, sit amet euismod lectus vulputate in. Donec felis leo, auctor eu faucibus a, molestie sed tellus. 
+    <td>Lorem ipsum dolor sit amet,
+    <td>Lorem
+</table>
+
+<hr>
+
+<h2>Example 6</h2>
+
+<p>In this example, we set the border-collapse attribute to collapsed.  As a result, there's only a 1px border around the cells.</p>
+
+<table id="table6">
+<col>
+<col>
+<col>
+<thead>
+  <tr>
+    <th>Header 1
+    <th>H2
+    <th>H3
+<tfoot>
+  <tr>
+    <td>Footer 1
+    <td>F2
+    <td>F3
+<tbody>
+  <tr>
+    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut imperdiet tempor nisl sed ultricies. Aenean accumsan dolor et libero iaculis adipiscing. Suspendisse quis ante sit amet dui tempor scelerisque in a lorem. Aenean mi odio, sodales in lacinia nec, feugiat id magna. Quisque pretium nisl nec massa porttitor venenatis. Quisque quis lacus sed nisi ultrices tincidunt. Nam mollis tortor vel lacus fermentum feugiat. Sed laoreet bibendum felis, sit amet euismod lectus vulputate in. Donec felis leo, auctor eu faucibus a, molestie sed tellus. 
+    <td>Lorem ipsum dolor sit amet,
+    <td>Lorem
+  <tr>
+    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut imperdiet tempor nisl sed ultricies. Aenean accumsan dolor et libero iaculis adipiscing. Suspendisse quis ante sit amet dui tempor scelerisque in a lorem. Aenean mi odio, sodales in lacinia nec, feugiat id magna. Quisque pretium nisl nec massa porttitor venenatis. Quisque quis lacus sed nisi ultrices tincidunt. Nam mollis tortor vel lacus fermentum feugiat. Sed laoreet bibendum felis, sit amet euismod lectus vulputate in. Donec felis leo, auctor eu faucibus a, molestie sed tellus. 
+    <td>Lorem ipsum dolor sit amet,
+    <td>Lorem
+</table>
+
+
+<hr>
+
+
+
+
+
+
+</body>
+</html>

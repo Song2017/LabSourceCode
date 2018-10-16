@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<meta charset:utf-8>
+<title>Lesson 14 - Color and Background Properties</title>
+
+<h1>Defining Colors</h1>
+
+<p style="color:blue;">color:blue;</p>
+<p style="color:#0000FF;">color:#0000FF;</p>
+<p style="color:rgb(0,0,255)">color:rgb(0,0,255);</p>
+
+<h1>background-color</h1>
+
+<div style="background-color:#999999;width:200px;height:50px;margin-bottom:10px;">
+  <p>background-color:#999999;</p>
+</div>
+
+<h1>background-image</h1>
+
+<div style="background-image:none;width:200px;height:200px;margin-bottom:10px;border:1px solid black;">
+  <p>background-image:none;</p>
+</div>
+
+<div style="background-image:url(http://placekitten.com/50/50);width:200px;height:200px;margin-bottom:10px;border:1px solid black;">
+  <p style="color:white;">background-image:url(http://placekitten.com/50/50);</p>
+</div>
+
+<h1>background-repeat</h1>
+
+<div style="background-image:url(http://placekitten.com/50/50);background-repeat:repeat;width:200px;height:200px;margin-bottom:10px;border:1px solid black;">
+  <p style="color:white;">background-repeat:repeat;</p>
+</div>
+
+<div style="background-image:url(http://placekitten.com/50/50);background-repeat:repeat-x;width:200px;height:200px;margin-bottom:10px;border:1px solid black;">
+  <p style="color:white;">background-repeat:repeat-x;</p>
+</div>
+
+<div style="background-image:url(http://placekitten.com/50/50);background-repeat:repeat-y;width:200px;height:200px;margin-bottom:10px;border:1px solid black;">
+  <p">background-repeat:repeat-y;</p>
+</div>
+
+<div style="background-image:url(http://placekitten.com/50/50);background-repeat:no-repeat;width:200px;height:200px;margin-bottom:10px;border:1px solid black;">
+  <p>background-repeat:no-repeat;</p>
+</div>
+
+<h1>background-attachment</h1>
+
+<p>Note: Seems to only be applicable to the body of the entire page.  Usage:<br><br>
+
+background-image:url(http://placekitten.com/100/100);<br>
+background-repeat:no-repeat;<br>
+<strong>background-attachment:fixed;</strong><br><br>
+
+scroll - Background image DOES scroll with the page.
+fixed - Background image DOES NOT scroll with the page.
+
+<h1>background-position</h1>
+
+<div style="background-image:url(http://placekitten.com/50/50);background-repeat:no-repeat;background-position:right top;width:200px;height:200px;margin-bottom:10px;border:1px solid black;">
+  <p>background-position:right top;</p>
+</div>
+
+
+<h1>background-shorthand</h1>
+
+background: [color] [image] [position] [repeat] [attachment]
+
+

@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Lesson 18 - Embedding Video in HTML5</title>
+</head>
+
+<body>
+
+  <h1>Embedding Video in HTML5</h1>
+
+  <video src="30seconds.mp4" controls width="960" height="540" autoplay muted poster="poster.jpg">
+    <p>Unfortunately your browser cannot play the video format. You may
+      <a href="30seconds.mp4">right-click this link and choose Save As</a> to download this video instead.</p>
+  </video>
+
+
+  <p>There's no video codec format standard. Internet Explorer supports the popular H.264 codec (typically .mp4, but other formats
+    may include H.264 as well).</p>
+
+  <p>This will only work for "progressive downloads" (aka, "pseudo-streaming", not true streaming (using a media server, so
+    no RTMP/E/T/S, MMS, etc.). Therefore no DRM, etc. Maybe some day ...</p>
+
+  <ul>
+    <li>poster - what is to be displayed during download of video</li>
+    <video  poster="poster.jpg">
+        <p>Unfortunately your browser cannot play the video format. You may
+          <a href="30seconds.mp4">right-click this link and choose Save As</a> to download this video instead.</p>
+      </video>
+    <li>controls - turns on the video player controls</li>
+    <li>autoplay - starts playing video as soon as completely downloaded</li>
+    <li>preload - start downloading video immediately so that its ready when the user wants to play it</li>
+    <li>loop - continuous loop</li>
+    <li>muted - not working yet in IE, turns off volume</li>
+    <li>autoplay - starts playing video as soon as completely downloaded</li>
+    <li>width / height - control dimensions</li>
+  </ul>
+
+</body>
+
+</html>

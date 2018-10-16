@@ -1,0 +1,94 @@
+﻿h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    color: purple;
+}
+
+.important {
+    color: red
+}
+
+#somesuch {
+    color: blue
+}
+
+#somesuch a {
+    color: red;
+}
+
+
+.myclass {
+    color: limegreen;
+    font-size: 1.1em;
+}
+
+#12 myclass {
+    color: limegreen;
+    font-size: 1.1em;
+}
+
+span.important {
+    color: darkred;
+}
+
+h1,
+h2,
+h3,
+h4,
+p.important {
+    margin-left: 50px;
+}
+
+a:link {
+    text-decoration: none;
+    color: greenyellow;
+}
+
+a:hover {
+    text-decoration: underline;
+    color:blue;
+}
+
+a:visited {
+    color: darkgreen;
+}
+
+p::first-letter {
+    font-size: 2em;
+}
+
+article:before {
+    content: '******'
+}
+
+p:first-of-type {
+    margin-right: 200px
+}
+
+li:first-child {
+    font-style: italic;
+}
+
+li:last-child {
+    font-weight: bold;
+}
+
+li:nth-of-type(3) {
+    text-decoration: underline;
+}
+
+span[title] {
+    color: black;
+}
+
+span[title='first idea'] {
+    text-decoration: line-through;
+    color: blue;
+}
+
+a[href^="email"] {
+    font-size: 2em;
+}
+
+span[title$='idea'] {
+    text-decoration: overline;
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>HTML5 and CSS3 Fundamentals</title>
+</head>
+
+<body>
+   
+    <script>
+
+function f(a,b,c) {
+    //基础类型按值传递，不会影响原始值，所以x还是4
+    a = 3;
+    //数组也是object，传进来的是原始值的地址，所以原始值也改变
+    b.push("foo");
+    // c指向z， 同数组
+    c.first = false;
+}
+
+var x = 4;
+var y = ["eeny", "miny", "mo"];
+var z = {first: true};
+f(x,y,z);
+console.log(x, y, z.first); // 4, ["eeny", "miny", "mo", "foo"], false
+
+var a = ["1", "2", {foo:"bar"}];
+var b = a[1]; // 按值传递， b是"2";
+var c = a[2]; // c是{foo:"bar"}
+a[1] = "4";   // a is now ["1", "4", {foo:"bar"}]; b仍是被声明时的值 2
+a[2] = "5";   // a is now ["1", "4", "5"];  
+console.log(b, c.foo); // "2" "bar"
+b=13;
+console.log(a); //["1", "4", "5"]
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Lesson 12 - Fun With CSS Selectors</title>
+  <link type="text/css" rel="stylesheet" href="styles.css" media="all">
+  <style type="text/css">
+  #12 {
+
+    color: red
+  }
+  </style>
+</head>
+
+<body>
+  <h1>Lesson 12 - Fun With CSS Selectors</h1>
+
+  <h2>This is a gratuitous use of the h2</h2>
+
+  <h3>Ditto</h3>
+
+  <article id='12'>
+
+
+    <pre class='myclass'>
+  CSS purpose
+  Casecading style sheets: casecading means many style sheet or styles are applied that affect a given html5 element
+
+  Applying style/presentation
+  Styles: sets of name/value pairs representing visual attributes to apply to html elements. ex. font,color,background
+
+  format
+  one line/nulti line
+
+  defining 
+  a[href^="email"] {
+    font-size: 2em;
+  }
+
+  link to styles
+  link type="text/css" rel="stylesheet" href="styles.css" media="all"
+  @importurl(styles.css);
+
+  CSS Selectors
+  Tags: h1 {}
+  ID: #firstParagraph{}
+  Class: .importMessage{}
+    div class="class1 class2"
+    div class="class3"
+  
+  inheritance of styles
+  inherit, none, normal, auto
+
+  Cascading Order of precedence
+  high => low
+  User >inline >Media >!Important >Specific >Order >Inheerited from Parent >Browser Default
+
+  F12 Developing Tools
+  可以实时的查看css的效果。
+</pre >
+<p>
+
+  <a href="../08_html5_list.html" onclick="alert('test'); return false;">new page</a> 
+</p>
+ 
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      <a href="http://www.wikipedia.org" onclick="alert('email');return false;">Ut ac tellus sit amet felis interdum sollicitudin et in ante.</a> Nam pellentesque, ante posuere consectetur pharetra,
+      velit nibh consectetur felis, id consectetur nisi nibh sit amet turpis. Etiam vitae commodo diam. Vestibulum ante ipsum
+      primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+      <span class="important">Morbi vel urna dolor</span>. Aenean vitae dolor feugiat erat convallis euismod. Duis blandit pretium blandit. Quisque
+      diam nisl, faucibus quis cursus nec, laoreet sit amet urna. In mollis semper risus a vehicula. Maecenas at neque massa,
+      ac rutrum felis. Donec adipiscing eleifend turpis venenatis auctor. Phasellus consectetur nibh et urna tempus at molestie
+      leo sodales. Donec faucibus faucibus ultricies. Nunc at aliquet nunc.</p>
+
+    <ul>
+      <li>Vestibulum luctus diam non tellus euismod placerat. Quisque adipiscing euismod est, a imperdiet dolor ultricies et.</li>
+      <li>Fusce quis libero leo, non porta erat. Suspendisse tincidunt ligula metus, imperdiet congue tortor. Morbi venenatis
+        aliquet elit ut tincidunt. Suspendisse mattis pharetra blandit.</li>
+      <li>Ut purus metus, mollis quis dapibus sed, pulvinar a nisl.</li>
+      <li>Etiam aliquam, leo gravida aliquam tristique, justo nulla mattis massa, ac vulputate purus erat ac ipsum. In vitae
+        erat quis eros fermentum blandit. Etiam ut dui diam.</li>
+      <li>Aenean lobortis rhoncus pellentesque. Nunc euismod, sem vitae imperdiet dignissim, nunc nisl interdum ligula, vel congue
+        erat dolor id lectus. Aenean mattis dui non metus vulputate dictum.</li>
+    </ul>
+
+  </article>
+
+  <article>
+
+    <p id="somesuch">Donec at nunc eget diam cursus tristique.
+      <a href="email:bobtabor@yahoo.com">Maecenas ut ligula eget sem interdum aliquam</a>. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur
+      ridiculus mus. Vivamus id lorem id eros tristique feugiat at at quam. Cras sed mollis elit. Sed volutpat, velit sed
+      eleifend porttitor, diam lorem commodo eros, et iaculis nibh lorem in leo. Aliquam euismod faucibus ullamcorper. Proin
+      tristique ante luctus sapien volutpat interdum. Mauris non risus et velit rhoncus ullamcorper eu nec quam. Nullam ullamcorper,
+      quam sed lobortis pellentesque, lorem lacus euismod augue, a sollicitudin sapien metus vitae nulla.</p>
+
+    <p class="important">Etiam eget diam sed enim luctus molestie rutrum tincidunt sem.
+      <span title="first idea">Fusce a faucibus lectus</span>. Nam augue leo,
+      <span title="second suggestion">dignissim at hendrerit blandit</span>, fringilla at tortor. In auctor,
+      <span title="third idea">tellus id facilisis commodo</span>, tellus elit lobortis ipsum,
+      <span title="fourth tidbit">vel ultrices dolor</span> augue vel risus. Vivamus id venenatis augue. Pellentesque pulvinar ornare massa ut mollis.
+      Morbi fringilla consectetur vulputate. Sed sagittis condimentum mi at volutpat. Pellentesque fringilla porta nunc,
+      quis egestas leo sodales non. Ut pulvinar, mauris nec luctus consectetur, massa lorem blandit mauris, vitae porta arcu
+      nibh eu metus. Aenean condimentum purus sodales felis blandit accumsan. Donec justo urna, congue non lobortis at, laoreet
+      eu dui. Sed turpis ante, hendrerit cursus ultricies nec, imperdiet nec est. Donec varius eleifend feugiat. Ut faucibus,
+      est ac tincidunt fermentum, nulla est convallis orci, non semper risus quam quis est.</p>
+
+    <p class="important">Duis a ipsum enim. Duis dictum viverra nulla non mattis. Proin sed erat tortor, ut condimentum dolor. Sed ultrices nulla
+      vel eros sagittis id pharetra neque dictum. In hac habitasse platea dictumst. Pellentesque interdum, leo eu mollis
+      sollicitudin, ligula neque fringilla massa, eu vestibulum quam justo nec lacus. Cras faucibus libero eu nisl porttitor
+      non volutpat quam elementum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+      Suspendisse eleifend tempus tellus, ut facilisis purus pulvinar ut.</p>
+
+  </article>
+
+</body>
+
+</html>

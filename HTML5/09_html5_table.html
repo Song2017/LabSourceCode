@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Table
+    </title>
+</head>
+
+<body>
+    <h1>Tables</h1>
+    <!--
+        cell: tr + td => cell
+        cellpadding: cell inside: the pad is the length between content and border
+        cellspacing: cell outside: the sapce is the length between each cell border
+    -->
+    <table border=1 cellpadding=5 cellspacing=0>
+        <thead>
+            <th>Season</th>
+            <th>Goals</th>
+            <th>Assists</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>2017-2018</td>
+                <td>goal25</td>
+                <td>assists22</td>
+            </tr>
+            <tr>
+                <td>2016-2017</td>
+                <td>goal2</td>
+                <td>assists22</td>
+            </tr>
+            <tr>
+                <td>2015-2016</td>
+                <td>25</td>
+                <td>assists22</td>
+            </tr>
+            <tr>
+                <td colspan="3">this will span 3 column</td>
+                <td>25</td>
+                <td>assists22</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <td>totals</td>
+            <td>25</td>
+            <td>assists22</td>
+        </tfoot>
+    </table>
+
+</body>
+
+</html>

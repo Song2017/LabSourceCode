@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountWithSQL", "AccountWithSQL\AccountWithSQL.csproj", "{73F6CF95-102B-40E4-8AA4-8CD9562AE11E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountBase", "AccountBase\AccountBase.csproj", "{1AE28824-A273-4188-9372-801FD005E65F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountForm", "AccountForm\AccountForm.csproj", "{6EA7881B-DA66-40CD-99A9-72E9AFDF6C5D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{73F6CF95-102B-40E4-8AA4-8CD9562AE11E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73F6CF95-102B-40E4-8AA4-8CD9562AE11E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73F6CF95-102B-40E4-8AA4-8CD9562AE11E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73F6CF95-102B-40E4-8AA4-8CD9562AE11E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AE28824-A273-4188-9372-801FD005E65F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AE28824-A273-4188-9372-801FD005E65F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AE28824-A273-4188-9372-801FD005E65F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AE28824-A273-4188-9372-801FD005E65F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EA7881B-DA66-40CD-99A9-72E9AFDF6C5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EA7881B-DA66-40CD-99A9-72E9AFDF6C5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EA7881B-DA66-40CD-99A9-72E9AFDF6C5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EA7881B-DA66-40CD-99A9-72E9AFDF6C5D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

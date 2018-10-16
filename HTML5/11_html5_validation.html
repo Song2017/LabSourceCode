@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Lesson 11 - Form Validation and other Future HTML5 Form Enhancements</title>
+  <style type="text/css" media="all">
+    span {
+      width: 175px;
+      display: block;
+      float: left;
+    }
+
+    input {
+      float: left;
+    }
+
+    p {
+      padding-top: 10px;
+      clear: all;
+    }
+
+    h2 {
+      padding-top: 20px;
+      clear: all;
+    }
+
+    label {
+      padding-right: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Creating Forms</h1>
+
+  <form method="POST" action="form.aspx">
+
+    <h2>Email</h2>
+    <p>
+      <label>
+        <span>Email Input:</span>
+        <input type="email" name=emailInput required>
+      </label>
+    </p>
+    <h2>Telephone</h2>
+    <p>
+      <label>
+        <span>Telephone: </span>
+        <input type="tel" name=telInput required>
+      </label>browser should do nothing...</p>
+    <h2>URL</h2>
+    <p>
+      <label>
+        <span>URL: </span>
+        <input type="url" name=urlInput required>
+      </label>
+    </p>
+
+    <h2>Numeric Values</h2>
+    <p>
+      <label>
+        <span>Numeric: </span>
+        <input type="number" name=numericInput required>
+      </label>
+    </p>
+    <p>
+      <label>
+        <span>Range: </span>
+        <input type="range" name=rangeInput required value=66>
+      </label>now value is 66. By default, value range from 1 to 100</p>
+
+    <h2>Data List</h2>
+    <p>
+      <label>
+        <span>Data: </span>
+        <input type="text" list=someList>
+        <datalist id=someList>
+          <option label=first value="first"></option>
+          <option label=second value="second"></option>
+          <option label=third value="third"></option>
+        </datalist>
+      </label>
+    </p>
+
+
+
+
+    <h2>New Attributes</h2>
+    <p>
+      <label>
+        <span>autofocus: </span>
+        <input type="text" autofocus>
+      </label>
+    </p>
+    <p>
+      <label>
+        <span>pattern: </span>
+        <input type="text" pattern="^\d{5}(-\d{4})?$">
+      </label> zip code: </p>
+    <p>
+      <label>
+        <span>placeholder: </span>
+        <input type=text placeholder="hello world">
+      </label>
+    </p>
+    <p>
+      <label>
+        <span>required: </span>
+        <input type=text required>
+      </label>
+    </p>
+    <p>
+      <label>
+        <span>step: </span>
+        <input type=number step="5">
+      </label>Hint:must be divisible by 5</p>
+
+
+    <p>
+      <button>Submit</button>
+    </p>
+
+  </form>
+
+</body>
+
+</html>

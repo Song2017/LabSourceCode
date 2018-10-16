@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta https-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Image Gallery</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/main.css" />
+</head>
+
+<body>
+    <div id="popup">
+        <h1>Pop up</h1>
+        <ol>
+            <li>
+                <a href="https://www.baidu.com/" onclick="popUp(this.href);return false;" title='Stationary degradation'> new tab Stationary degradation</a>
+            </li>
+            <li>
+                <a href="https://www.baidu.com/" class='popUp' title='Stationary degradation'> css style event</a>
+            </li>
+        </ol>
+    </div>
+
+    <br/>
+    <h1>Snapshots</h1>
+    <ul id="imagallery">
+        <li>
+            <a href="images/first.jpg" title='first'>
+                <img src="images/first.jpg" alt="first" />
+            </a>
+        </li>
+        <li>
+            <a href="images/second.jpg" title='second'>
+                <img src="images/second.jpg" alt="second" />
+            </a>
+        </li>
+        <li>
+            <a href="images/third.jpg" title='third'>
+                <img src="images/third.jpg" alt="third" />
+            </a>
+        </li>
+        <li>
+            <a href="images/fourth.jpg" title='fourth'>
+                <img src="images/fourth.jpg" alt="fourth" />
+            </a>
+        </li>
+    </ul>
+
+
+
+    <script src="scripts/main.js"></script>
+</body>
+
+</html>

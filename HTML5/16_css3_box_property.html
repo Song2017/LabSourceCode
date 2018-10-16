@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Lesson 16 - Box Properties</title>
+
+</head>
+
+<body>
+  <h1></h1>
+
+  <pre>
+  Inline elements
+  a, code, em, i, u, img, label, legend, nav, small, span, font
+  selector{property:value}
+
+  Block-style elements
+  article; aside,header,footer; body,head; div; dl,dd,dt;
+  figure,figucaption; form,fieldset; h1,h2,h3...hgroup;
+  p,hr; ul,ol,li; table
+  selector{
+    property: value;
+  }
+
+
+</pre>
+
+  <p>Important concept: Some HTML tags are treated as "boxes", while others are treated as just text. What's the difference?
+
+
+    <h2>Example 1</h2>
+
+    <p>Here's a div that is 200x200.</p>
+
+    <div style="width:200px;height:200px;background-color:yellow;margin-bottom:10px;">
+
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut imperdiet tempor nisl sed ultricies. Aenean accumsan dolor et
+      libero iaculis adipiscing. Suspendisse quis ante sit amet dui tempor scelerisque in a lorem. Aenean mi odio, sodales
+      in lacinia nec, feugiat id magna.
+
+    </div>
+
+
+    <h2>Example 2</h2>
+
+    <p>Here's a div that is 200x200. Why is this so much larger? Because it also has 10px padding and a 10px border.</p>
+
+    <div style="width:200px;height:200px;border:10px black solid;padding:10px;background-color:yellow;">
+
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut imperdiet tempor nisl sed ultricies. Aenean accumsan dolor et
+      libero iaculis adipiscing. Suspendisse quis ante sit amet dui tempor scelerisque in a lorem. Aenean mi odio, sodales
+      in lacinia nec, feugiat id magna.
+
+    </div>
+
+    <h2>Example 3</h2>
+
+    <p>These three divs have their display value set to the default (block).
+
+      <div style="width:50%;">
+
+        <div style="background-color:red;">First</div>
+
+        <div style="background-color:red;">Second</div>
+
+        <div style="background-color:red;">Third</div>
+
+      </div>
+
+      <hr style="clear:both;">
+
+      <h2>Example 4</h2>
+
+      <p>These three divs have their display value set to inline.
+
+
+        <div style="width:50%;">
+
+          <div style="background-color:red;display:inline;">First</div>
+
+          <div style="background-color:red;display:inline;">Second</div>
+
+          <div style="background-color:red;display:inline;">Third</div>
+
+        </div>
+
+
+        <h2>Example 5</h2>
+
+        <p>This same is true with the H3 tags ... notice by default they are display:block;
+
+          <h3 style="background-color:blue;color:white;">This is an H3</h3>
+          <h3 style="background-color:blue;color:white;">This is an H3</h3>
+          <h3 style="background-color:blue;color:white;">This is an H3</h3>
+
+          <h2>Example 6</h2>
+
+          <p>Notice what happens when we set these H3's to display:inline;
+
+            <h3 style="background-color:blue;color:white;">This is an H3</h3>
+            <h3 style="background-color:blue;color:white;display:inline;">This is an H3</h3>
+            <h3 style="background-color:blue;color:white;display:inline;">This is an H3</h3>
+
+            <h2>Example 7</h2>
+
+            <p>This is how most people did layout prior to CSS Frameworks like 960, Blueprint, CSSGrid or Bootstrap. (I'm over-simplifying,
+              but you get the idea.) Designers used a lot of float:left, float:right and divs.
+
+              <div class="wrapper">
+                <div style="width:30%;float:left;margin-right:10px;">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut imperdiet tempor nisl sed ultricies. Aenean
+                    accumsan dolor et libero iaculis adipiscing. Suspendisse quis ante sit amet dui tempor scelerisque in
+                    a lorem. Aenean mi odio, sodales in lacinia nec, feugiat id magna. Quisque pretium nisl nec massa porttitor
+                    venenatis. Quisque quis lacus sed nisi ultrices tincidunt. Nam mollis tortor vel lacus fermentum feugiat.
+                    Sed laoreet bibendum felis, sit amet euismod lectus vulputate in. Donec felis leo, auctor eu faucibus
+                    a, molestie sed tellus.
+                </div>
+
+                <div style="width:50%;float:left;">
+                  <p>In sed nunc nec mauris feugiat suscipit. Cras venenatis enim sem. Donec pretium volutpat eros, vel pretium
+                    turpis accumsan id. Fusce porttitor volutpat felis non convallis. Aliquam erat volutpat. Aliquam lobortis
+                    pretium porta. Vestibulum a justo leo, a pulvinar lacus. Praesent laoreet nisi nec dui bibendum cursus.
+                    Donec in lobortis tortor. Quisque urna diam, vehicula auctor vulputate eget, laoreet at sem. Nulla varius
+                    pretium pharetra. Mauris sed risus vitae lorem sollicitudin convallis vitae hendrerit justo. Maecenas
+                    ligula enim, aliquam ac molestie quis, lobortis sit amet elit. Nam eu purus et mauris fermentum malesuada.
+                    Suspendisse potenti.
+                </div>
+
+                <div style="width:15%;float:right;">
+                  <h1 style="line-height:0px;">My Blog</h1>
+                  <ul>
+                    <li style="list-style-type:none;">
+                      <a href="#">Home</a>
+                    </li>
+                    <li style="list-style-type:none;">
+                      <a href="#">About</a>
+                    </li>
+                    <li style="list-style-type:none;">
+                      <A href="#">FAQ</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+
+
+              <hr style="clear:both;">
+              <div style="width:100%">
+                <pre> hr style="clear:both;" clear out floats, make hr a whole new kind of line</pre>
+              </div>
+
+              <p>Before moving on, notice the hr tag in this example (above) has a style=&quot;clear:both;&quot; applied. Use
+                this to clear out of floated elements. Try removing the clear attribute to see what happens. By adding it
+                back in, we are saying that both left and right sides should not be floated, so it will end up on its own
+                &quot;line&quot;. Other settings are: None, Both, Left, Right. This is used often when using a floating-div
+                layout approach.
+
+                <h2>Example 8</h2>
+
+                <div style="margin-bottom:10px;width:100px;height:100px;border-width:10px;border-color:blue;border-style:none;">border-style:none;</div>
+                <div style="margin-bottom:10px;width:100px;height:100px;border-width:10px;border-color:blue;border-style:solid;">border-style:solid;</div>
+                <div style="margin-bottom:10px;width:100px;height:100px;border-width:10px;border-color:blue;border-style:dotted;">border-style:dotted;</div>
+                <div style="margin-bottom:10px;width:100px;height:100px;border-width:10px;border-color:blue;border-style:dashed;">border-style:dashed;</div>
+                <div style="margin-bottom:10px;width:100px;height:100px;border-width:10px;border-color:blue;border-style:double;">border-style:double;</div>
+                <div style="margin-bottom:10px;width:100px;height:100px;border-width:10px;border-color:blue;border-style:groove;">border-style:groove;</div>
+                <div style="margin-bottom:10px;width:100px;height:100px;border-width:10px;border-color:blue;border-style:ridge;">border-style:ridge;</div>
+                <div style="margin-bottom:10px;width:100px;height:100px;border-width:10px;border-color:blue;border-style:inset;">border-style:inset;</div>
+                <div style="margin-bottom:10px;width:100px;height:100px;border-width:10px;border-color:blue;border-style:outset;">border-style:outset;</div>
+
+                <h2>Example 9</h2>
+
+                <div>
+
+                  <h3>overflow:auto;</h3>
+
+                  <div style="width:200px;height:200px;background-color:yellow;overflow:auto;margin-bottom:10px;">
+                    <p>In sed nunc nec mauris feugiat suscipit. Cras venenatis enim sem. Donec pretium volutpat eros, vel pretium
+                      turpis accumsan id. Fusce porttitor volutpat felis non convallis. Aliquam erat volutpat. Aliquam lobortis
+                      pretium porta. Vestibulum a justo leo, a pulvinar lacus. Praesent laoreet nisi nec dui bibendum cursus.
+                      Donec in lobortis tortor. Quisque urna diam, vehicula auctor vulputate eget, laoreet at sem. Nulla
+                      varius pretium pharetra. Mauris sed risus vitae lorem sollicitudin convallis vitae hendrerit justo.
+                      Maecenas ligula enim, aliquam ac molestie quis, lobortis sit amet elit. Nam eu purus et mauris fermentum
+                      malesuada. Suspendisse potenti.
+                  </div>
+
+                  <h3>overflow:scroll;</h3>
+
+                  <div style="width:200px;height:200px;background-color:yellow;overflow:scroll;margin-bottom:10px;">
+                    <p>In sed nunc nec mauris feugiat suscipit. Cras venenatis enim sem. Donec pretium volutpat eros, vel pretium
+                      turpis accumsan id. Fusce porttitor volutpat felis non convallis. Aliquam erat volutpat. Aliquam lobortis
+                      pretium porta. Vestibulum a justo leo, a pulvinar lacus. Praesent laoreet nisi nec dui bibendum cursus.
+                      Donec in lobortis tortor. Quisque urna diam, vehicula auctor vulputate eget, laoreet at sem. Nulla
+                      varius pretium pharetra. Mauris sed risus vitae lorem sollicitudin convallis vitae hendrerit justo.
+                      Maecenas ligula enim, aliquam ac molestie quis, lobortis sit amet elit. Nam eu purus et mauris fermentum
+                      malesuada. Suspendisse potenti.
+                  </div>
+
+                  <h3>overflow:hidden;</h3>
+
+                  <div style="width:200px;height:200px;background-color:yellow;overflow:hidden;margin-bottom:10px;">
+                    <p>In sed nunc nec mauris feugiat suscipit. Cras venenatis enim sem. Donec pretium volutpat eros, vel pretium
+                      turpis accumsan id. Fusce porttitor volutpat felis non convallis. Aliquam erat volutpat. Aliquam lobortis
+                      pretium porta. Vestibulum a justo leo, a pulvinar lacus. Praesent laoreet nisi nec dui bibendum cursus.
+                      Donec in lobortis tortor. Quisque urna diam, vehicula auctor vulputate eget, laoreet at sem. Nulla
+                      varius pretium pharetra. Mauris sed risus vitae lorem sollicitudin convallis vitae hendrerit justo.
+                      Maecenas ligula enim, aliquam ac molestie quis, lobortis sit amet elit. Nam eu purus et mauris fermentum
+                      malesuada. Suspendisse potenti.
+                  </div>
+
+                  <h3>overflow:visible;</h3>
+
+                  <div style="width:200px;height:200px;background-color:yellow;overflow:visible;margin-bottom:10px;">
+                    <p>In sed nunc nec mauris feugiat suscipit. Cras venenatis enim sem. Donec pretium volutpat eros, vel pretium
+                      turpis accumsan id. Fusce porttitor volutpat felis non convallis. Aliquam erat volutpat. Aliquam lobortis
+                      pretium porta. Vestibulum a justo leo, a pulvinar lacus. Praesent laoreet nisi nec dui bibendum cursus.
+                      Donec in lobortis tortor. Quisque urna diam, vehicula auctor vulputate eget, laoreet at sem. Nulla
+                      varius pretium pharetra. Mauris sed risus vitae lorem sollicitudin convallis vitae hendrerit justo.
+                      Maecenas ligula enim, aliquam ac molestie quis, lobortis sit amet elit. Nam eu purus et mauris fermentum
+                      malesuada. Suspendisse potenti.
+                  </div>
+
+                  <div>
+
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+
+                    <h2 style="clear:both;">
+
+                      <h2>Example 10</h2>
+
+                      Padding and Margin Examples
+
+                      <h3 style="margin-left:50px;">margin-left:50px;</h3>
+
+                      <p>Margin shortcut:
+
+                        <p>margin:[top] [right] [bottom] [left]
+
+
+                          <h2>Example 11</h2>
+
+                          <div style="width:50%;height:50px;background-color:yellow;display:block;margin-left:auto;margin-right:auto;">Centered using magin-left:auto; and margin-right:auto;</div>
+
+                          <h2>Example 12</h2>
+
+                          <div style="width:50%;height:50px;background-color:red;color:white;display:block;padding:20px 20px 20px 20px;">
+                            Here's padding set at 20px for all sides. I'll type enough information in to make it work on at least three of the sides.
+                          </div>
+
+                          <p>Again, that shortcut is:
+
+                            <p>padding:[top] [right] [bottom] [left]
+
+                              <p>... and don't forget that padding ADDS to the overall dimensions of the content area.
+
+                                <h2>Example 13</h2>
+
+
+                                <div style="width:50%;height:50px;background-color:blue;color:white;display:block;padding:20px 20px 20px 20px;border-radius:10px;margin-bottom:10px;">
+                                  Rounded corners!
+                                </div>
+
+                                <div style="width:50%;height:50px;background-color:blue;color:white;display:block;padding:20px 20px 20px 20px;border-top-left-radius:20px;border-bottom-right-radius:20px;">
+                                  Rounded corners on top-left and bottom-right.
+                                </div>
+
+                                <h2>Example 14</h2>
+
+                                <div style="width:50%;height:50px;background-color:green;outline-color:orange;outline-width:10px;outline-style:double;border:10px solid red;">Using the OUTLINE in addition to the border. Crazy, huh?</div>
+
+                                <h2>Example 15</h2>
+
+                                <div style="width:50px;height:50px;background-color:orange;visibility:hidden;">You should not see this!</div>
+
+                                <h2>Example 16</h2>
+
+                                <div style="width:200px;height:50px;background-color:purple;color:white;cursor:auto;margin-bottom:10px;">cursor:auto;</div>
+                                <div style="width:200px;height:50px;background-color:purple;color:white;cursor:crosshair;margin-bottom:10px;">cursor:crosshair;</div>
+                                <div style="width:200px;height:50px;background-color:purple;color:white;cursor:default;margin-bottom:10px;">cursor:default;</div>
+                                <div style="width:200px;height:50px;background-color:purple;color:white;cursor:help;margin-bottom:10px;">cursor:help;</div>
+                                <div style="width:200px;height:50px;background-color:purple;color:white;cursor:move;margin-bottom:10px;">cursor:move;</div>
+                                <div style="width:200px;height:50px;background-color:purple;color:white;cursor:pointer;margin-bottom:10px;">cursor:pointer;</div>
+                                <div style="width:200px;height:50px;background-color:purple;color:white;cursor:text;margin-bottom:10px;">cursor:text;</div>
+                                <div style="width:200px;height:50px;background-color:purple;color:white;cursor:wait;margin-bottom:10px;">cursor:wait;</div>
+                                <div style="width:200px;height:50px;background-color:purple;color:white;cursor:e-resize;margin-bottom:10px;">cursor:e-resize;</div>
+                                <div style="width:200px;height:50px;background-color:purple;color:white;cursor:ne-resize;margin-bottom:10px;">cursor:ne-resize;</div>
+                                <div style="width:200px;height:50px;background-color:purple;color:white;cursor:nw-resize;margin-bottom:10px;">cursor:nw-resize;</div>
+                                <div style="width:200px;height:50px;background-color:purple;color:white;cursor:n-resize;margin-bottom:10px;">cursor:n-resize;</div>
+                                <div style="width:200px;height:50px;background-color:purple;color:white;cursor:se-resize;margin-bottom:10px;">cursor:se-resize;</div>
+                                <div style="width:200px;height:50px;background-color:purple;color:white;cursor:sw-resize;margin-bottom:10px;">cursor:sw-resize;</div>
+                                <div style="width:200px;height:50px;background-color:purple;color:white;cursor:s-resize;margin-bottom:10px;">cursor:s-resize;</div>
+                                <div style="width:200px;height:50px;background-color:purple;color:white;cursor:w-resize;margin-bottom:10px;">cursor:w-resize;</div>
+
+                                <p>You can also use a custom cursor. It's risky business to do this, but if you choose to do
+                                  it, better create a &quot;stacked&quot; list like so:
+
+                                  <p>cursor:url(myCursor.cur), default;
+
+
+</body>
+
+</html>

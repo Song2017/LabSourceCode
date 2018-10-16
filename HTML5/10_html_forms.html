@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Lesson 10 - Creating Forms</title>
+</head>
+
+<body>
+
+  <h1>Creating Forms</h1>
+
+  <form method="POST" action="form.aspx">
+
+    <p>
+      <label>
+        customer name:
+        <input type="text" id="customerNmae" name="customerName" maxlength="10">
+      </label>
+    </p>
+    <fieldset>
+      <legend>
+        Pizza Size
+      </legend>
+      <p>
+        <label>
+          <input type="radio" name="size" value="small">
+        </label> small size(10 inch)</p>
+      <p>
+        <label>
+          <input type="radio" name="size" value="medium">
+        </label> medium size(12 inch)</p>
+      <p>
+        <label>
+          <input type="radio" name="size" value="large">
+        </label> large size(14 inch)</p>
+    </fieldset>
+    <fieldset>
+      <legend>Pizza Toppings</legend>
+      <p>
+        <label>
+          <input type="checkbox" name="toppings" value="bacon">bacon</label>
+      </p>
+      <p>
+        <label>
+          <input type="checkbox" name="toppings" value="onion">onion</label>
+      </p>
+      <p>
+        <label>
+          <input type="checkbox" name="toppings" value="mushroom">mushroom</label>
+      </p>
+    </fieldset>
+    <p>
+      Crust:
+      <select name="crust" multiple>
+        <option value="c1">Normal</option>
+        <option value="c2" selected>deep dish</option>
+        <option value="c3">thin</option>
+      </select>
+    </p>
+    <p>
+      <label>
+        Delivery Instruction:
+        <textarea name="comments" cols="50" rows="5" maxlength="1000">
+          How do we get pizza to your home.</textarea>
+      </label>
+    </p>
+    <p>
+      <input type="submit" value="Continue">
+    </p>
+    <p>
+      <input type="reset" value="Reset">
+    </p>
+    <button> button </button>
+  </form>
+
+  method
+  <br> Http post: encode form data in body of http message
+  <br> Http get: encode form data or other data in URL
+  <br> action
+  <br> sever-side tecnology: ASP.NET, PHP, CGI
+  <br>
+  <br>Input types
+  <br> input type="text" vs textarea
+  <br> input type=password/hidden/checkbox/radio/file/image/submit/reset
+  <br>Button vs Inputs
+  <br> button have more css properties
+
+</body>
+
+</html>

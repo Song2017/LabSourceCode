@@ -1,0 +1,20 @@
+{
+  "name": "marvel-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "learn"
+  ],
+  "author": "ben",
+  "license": "ISC",
+  "dependencies": {
+    "botbuilder": "^3.11.0",
+    "crypto": "^1.0.1",
+    "request": "^2.83.0",
+    "restify": "^6.3.2"
+  }
+}

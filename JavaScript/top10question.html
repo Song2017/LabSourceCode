@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        top 10 javascript questions
+    </title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript"></script>
+
+
+
+
+</head>
+
+<body>
+    <p id='bodytext'>this is body text</p>
+    <div>this is body.</div>
+    <script type="text/javascript">
+        window.onload = function () {
+            //how do i return the response from an asynchrinous call 
+            function getAsyncData(url, callback) {
+                var result;
+                $.ajax({
+                    url: url,
+                    success: callback
+                });
+            };
+            var url = 'https://jsonplaceholder.typicode.com/posts/1';
+            var data = getAsyncData(url, handleResult);
+
+            function handleResult(result) {
+                console.log(result);
+            }
+            //closure: transfer function as a return value 
+            //exposed less variable 
+            function outerFunction(name) {
+                var count = 0;
+                var innerFunction = function () {
+                    count++;
+                    console.log(name + " : " + count);
+                    return innerFunction;
+                }
+            }
+            var closure = outerFunction('Hi');
+            // document.addEventListener('click', closure);
+
+            //why is it bad to use for/in statement to iterate through an array
+            var b = [];
+            b[5] = 5;
+            Array.prototype.fooasd = "extra property";
+            console.log("traditional for loop")
+            for (var i = 0; i < b.length; i++)
+                console.log(b[i]);
+            console.log("for-in statement: skip undefined item, influenced by Array.prototype")
+            for (var x in b)
+                console.log(b[x]);
+
+            // ==vs=== 
+            // ==进行类型转换 1 == ‘1’ == true
+            console.log(0 == ''); //true
+            console.log(0 == '0');//true
+            console.log('' == '0');//false
+            console.log("abc" == new String("abc"));
+            console.log("abc" === new String("abc")); // false, string type !=== object type
+
+            //get a date
+            var d = new Date(2017, 2, 14);
+            d.setMonth(3);
+            console.log(d.getMonth() + '/' + d.getDate() + '/' + d.getFullYear());
+
+            //check if javascript objects are equal
+            var a = { id: 123, name: 'abc' };
+            var b = { id: 123, name: 'abc' };
+            var c = { id: 123, name: 'c' };
+            var d = { id: 123, name: 'd' };
+            console.log(JSON.stringify(a) === JSON.stringify(b));//true
+            console.log(JSON.stringify(c) === JSON.stringify(d));//false
+
+            function compare(a, b) {
+                if (Object.keys(a).length != Object.keys(b).length)
+                    return false;
+                for (var x in a)
+                    if (a[x] != b[x])
+                        return false;
+
+                return true;
+            }
+            console.log(compare(a, b));//true
+            console.log(compare(c, d));//false
+
+            //sort array
+
+            // let and var
+            // var is scoped to the nearest function block 
+            // let is scoped to the nearest enclosing block, loop
+            function funcVar() {
+                for (var i = 0; i < 5; i++) { }
+                if (typeof i === 'undefined')
+                    console.log('i is undefined');
+                else
+                    console.log('i is defined');
+                return '';
+            }
+            function funcLet() {
+                for (let j = 0; j < 5; j++) { }
+                if (typeof j === 'undefined')
+                    console.log('j is undefined');
+                else
+                    console.log('j is defined');
+                return '';
+            }
+            funcVar();
+            funcLet();
+
+            //change html element in javascript
+            //reference the html element in javascript
+            //add an event listener that fire an event handler when event is triggered
+            //modefy the html element
+            var bodytext = document.getElementById('bodytext');
+            document.addEventListener('mousemove', function (e) {
+                bodytext.innerHTML = 'mouse moved';
+            });
+
+            //check if an array contains an object with a certain attribute value
+            var arr = [1, 2, 3];
+            for (let i = 0; i < 100; i++)
+                arr.push({ id: Math.floor(Math.random() * 100) });
+            function containA(arr, id) {
+                for (let i = 0; i < arr.length; i++)
+                    if (arr[i].id == id)
+                        return true;
+
+                return false;
+            }
+            console.log(containA(arr, 2));
+            function containB(arr, id) {
+                var containers = arr.filter(function (obj) { return obj.id == id; }).length >= 1;
+                return containers;
+            }
+            console.log(containA(arr, 1));
+        }
+    </script>
+</body>
+
+</html>

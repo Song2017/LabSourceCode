@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+    function clickMe(evt) {
+      var shape = evt.target;
+      var x = parseInt(shape.getAttribute("x"));
+      if (isNaN(x)) {
+        // For the circle
+        var x = parseInt(shape.getAttribute("cx"));
+        x += 100;
+        shape.setAttribute("cx", x);
+      }
+      else {
+        // For other shapes
+        x += 100;
+        shape.setAttribute("x", x);
+      }
+
+    }
+  </script>
+  <title>scalable vector graphics</title>
+</head>
+
+<body>
+  <h1>SVG Interactivity:scalable vector graphics</h1>
+  <svg width=200% height=500>
+    <rect x="100" y="100" width="200" height="100" stroke="green" stroke-width="5" fill="#555" onclick="clickMe(evt)" />
+
+    <circle cx="300" cy="150" r="100" fill="red" onclick="clickMe(evt)" />
+
+    <text x="100" y="100" font-family="Verdana" font-size="35" text-anchor="middle" onclick="clickMe(evt)">
+      Some sample text
+    </text>
+  </svg>
+
+  <pre>
+      Difference between raster/bitmapped image and SVG
+      Raster/bitmapped image: composed of a series of dots, each dot or bit is mapped to a color.
+      SVG: vector image is just a description of basic shapes, lines, text and device independent..
+      
+      Difference canvas and SVG
+      SVG: declarative, based on xml, vector, every element is an javascript object
+      Canvas: based on javascript, raster
+
+      Tetris:http://onilabs.com/svg/samples/svgtetris/svgtetris.svg 
+    </pre>
+
+</body>
+
+</html>

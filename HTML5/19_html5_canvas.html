@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Lesson 19 - Working with the HTML5 Canvas</title>
+  <script type="text/javascript">
+
+    function onLoad() {
+   
+      // Programmatically access our canvas element ...
+      var canvas = document.getElementById("myCanvas");
+
+      // Asking for a reference to a context, i.e., a drawing tool
+      // 2d -> flat surface
+      var context = canvas.getContext("2d");
+   
+      // Set the fillStyle to a solid color, in this case
+      // using a named color, however it could be a hex value, 
+      // a gradient object, a pattern object, etc. 
+      context.fillStyle = "blue";
+
+      // context.fillRect(x, y, w, h)
+      // Paints the given rectangle onto the canvas, 
+      // using the current fill style.
+      context.fillRect(0, 0, 500, 100);    
+
+      context.fillStyle = "yellow";
+
+      // context.beginPath()
+      // Resets the current path.
+      // I.e., pick up the drawing tool, so that you can
+      // move it to a new location.
+      context.beginPath();
+
+      // context.arc(x, y, radius, startAngle, endAngle [,anticlockwise])
+      // Adds points to the subpath such that the arc described 
+      // by the circumference of the circle described by the arguments, 
+      // starting at the given start angle and ending 
+      // at the given end angle, going in the given direction 
+      // (defaulting to clockwise), is added to the path, 
+      // connected to the previous point by a straight line.
+      context.arc(250, 50, 50, 0, Math.PI*2, true); 
+
+      // context.closePath()
+      // Marks the current subpath as closed, and starts a 
+      // new subpath with a point the same as the start 
+      // and end of the newly closed subpath.
+      context.closePath();
+
+      // context.fill()
+      // Fills the subpaths with the current fill style.
+      context.fill();
+
+      // creating a variable that holds our message.
+      var text = "HTML5 Canvas Rocks!";
+      context.fillStyle = "red";
+
+      // strokeStyle is the color around the outer edge
+      // of the shape or text 
+      context.strokeStyle = "yellow";
+      context.font = "36px Verdana";
+
+      // context.fillText(text, x, y [, maxWidth ] )
+      // context.strokeText(text, x, y [, maxWidth ] )
+      // Fills or strokes (respectively) the given text at 
+      // the given position. If a maximum width is provided, 
+      // the text will be scaled to fit that width if necessary.
+      context.strokeText(text, 45, 60);
+      context.fillText(text, 45, 60);
+
+    }
+  </script>
+</head>
+<body onload="onLoad()">
+
+<h1>Working with the HTML5 Canvas</h1>
+
+<canvas id="myCanvas" width="500" height="150">
+  <p>Canvas not supported in your browser.</p>
+</canvas>
+
+<p>For more information, the see <a href="http://www.w3.org/TR/html5-author/the-canvas-element.html#the-canvas-element">developer's documentation</a>.
+
+<p>Interested in more?  Watch the JavaScript Fundamentals series FIRST, 
+THEN I highly recommend you go 
+through <a href="http://devhammer.net/blog/exploring-html5-canvas-part-1---introduction">this five part tutorial</a> 
+by Andrew Duthie, Microsoft Evangelist (on his personal blog). 
+
+</body>
+</html>
