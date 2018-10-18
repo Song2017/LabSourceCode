@@ -1,0 +1,585 @@
+Author: david.horwitz@uct.ac.za
+Date: 2008-01-04 04:47:16 -0500 (Fri, 04 Jan 2008)
+New Revision: 39752
+
+Modified:
+podcasts/branches/sakai_2-5-x/podcasts-app/src/webapp/css/podcaster.css
+podcasts/branches/sakai_2-5-x/podcasts-app/src/webapp/podcasts/podMain.jsp
+Log:
+svn log -r39641 https://source.sakaiproject.org/svn/podcasts/trunk
+------------------------------------------------------------------------
+r39641 | josrodri@iupui.edu | 2007-12-28 23:44:24 +0200 (Fri, 28 Dec 2007) | 1 line
+
+SAK-9882: refactored podMain.jsp the right way (at least much closer to)
+------------------------------------------------------------------------
+
+dhorwitz@david-horwitz-6:~/branchManagemnt/sakai_2-5-x> svn merge  -c39641 https://source.sakaiproject.org/svn/podcasts/trunk podcasts/
+C    podcasts/podcasts-app/src/webapp/podcasts/podMain.jsp
+U    podcasts/podcasts-app/src/webapp/css/podcaster.css
+
+conflict merged manualy
+
+
+
+----------------------
+This automatic notification message was sent by Sakai Collab (https://collab.sakaiproject.org/portal) from the Source site.
+You can modify how you receive notifications at My Workspace > Preferences.
+
+
+
+From david.horwitz@uct.ac.za Fri Jan  4 04:33:44 2008
+Return-Path: <postmaster@collab.sakaiproject.org>
+Received: from murder (mail.umich.edu [141.211.14.46])
+	 by frankenstein.mail.umich.edu (Cyrus v2.3.8) with LMTPA;
+	 Fri, 04 Jan 2008 04:33:44 -0500
+X-Sieve: CMU Sieve 2.3
+Received: from murder ([unix socket])
+	 by mail.umich.edu (Cyrus v2.2.12) with LMTPA;
+	 Fri, 04 Jan 2008 04:33:44 -0500
+Received: from workinggirl.mr.itd.umich.edu (workinggirl.mr.itd.umich.edu [141.211.93.143])
+	by fan.mail.umich.edu () with ESMTP id m049Xge3031803;
+	Fri, 4 Jan 2008 04:33:42 -0500
+Received: FROM paploo.uhi.ac.uk (app1.prod.collab.uhi.ac.uk [194.35.219.184])
+	BY workinggirl.mr.itd.umich.edu ID 477DFD6C.75DBE.26054 ; 
+	 4 Jan 2008 04:33:35 -0500
+Received: from paploo.uhi.ac.uk (localhost [127.0.0.1])
+	by paploo.uhi.ac.uk (Postfix) with ESMTP id 6C929BA656;
+	Fri,  4 Jan 2008 09:33:27 +0000 (GMT)
+Message-ID: <200801040932.m049W2i5006493@nakamura.uits.iupui.edu>
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Received: from prod.collab.uhi.ac.uk ([194.35.219.182])
+          by paploo.uhi.ac.uk (JAMES SMTP Server 2.1.3) with SMTP ID 153
+          for <source@collab.sakaiproject.org>;
+          Fri, 4 Jan Jan 2008 09:33:10 +0000 (GMT)
+Received: from nakamura.uits.iupui.edu (nakamura.uits.iupui.edu [134.68.220.122])
+	by shmi.uhi.ac.uk (Postfix) with ESMTP id 6C69423767
+	for <source@collab.sakaiproject.org>; Fri,  4 Jan 2008 09:33:13 +0000 (GMT)
+Received: from nakamura.uits.iupui.edu (localhost [127.0.0.1])
+	by nakamura.uits.iupui.edu (8.12.11.20060308/8.12.11) with ESMTP id m049W3fl006495
+	for <source@collab.sakaiproject.org>; Fri, 4 Jan 2008 04:32:03 -0500
+Received: (from apache@localhost)
+	by nakamura.uits.iupui.edu (8.12.11.20060308/8.12.11/Submit) id m049W2i5006493
+	for source@collab.sakaiproject.org; Fri, 4 Jan 2008 04:32:02 -0500
+Date: Fri, 4 Jan 2008 04:32:02 -0500
+X-Authentication-Warning: nakamura.uits.iupui.edu: apache set sender to david.horwitz@uct.ac.za using -f
+To: source@collab.sakaiproject.org
+From: david.horwitz@uct.ac.za
+Subject: [sakai] svn commit: r39751 - in podcasts/branches/sakai_2-5-x/podcasts-app/src/webapp: css images podcasts
+X-Content-Type-Outer-Envelope: text/plain; charset=UTF-8
+X-Content-Type-Message-Body: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=UTF-8
+X-DSPAM-Result: Innocent
+X-DSPAM-Processed: Fri Jan  4 04:33:44 2008
+X-DSPAM-Confidence: 0.7002
+X-DSPAM-Probability: 0.0000
+
+Details: http://source.sakaiproject.org/viewsvn/?view=rev&rev=39751
+
+Author: david.horwitz@uct.ac.za
+Date: 2008-01-04 04:31:35 -0500 (Fri, 04 Jan 2008)
+New Revision: 39751
+
+Removed:
+podcasts/branches/sakai_2-5-x/podcasts-app/src/webapp/images/rss-feed-icon.png
+podcasts/branches/sakai_2-5-x/podcasts-app/src/webapp/podcasts/podPermissions.jsp
+Modified:
+podcasts/branches/sakai_2-5-x/podcasts-app/src/webapp/css/podcaster.css
+podcasts/branches/sakai_2-5-x/podcasts-app/src/webapp/podcasts/podDelete.jsp
+podcasts/branches/sakai_2-5-x/podcasts-app/src/webapp/podcasts/podMain.jsp
+podcasts/branches/sakai_2-5-x/podcasts-app/src/webapp/podcasts/podNoResource.jsp
+podcasts/branches/sakai_2-5-x/podcasts-app/src/webapp/podcasts/podOptions.jsp
+Log:
+svn log -r39146 https://source.sakaiproject.org/svn/podcasts/trunk
+------------------------------------------------------------------------
+r39146 | josrodri@iupui.edu | 2007-12-12 21:40:33 +0200 (Wed, 12 Dec 2007) | 1 line
+
+SAK-9882: refactored the other pages as well to take advantage of proper jsp components as well as validation cleanup.
+------------------------------------------------------------------------
+dhorwitz@david-horwitz-6:~/branchManagemnt/sakai_2-5-x> svn merge -c39146 https://source.sakaiproject.org/svn/podcasts/trunk podcasts/
+D    podcasts/podcasts-app/src/webapp/podcasts/podPermissions.jsp
+U    podcasts/podcasts-app/src/webapp/podcasts/podDelete.jsp
+U    podcasts/podcasts-app/src/webapp/podcasts/podMain.jsp
+U    podcasts/podcasts-app/src/webapp/podcasts/podNoResource.jsp
+U    podcasts/podcasts-app/src/webapp/podcasts/podOptions.jsp
+D    podcasts/podcasts-app/src/webapp/images/rss-feed-icon.png
+U    podcasts/podcasts-app/src/webapp/css/podcaster.css
+
+
+
+----------------------
+This automatic notification message was sent by Sakai Collab (https://collab.sakaiproject.org/portal) from the Source site.
+You can modify how you receive notifications at My Workspace > Preferences.
+
+
+
+From stephen.marquard@uct.ac.za Fri Jan  4 04:07:34 2008
+Return-Path: <postmaster@collab.sakaiproject.org>
+Received: from murder (mail.umich.edu [141.211.14.25])
+	 by frankenstein.mail.umich.edu (Cyrus v2.3.8) with LMTPA;
+	 Fri, 04 Jan 2008 04:07:34 -0500
+X-Sieve: CMU Sieve 2.3
+Received: from murder ([unix socket])
+	 by mail.umich.edu (Cyrus v2.2.12) with LMTPA;
+	 Fri, 04 Jan 2008 04:07:34 -0500
+Received: from salemslot.mr.itd.umich.edu (salemslot.mr.itd.umich.edu [141.211.14.58])
+	by panther.mail.umich.edu () with ESMTP id m0497WAN027902;
+	Fri, 4 Jan 2008 04:07:32 -0500
+Received: FROM paploo.uhi.ac.uk (app1.prod.collab.uhi.ac.uk [194.35.219.184])
+	BY salemslot.mr.itd.umich.edu ID 477DF74E.49493.30415 ; 
+	 4 Jan 2008 04:07:29 -0500
+Received: from paploo.uhi.ac.uk (localhost [127.0.0.1])
+	by paploo.uhi.ac.uk (Postfix) with ESMTP id 88598BA5B6;
+	Fri,  4 Jan 2008 09:07:19 +0000 (GMT)
+Message-ID: <200801040905.m0495rWB006420@nakamura.uits.iupui.edu>
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Received: from prod.collab.uhi.ac.uk ([194.35.219.182])
+          by paploo.uhi.ac.uk (JAMES SMTP Server 2.1.3) with SMTP ID 385
+          for <source@collab.sakaiproject.org>;
+          Fri, 4 Jan 2008 09:07:04 +0000 (GMT)
+Received: from nakamura.uits.iupui.edu (nakamura.uits.iupui.edu [134.68.220.122])
+	by shmi.uhi.ac.uk (Postfix) with ESMTP id 90636418A8
+	for <source@collab.sakaiproject.org>; Fri,  4 Jan 2008 09:07:04 +0000 (GMT)
+Received: from nakamura.uits.iupui.edu (localhost [127.0.0.1])
+	by nakamura.uits.iupui.edu (8.12.11.20060308/8.12.11) with ESMTP id m0495sZs006422
+	for <source@collab.sakaiproject.org>; Fri, 4 Jan 2008 04:05:54 -0500
+Received: (from apache@localhost)
+	by nakamura.uits.iupui.edu (8.12.11.20060308/8.12.11/Submit) id m0495rWB006420
+	for source@collab.sakaiproject.org; Fri, 4 Jan 2008 04:05:53 -0500
+Date: Fri, 4 Jan 2008 04:05:53 -0500
+X-Authentication-Warning: nakamura.uits.iupui.edu: apache set sender to stephen.marquard@uct.ac.za using -f
+To: source@collab.sakaiproject.org
+From: stephen.marquard@uct.ac.za
+Subject: [sakai] svn commit: r39750 - event/branches/SAK-6216/event-util/util/src/java/org/sakaiproject/util
+X-Content-Type-Outer-Envelope: text/plain; charset=UTF-8
+X-Content-Type-Message-Body: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=UTF-8
+X-DSPAM-Result: Innocent
+X-DSPAM-Processed: Fri Jan  4 04:07:34 2008
+X-DSPAM-Confidence: 0.7554
+X-DSPAM-Probability: 0.0000
+
+Details: http://source.sakaiproject.org/viewsvn/?view=rev&rev=39750
+
+Author: stephen.marquard@uct.ac.za
+Date: 2008-01-04 04:05:43 -0500 (Fri, 04 Jan 2008)
+New Revision: 39750
+
+Modified:
+event/branches/SAK-6216/event-util/util/src/java/org/sakaiproject/util/EmailNotification.java
+Log:
+SAK-6216 merge event change from SAK-11169 (r39033) to synchronize branch with 2-5-x (for convenience for UCT local build)
+
+----------------------
+This automatic notification message was sent by Sakai Collab (https://collab.sakaiproject.org/portal) from the Source site.
+You can modify how you receive notifications at My Workspace > Preferences.
+
+
+
+From louis@media.berkeley.edu Thu Jan  3 19:51:21 2008
+Return-Path: <postmaster@collab.sakaiproject.org>
+Received: from murder (mail.umich.edu [141.211.14.91])
+	 by frankenstein.mail.umich.edu (Cyrus v2.3.8) with LMTPA;
+	 Thu, 03 Jan 2008 19:51:21 -0500
+X-Sieve: CMU Sieve 2.3
+Received: from murder ([unix socket])
+	 by mail.umich.edu (Cyrus v2.2.12) with LMTPA;
+	 Thu, 03 Jan 2008 19:51:21 -0500
+Received: from eyewitness.mr.itd.umich.edu (eyewitness.mr.itd.umich.edu [141.211.93.142])
+	by jacknife.mail.umich.edu () with ESMTP id m040pJHB027171;
+	Thu, 3 Jan 2008 19:51:19 -0500
+Received: FROM paploo.uhi.ac.uk (app1.prod.collab.uhi.ac.uk [194.35.219.184])
+	BY eyewitness.mr.itd.umich.edu ID 477D8300.AC098.32562 ; 
+	 3 Jan 2008 19:51:15 -0500
+Received: from paploo.uhi.ac.uk (localhost [127.0.0.1])
+	by paploo.uhi.ac.uk (Postfix) with ESMTP id E6CC4B9F8A;
+	Fri,  4 Jan 2008 00:36:06 +0000 (GMT)
+Message-ID: <200801040023.m040NpCc005473@nakamura.uits.iupui.edu>
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Received: from prod.collab.uhi.ac.uk ([194.35.219.182])
+          by paploo.uhi.ac.uk (JAMES SMTP Server 2.1.3) with SMTP ID 754
+          for <source@collab.sakaiproject.org>;
+          Fri, 4 Jan 2008 00:35:43 +0000 (GMT)
+Received: from nakamura.uits.iupui.edu (nakamura.uits.iupui.edu [134.68.220.122])
+	by shmi.uhi.ac.uk (Postfix) with ESMTP id 8889842C49
+	for <source@collab.sakaiproject.org>; Fri,  4 Jan 2008 00:25:00 +0000 (GMT)
+Received: from nakamura.uits.iupui.edu (localhost [127.0.0.1])
+	by nakamura.uits.iupui.edu (8.12.11.20060308/8.12.11) with ESMTP id m040NpgM005475
+	for <source@collab.sakaiproject.org>; Thu, 3 Jan 2008 19:23:51 -0500
+Received: (from apache@localhost)
+	by nakamura.uits.iupui.edu (8.12.11.20060308/8.12.11/Submit) id m040NpCc005473
+	for source@collab.sakaiproject.org; Thu, 3 Jan 2008 19:23:51 -0500
+Date: Thu, 3 Jan 2008 19:23:51 -0500
+X-Authentication-Warning: nakamura.uits.iupui.edu: apache set sender to louis@media.berkeley.edu using -f
+To: source@collab.sakaiproject.org
+From: louis@media.berkeley.edu
+Subject: [sakai] svn commit: r39749 - in bspace/site-manage/sakai_2-4-x/site-manage-tool/tool/src: bundle webapp/vm/sitesetup
+X-Content-Type-Outer-Envelope: text/plain; charset=UTF-8
+X-Content-Type-Message-Body: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=UTF-8
+X-DSPAM-Result: Innocent
+X-DSPAM-Processed: Thu Jan  3 19:51:20 2008
+X-DSPAM-Confidence: 0.6956
+X-DSPAM-Probability: 0.0000
+
+Details: http://source.sakaiproject.org/viewsvn/?view=rev&rev=39749
+
+Author: louis@media.berkeley.edu
+Date: 2008-01-03 19:23:46 -0500 (Thu, 03 Jan 2008)
+New Revision: 39749
+
+Modified:
+bspace/site-manage/sakai_2-4-x/site-manage-tool/tool/src/bundle/sitesetupgeneric.properties
+bspace/site-manage/sakai_2-4-x/site-manage-tool/tool/src/webapp/vm/sitesetup/chef_site-importSites.vm
+Log:
+BSP-1420 Update text to clarify "Re-Use Materials..." option in WS Setup
+
+----------------------
+This automatic notification message was sent by Sakai Collab (https://collab.sakaiproject.org/portal) from the Source site.
+You can modify how you receive notifications at My Workspace > Preferences.
+
+
+
+From louis@media.berkeley.edu Thu Jan  3 17:18:23 2008
+Return-Path: <postmaster@collab.sakaiproject.org>
+Received: from murder (mail.umich.edu [141.211.14.91])
+	 by frankenstein.mail.umich.edu (Cyrus v2.3.8) with LMTPA;
+	 Thu, 03 Jan 2008 17:18:23 -0500
+X-Sieve: CMU Sieve 2.3
+Received: from murder ([unix socket])
+	 by mail.umich.edu (Cyrus v2.2.12) with LMTPA;
+	 Thu, 03 Jan 2008 17:18:23 -0500
+Received: from salemslot.mr.itd.umich.edu (salemslot.mr.itd.umich.edu [141.211.14.58])
+	by jacknife.mail.umich.edu () with ESMTP id m03MIMXY027729;
+	Thu, 3 Jan 2008 17:18:22 -0500
+Received: FROM paploo.uhi.ac.uk (app1.prod.collab.uhi.ac.uk [194.35.219.184])
+	BY salemslot.mr.itd.umich.edu ID 477D5F23.797F6.16348 ; 
+	 3 Jan 2008 17:18:14 -0500
+Received: from paploo.uhi.ac.uk (localhost [127.0.0.1])
+	by paploo.uhi.ac.uk (Postfix) with ESMTP id EF439B98CE;
+	Thu,  3 Jan 2008 22:18:19 +0000 (GMT)
+Message-ID: <200801032216.m03MGhDa005292@nakamura.uits.iupui.edu>
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Received: from prod.collab.uhi.ac.uk ([194.35.219.182])
+          by paploo.uhi.ac.uk (JAMES SMTP Server 2.1.3) with SMTP ID 236
+          for <source@collab.sakaiproject.org>;
+          Thu, 3 Jan 2008 22:18:04 +0000 (GMT)
+Received: from nakamura.uits.iupui.edu (nakamura.uits.iupui.edu [134.68.220.122])
+	by shmi.uhi.ac.uk (Postfix) with ESMTP id 905D53C2FD
+	for <source@collab.sakaiproject.org>; Thu,  3 Jan 2008 22:17:52 +0000 (GMT)
+Received: from nakamura.uits.iupui.edu (localhost [127.0.0.1])
+	by nakamura.uits.iupui.edu (8.12.11.20060308/8.12.11) with ESMTP id m03MGhrs005294
+	for <source@collab.sakaiproject.org>; Thu, 3 Jan 2008 17:16:43 -0500
+Received: (from apache@localhost)
+	by nakamura.uits.iupui.edu (8.12.11.20060308/8.12.11/Submit) id m03MGhDa005292
+	for source@collab.sakaiproject.org; Thu, 3 Jan 2008 17:16:43 -0500
+Date: Thu, 3 Jan 2008 17:16:43 -0500
+X-Authentication-Warning: nakamura.uits.iupui.edu: apache set sender to louis@media.berkeley.edu using -f
+To: source@collab.sakaiproject.org
+From: louis@media.berkeley.edu
+Subject: [sakai] svn commit: r39746 - in bspace/site-manage/sakai_2-4-x/site-manage-tool/tool/src: bundle webapp/vm/sitesetup
+X-Content-Type-Outer-Envelope: text/plain; charset=UTF-8
+X-Content-Type-Message-Body: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=UTF-8
+X-DSPAM-Result: Innocent
+X-DSPAM-Processed: Thu Jan  3 17:18:23 2008
+X-DSPAM-Confidence: 0.6959
+X-DSPAM-Probability: 0.0000
+
+Details: http://source.sakaiproject.org/viewsvn/?view=rev&rev=39746
+
+Author: louis@media.berkeley.edu
+Date: 2008-01-03 17:16:39 -0500 (Thu, 03 Jan 2008)
+New Revision: 39746
+
+Modified:
+bspace/site-manage/sakai_2-4-x/site-manage-tool/tool/src/bundle/sitesetupgeneric.properties
+bspace/site-manage/sakai_2-4-x/site-manage-tool/tool/src/webapp/vm/sitesetup/chef_site-siteInfo-duplicate.vm
+Log:
+BSP-1421 Add text to clarify "Duplicate Site" option in Site Info
+
+----------------------
+This automatic notification message was sent by Sakai Collab (https://collab.sakaiproject.org/portal) from the Source site.
+You can modify how you receive notifications at My Workspace > Preferences.
+
+
+
+From ray@media.berkeley.edu Thu Jan  3 17:07:00 2008
+Return-Path: <postmaster@collab.sakaiproject.org>
+Received: from murder (mail.umich.edu [141.211.14.39])
+	 by frankenstein.mail.umich.edu (Cyrus v2.3.8) with LMTPA;
+	 Thu, 03 Jan 2008 17:07:00 -0500
+X-Sieve: CMU Sieve 2.3
+Received: from murder ([unix socket])
+	 by mail.umich.edu (Cyrus v2.2.12) with LMTPA;
+	 Thu, 03 Jan 2008 17:07:00 -0500
+Received: from anniehall.mr.itd.umich.edu (anniehall.mr.itd.umich.edu [141.211.93.141])
+	by faithful.mail.umich.edu () with ESMTP id m03M6xaq014868;
+	Thu, 3 Jan 2008 17:06:59 -0500
+Received: FROM paploo.uhi.ac.uk (app1.prod.collab.uhi.ac.uk [194.35.219.184])
+	BY anniehall.mr.itd.umich.edu ID 477D5C7A.4FE1F.22211 ; 
+	 3 Jan 2008 17:06:53 -0500
+Received: from paploo.uhi.ac.uk (localhost [127.0.0.1])
+	by paploo.uhi.ac.uk (Postfix) with ESMTP id 0BC8D7225E;
+	Thu,  3 Jan 2008 22:06:57 +0000 (GMT)
+Message-ID: <200801032205.m03M5Ea7005273@nakamura.uits.iupui.edu>
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Received: from prod.collab.uhi.ac.uk ([194.35.219.182])
+          by paploo.uhi.ac.uk (JAMES SMTP Server 2.1.3) with SMTP ID 554
+          for <source@collab.sakaiproject.org>;
+          Thu, 3 Jan 2008 22:06:34 +0000 (GMT)
+Received: from nakamura.uits.iupui.edu (nakamura.uits.iupui.edu [134.68.220.122])
+	by shmi.uhi.ac.uk (Postfix) with ESMTP id 2AB513C2FD
+	for <source@collab.sakaiproject.org>; Thu,  3 Jan 2008 22:06:23 +0000 (GMT)
+Received: from nakamura.uits.iupui.edu (localhost [127.0.0.1])
+	by nakamura.uits.iupui.edu (8.12.11.20060308/8.12.11) with ESMTP id m03M5EQa005275
+	for <source@collab.sakaiproject.org>; Thu, 3 Jan 2008 17:05:14 -0500
+Received: (from apache@localhost)
+	by nakamura.uits.iupui.edu (8.12.11.20060308/8.12.11/Submit) id m03M5Ea7005273
+	for source@collab.sakaiproject.org; Thu, 3 Jan 2008 17:05:14 -0500
+Date: Thu, 3 Jan 2008 17:05:14 -0500
+X-Authentication-Warning: nakamura.uits.iupui.edu: apache set sender to ray@media.berkeley.edu using -f
+To: source@collab.sakaiproject.org
+From: ray@media.berkeley.edu
+Subject: [sakai] svn commit: r39745 - providers/trunk/cm/cm-authz-provider/src/java/org/sakaiproject/coursemanagement/impl/provider
+X-Content-Type-Outer-Envelope: text/plain; charset=UTF-8
+X-Content-Type-Message-Body: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=UTF-8
+X-DSPAM-Result: Innocent
+X-DSPAM-Processed: Thu Jan  3 17:07:00 2008
+X-DSPAM-Confidence: 0.7556
+X-DSPAM-Probability: 0.0000
+
+Details: http://source.sakaiproject.org/viewsvn/?view=rev&rev=39745
+
+Author: ray@media.berkeley.edu
+Date: 2008-01-03 17:05:11 -0500 (Thu, 03 Jan 2008)
+New Revision: 39745
+
+Modified:
+providers/trunk/cm/cm-authz-provider/src/java/org/sakaiproject/coursemanagement/impl/provider/CourseManagementGroupProvider.java
+Log:
+SAK-12602 Fix logic when a user has multiple roles in a section
+
+----------------------
+This automatic notification message was sent by Sakai Collab (https://collab.sakaiproject.org/portal) from the Source site.
+You can modify how you receive notifications at My Workspace > Preferences.
+
+
+
+From cwen@iupui.edu Thu Jan  3 16:34:40 2008
+Return-Path: <postmaster@collab.sakaiproject.org>
+Received: from murder (mail.umich.edu [141.211.14.34])
+	 by frankenstein.mail.umich.edu (Cyrus v2.3.8) with LMTPA;
+	 Thu, 03 Jan 2008 16:34:40 -0500
+X-Sieve: CMU Sieve 2.3
+Received: from murder ([unix socket])
+	 by mail.umich.edu (Cyrus v2.2.12) with LMTPA;
+	 Thu, 03 Jan 2008 16:34:40 -0500
+Received: from icestorm.mr.itd.umich.edu (icestorm.mr.itd.umich.edu [141.211.93.149])
+	by chaos.mail.umich.edu () with ESMTP id m03LYdY1029538;
+	Thu, 3 Jan 2008 16:34:39 -0500
+Received: FROM paploo.uhi.ac.uk (app1.prod.collab.uhi.ac.uk [194.35.219.184])
+	BY icestorm.mr.itd.umich.edu ID 477D54EA.13F34.26602 ; 
+	 3 Jan 2008 16:34:36 -0500
+Received: from paploo.uhi.ac.uk (localhost [127.0.0.1])
+	by paploo.uhi.ac.uk (Postfix) with ESMTP id CC710ADC79;
+	Thu,  3 Jan 2008 21:34:29 +0000 (GMT)
+Message-ID: <200801032133.m03LX3gG005191@nakamura.uits.iupui.edu>
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Received: from prod.collab.uhi.ac.uk ([194.35.219.182])
+          by paploo.uhi.ac.uk (JAMES SMTP Server 2.1.3) with SMTP ID 611
+          for <source@collab.sakaiproject.org>;
+          Thu, 3 Jan 2008 21:34:08 +0000 (GMT)
+Received: from nakamura.uits.iupui.edu (nakamura.uits.iupui.edu [134.68.220.122])
+	by shmi.uhi.ac.uk (Postfix) with ESMTP id 43C4242B55
+	for <source@collab.sakaiproject.org>; Thu,  3 Jan 2008 21:34:12 +0000 (GMT)
+Received: from nakamura.uits.iupui.edu (localhost [127.0.0.1])
+	by nakamura.uits.iupui.edu (8.12.11.20060308/8.12.11) with ESMTP id m03LX3Vb005193
+	for <source@collab.sakaiproject.org>; Thu, 3 Jan 2008 16:33:03 -0500
+Received: (from apache@localhost)
+	by nakamura.uits.iupui.edu (8.12.11.20060308/8.12.11/Submit) id m03LX3gG005191
+	for source@collab.sakaiproject.org; Thu, 3 Jan 2008 16:33:03 -0500
+Date: Thu, 3 Jan 2008 16:33:03 -0500
+X-Authentication-Warning: nakamura.uits.iupui.edu: apache set sender to cwen@iupui.edu using -f
+To: source@collab.sakaiproject.org
+From: cwen@iupui.edu
+Subject: [sakai] svn commit: r39744 - oncourse/branches/oncourse_OPC_122007
+X-Content-Type-Outer-Envelope: text/plain; charset=UTF-8
+X-Content-Type-Message-Body: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=UTF-8
+X-DSPAM-Result: Innocent
+X-DSPAM-Processed: Thu Jan  3 16:34:40 2008
+X-DSPAM-Confidence: 0.9846
+X-DSPAM-Probability: 0.0000
+
+Details: http://source.sakaiproject.org/viewsvn/?view=rev&rev=39744
+
+Author: cwen@iupui.edu
+Date: 2008-01-03 16:33:02 -0500 (Thu, 03 Jan 2008)
+New Revision: 39744
+
+Modified:
+oncourse/branches/oncourse_OPC_122007/
+oncourse/branches/oncourse_OPC_122007/.externals
+Log:
+update external for GB.
+
+----------------------
+This automatic notification message was sent by Sakai Collab (https://collab.sakaiproject.org/portal) from the Source site.
+You can modify how you receive notifications at My Workspace > Preferences.
+
+
+
+From cwen@iupui.edu Thu Jan  3 16:29:07 2008
+Return-Path: <postmaster@collab.sakaiproject.org>
+Received: from murder (mail.umich.edu [141.211.14.46])
+	 by frankenstein.mail.umich.edu (Cyrus v2.3.8) with LMTPA;
+	 Thu, 03 Jan 2008 16:29:07 -0500
+X-Sieve: CMU Sieve 2.3
+Received: from murder ([unix socket])
+	 by mail.umich.edu (Cyrus v2.2.12) with LMTPA;
+	 Thu, 03 Jan 2008 16:29:07 -0500
+Received: from galaxyquest.mr.itd.umich.edu (galaxyquest.mr.itd.umich.edu [141.211.93.145])
+	by fan.mail.umich.edu () with ESMTP id m03LT6uw027749;
+	Thu, 3 Jan 2008 16:29:06 -0500
+Received: FROM paploo.uhi.ac.uk (app1.prod.collab.uhi.ac.uk [194.35.219.184])
+	BY galaxyquest.mr.itd.umich.edu ID 477D5397.E161D.20326 ; 
+	 3 Jan 2008 16:28:58 -0500
+Received: from paploo.uhi.ac.uk (localhost [127.0.0.1])
+	by paploo.uhi.ac.uk (Postfix) with ESMTP id DEC65ADC79;
+	Thu,  3 Jan 2008 21:28:52 +0000 (GMT)
+Message-ID: <200801032127.m03LRUqH005177@nakamura.uits.iupui.edu>
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Received: from prod.collab.uhi.ac.uk ([194.35.219.182])
+          by paploo.uhi.ac.uk (JAMES SMTP Server 2.1.3) with SMTP ID 917
+          for <source@collab.sakaiproject.org>;
+          Thu, 3 Jan 2008 21:28:39 +0000 (GMT)
+Received: from nakamura.uits.iupui.edu (nakamura.uits.iupui.edu [134.68.220.122])
+	by shmi.uhi.ac.uk (Postfix) with ESMTP id 1FBB042B30
+	for <source@collab.sakaiproject.org>; Thu,  3 Jan 2008 21:28:38 +0000 (GMT)
+Received: from nakamura.uits.iupui.edu (localhost [127.0.0.1])
+	by nakamura.uits.iupui.edu (8.12.11.20060308/8.12.11) with ESMTP id m03LRUk4005179
+	for <source@collab.sakaiproject.org>; Thu, 3 Jan 2008 16:27:30 -0500
+Received: (from apache@localhost)
+	by nakamura.uits.iupui.edu (8.12.11.20060308/8.12.11/Submit) id m03LRUqH005177
+	for source@collab.sakaiproject.org; Thu, 3 Jan 2008 16:27:30 -0500
+Date: Thu, 3 Jan 2008 16:27:30 -0500
+X-Authentication-Warning: nakamura.uits.iupui.edu: apache set sender to cwen@iupui.edu using -f
+To: source@collab.sakaiproject.org
+From: cwen@iupui.edu
+Subject: [sakai] svn commit: r39743 - gradebook/branches/oncourse_2-4-2/app/ui/src/java/org/sakaiproject/tool/gradebook/ui
+X-Content-Type-Outer-Envelope: text/plain; charset=UTF-8
+X-Content-Type-Message-Body: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=UTF-8
+X-DSPAM-Result: Innocent
+X-DSPAM-Processed: Thu Jan  3 16:29:07 2008
+X-DSPAM-Confidence: 0.8509
+X-DSPAM-Probability: 0.0000
+
+Details: http://source.sakaiproject.org/viewsvn/?view=rev&rev=39743
+
+Author: cwen@iupui.edu
+Date: 2008-01-03 16:27:29 -0500 (Thu, 03 Jan 2008)
+New Revision: 39743
+
+Modified:
+gradebook/branches/oncourse_2-4-2/app/ui/src/java/org/sakaiproject/tool/gradebook/ui/RosterBean.java
+Log:
+svn merge -c 39403 https://source.sakaiproject.org/svn/gradebook/trunk
+U    app/ui/src/java/org/sakaiproject/tool/gradebook/ui/RosterBean.java
+
+svn log -r 39403 https://source.sakaiproject.org/svn/gradebook/trunk
+------------------------------------------------------------------------
+r39403 | wagnermr@iupui.edu | 2007-12-17 17:11:08 -0500 (Mon, 17 Dec 2007) | 3 lines
+
+SAK-12504
+http://jira.sakaiproject.org/jira/browse/SAK-12504
+Viewing "All Grades" page as a TA with grader permissions causes stack trace
+------------------------------------------------------------------------
+
+
+----------------------
+This automatic notification message was sent by Sakai Collab (https://collab.sakaiproject.org/portal) from the Source site.
+You can modify how you receive notifications at My Workspace > Preferences.
+
+
+
+From cwen@iupui.edu Thu Jan  3 16:23:48 2008
+Return-Path: <postmaster@collab.sakaiproject.org>
+Received: from murder (mail.umich.edu [141.211.14.91])
+	 by frankenstein.mail.umich.edu (Cyrus v2.3.8) with LMTPA;
+	 Thu, 03 Jan 2008 16:23:48 -0500
+X-Sieve: CMU Sieve 2.3
+Received: from murder ([unix socket])
+	 by mail.umich.edu (Cyrus v2.2.12) with LMTPA;
+	 Thu, 03 Jan 2008 16:23:48 -0500
+Received: from salemslot.mr.itd.umich.edu (salemslot.mr.itd.umich.edu [141.211.14.58])
+	by jacknife.mail.umich.edu () with ESMTP id m03LNlf0002115;
+	Thu, 3 Jan 2008 16:23:47 -0500
+Received: FROM paploo.uhi.ac.uk (app1.prod.collab.uhi.ac.uk [194.35.219.184])
+	BY salemslot.mr.itd.umich.edu ID 477D525E.1448.30389 ; 
+	 3 Jan 2008 16:23:44 -0500
+Received: from paploo.uhi.ac.uk (localhost [127.0.0.1])
+	by paploo.uhi.ac.uk (Postfix) with ESMTP id 9D005B9D06;
+	Thu,  3 Jan 2008 21:23:38 +0000 (GMT)
+Message-ID: <200801032122.m03LMFo4005148@nakamura.uits.iupui.edu>
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Received: from prod.collab.uhi.ac.uk ([194.35.219.182])
+          by paploo.uhi.ac.uk (JAMES SMTP Server 2.1.3) with SMTP ID 6
+          for <source@collab.sakaiproject.org>;
+          Thu, 3 Jan 2008 21:23:24 +0000 (GMT)
+Received: from nakamura.uits.iupui.edu (nakamura.uits.iupui.edu [134.68.220.122])
+	by shmi.uhi.ac.uk (Postfix) with ESMTP id 3535542B69
+	for <source@collab.sakaiproject.org>; Thu,  3 Jan 2008 21:23:24 +0000 (GMT)
+Received: from nakamura.uits.iupui.edu (localhost [127.0.0.1])
+	by nakamura.uits.iupui.edu (8.12.11.20060308/8.12.11) with ESMTP id m03LMFtT005150
+	for <source@collab.sakaiproject.org>; Thu, 3 Jan 2008 16:22:15 -0500
+Received: (from apache@localhost)
+	by nakamura.uits.iupui.edu (8.12.11.20060308/8.12.11/Submit) id m03LMFo4005148
+	for source@collab.sakaiproject.org; Thu, 3 Jan 2008 16:22:15 -0500
+Date: Thu, 3 Jan 2008 16:22:15 -0500
+X-Authentication-Warning: nakamura.uits.iupui.edu: apache set sender to cwen@iupui.edu using -f
+To: source@collab.sakaiproject.org
+From: cwen@iupui.edu
+Subject: [sakai] svn commit: r39742 - gradebook/branches/oncourse_2-4-2/app/ui/src/java/org/sakaiproject/tool/gradebook/ui
+X-Content-Type-Outer-Envelope: text/plain; charset=UTF-8
+X-Content-Type-Message-Body: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=UTF-8
+X-DSPAM-Result: Innocent
+X-DSPAM-Processed: Thu Jan  3 16:23:48 2008
+X-DSPAM-Confidence: 0.9907
+X-DSPAM-Probability: 0.0000
+
+Details: http://source.sakaiproject.org/viewsvn/?view=rev&rev=39742
+
+Author: cwen@iupui.edu
+Date: 2008-01-03 16:22:14 -0500 (Thu, 03 Jan 2008)
+New Revision: 39742
+
+Modified:
+gradebook/branches/oncourse_2-4-2/app/ui/src/java/org/sakaiproject/tool/gradebook/ui/RosterBean.java
+Log:
+svn merge -c 35014 https://source.sakaiproject.org/svn/gradebook/trunk
+U    app/ui/src/java/org/sakaiproject/tool/gradebook/ui/RosterBean.java
+
+svn log -r 35014 https://source.sakaiproject.org/svn/gradebook/trunk
+------------------------------------------------------------------------
+r35014 | wagnermr@iupui.edu | 2007-09-12 16:17:59 -0400 (Wed, 12 Sep 2007) | 3 lines
+
+SAK-11458
+http://bugs.sakaiproject.org/jira/browse/SAK-11458
+Course grade does not appear on "All Grades" page if no categories in gb
+------------------------------------------------------------------------
+
+
+----------------------
+This automatic notification message was sent by Sakai Collab (https://collab.sakaiproject.org/portal) from the Source site.
+You can modify how you receive notifications at My Workspace > Preferences.
