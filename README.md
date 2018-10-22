@@ -9,3 +9,12 @@ SourceCode Tourial
 
 ## Python
 [Python for Everybody_Exploring Data Using Python 3_Charles R. Severance](https://www.py4e.com/html3/01-intro)
+
+
+
+# Reading List
+## Linux
+[Linux Documentation Project Guides ](http://www.tldp.org/guides.html)    
+[Kernel](http://www.tldp.org/LDP/tlk/tlk-toc.html)     
+[Shell](http://www.learnlinux.org.za/courses/build/shell-scripting/ch01s03.html)    
+[Bash](http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html#toc2)    
