@@ -10,5 +10,5 @@ Learn
 [CPython Sourcecode](https://github.com/python/cpython)
 
 ## Note
-[oauth2](https://oauth.net/)
-[http://sqlitebrowser.org](http://sqlitebrowser.org/)
+[oauth2](https://oauth.net/)     
+[sqlitebrowser.org](http://sqlitebrowser.org)
