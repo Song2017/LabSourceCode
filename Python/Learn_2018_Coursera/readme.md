@@ -11,4 +11,4 @@ Learn
 
 ## Note
 [oauth2](https://oauth.net/)
-[http://sqlitebrowser.org/](http://sqlitebrowser.org/)
+[http://sqlitebrowser.org](http://sqlitebrowser.org/)
