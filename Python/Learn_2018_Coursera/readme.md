@@ -9,4 +9,6 @@ Learn
 [Python3 datamodel](https://docs.python.org/3/reference/datamodel.html)
 [CPython Sourcecode](https://github.com/python/cpython)
 
+## Note
 [oauth2](https://oauth.net/)
+[http://sqlitebrowser.org/](http://sqlitebrowser.org/)
