@@ -11,4 +11,5 @@ Learn
 
 ## Note
 [oauth2](https://oauth.net/)     
-[sqlitebrowser.org](http://sqlitebrowser.org)
+[sqlitebrowser.org](http://sqlitebrowser.org)    
+[python-garbage-collector](https://rushter.com/blog/python-garbage-collector/)

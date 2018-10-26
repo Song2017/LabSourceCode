@@ -61,6 +61,7 @@ while True:
     cur.execute('SELECT id,url FROM Pages WHERE html is NULL and error is NULL ORDER BY RANDOM() LIMIT 1')
     try:
         row = cur.fetchone()
+        print('row :', row)
         # print row
         fromid = row[0]
         url = row[1]
