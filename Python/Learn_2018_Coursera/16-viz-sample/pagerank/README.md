@@ -1,5 +1,28 @@
 Simple Python Search Spider, Page Ranker, and Visualizer
 
+首先捕获网络的一小部分并运行Google页面排名算法的简化版本，
+以确定哪些页面连接最高，然后可视化网页排名和网络小角落的连接
+
+[Google页面排名算法](https://wizardforcel.gitbooks.io/dm-algo-top10/content/pagerank.html)
+    假设一个由4个页面组成的小团体：A，B，C和D。如果所有页面都链向A，那么A的PR（PageRank）值将是B，C及D的Pagerank总和。
+    *PR(A)=PR(B)+PR(C)+PR(D)*
+    继续假设B也有链接到C，并且D也有链接到包括A的3个页面。一个页面不能投票2次。所以B给每个页面半票。以同样的逻辑，D投出的票只有三分之一算到了A的PageRank上。
+    *PR(A)=PR(B)/2+PR(C)/1+PR(D)/3*
+    换句话说，根据链出总数平分一个页面的PR值。
+    *PR(A)=PR(B)/L(B)+PR(C)/L(C)+PR(D)/L(D)* **L(D):Links(D) 页面D向外链接的总数**
+    最后，所有这些被换算为一个百分比再乘上一个系数。由于“没有向外链接的页面”传递出去的PageRank会是0，
+    所以，Google通过数学系统给了每个页面一个最小值：
+    *PR(A)=(PR(B)/L(B)+PR(C)/L(C)+PR(D)/L(D)+...)d + (1-d)/N*
+    说明：在Sergey Brin和Lawrence Page的1998年原文中给每一个页面设定的最小值是1-d，而不是这里的(1-d)/N。 
+    所以一个页面的PageRank是由其他页面的PageRank计算得到。Google不断的重复计算每个页面的PageRank。
+    如果给每个页面一个随机PageRank值（非0），那么经过不断的重复计算，这些页面的PR值会趋向于稳定，
+    也就是收敛的状态。这就是搜索引擎使用它的原因。
+
+Table Structure
+    Pages: all the pages details info. id, url, html, error, rank
+    Links: source pages and linked url it linked. from_id, to_id
+    Webs: the start pages
+
 This is a set of programs that emulate some of the functions of a 
 search engine.  They store their data in a SQLITE3 database named
 'spider.sqlite'.  This file can be removed at any time to restart the
@@ -159,8 +182,6 @@ http://mbostock.github.com/d3/
 If you rerun the other utilities and then re-run spjson.py - you merely
 have to press refresh in the browser to get the new data from spider.js.
 
-Table Structure
-Pages: all the new pages details info. id, url, html, error, rank
-Links: source pages and linked url it linked. from_id, to_id
-Webs: the start page
+
+
 

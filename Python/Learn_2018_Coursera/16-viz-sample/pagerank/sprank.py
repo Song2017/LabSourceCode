@@ -53,7 +53,6 @@ for i in range(many):
         total = total + old_rank
         next_ranks[node] = 0.0
     # print total
-    print('total', total)
     # Find the number of outbound links and sent the page rank down each
     for (node, old_rank) in list(prev_ranks.items()):
         # print node, old_rank
@@ -66,7 +65,7 @@ for i in range(many):
             give_ids.append(to_id)
         if (len(give_ids) < 1):
             continue
-        # 原来的排名/被访问的次数
+        # 新的页面PR值：原来的排名/被访问的次数
         amount = old_rank / len(give_ids)
         # print node, old_rank,amount, give_ids
         # print (node, old_rank,amount, give_ids, end='\n')
@@ -76,17 +75,12 @@ for i in range(many):
     newtot = 0
     for (node, next_rank) in list(next_ranks.items()):
         newtot = newtot + next_rank
-    print (newtot, next_ranks)
-    # 新旧的排名和之差/
+    # 每个页面的最小值：新旧的排名和之差/排名页面的总数
     evap = (total - newtot) / len(next_ranks)
 
     # print newtot, evap
     for node in next_ranks:
         next_ranks[node] = next_ranks[node] + evap
-
-    newtot = 0
-    for (node, next_rank) in list(next_ranks.items()):
-        newtot = newtot + next_rank
 
     # Compute the per-page average change from old rank to new rank
     # As indication of convergence of the algorithm
