@@ -159,3 +159,8 @@ http://mbostock.github.com/d3/
 If you rerun the other utilities and then re-run spjson.py - you merely
 have to press refresh in the browser to get the new data from spider.js.
 
+Table Structure
+Pages: all the new pages details info. id, url, html, error, rank
+Links: source pages and linked url it linked. from_id, to_id
+Webs: the start page
+

@@ -57,11 +57,12 @@ while True:
         if ( len(sval) < 1 ) : break
         many = int(sval)
     many = many - 1
-
+    # select random url to recursion
     cur.execute('SELECT id,url FROM Pages WHERE html is NULL and error is NULL ORDER BY RANDOM() LIMIT 1')
     try:
         row = cur.fetchone()
-        print('row :', row)
+        print('Pages url is', row, row[0], row[1] )
+
         # print row
         fromid = row[0]
         url = row[1]
@@ -76,7 +77,6 @@ while True:
     cur.execute('DELETE from Links WHERE from_id=?', (fromid, ) )
     try:
         document = urlopen(url, context=ctx)
-
         html = document.read()
         if document.getcode() != 200 :
             print("Error on page: ",document.getcode())
@@ -92,12 +92,13 @@ while True:
         print('('+str(len(html))+')', end=' ')
 
         soup = BeautifulSoup(html, "html.parser")
+        print('html.parser')
     except KeyboardInterrupt:
         print('')
         print('Program interrupted by user...')
         break
-    except:
-        print("Unable to retrieve or parse page")
+    except Exception as e:
+        print("Unable to retrieve or parse page", e)
         cur.execute('UPDATE Pages SET error=-1 WHERE url=?', (url, ) )
         conn.commit()
         continue
@@ -144,7 +145,6 @@ while True:
             continue
         # print fromid, toid
         cur.execute('INSERT OR IGNORE INTO Links (from_id, to_id) VALUES ( ?, ? )', ( fromid, toid ) )
-
 
     print(count)
 

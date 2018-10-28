@@ -86,8 +86,10 @@ for last, fir in directory:
         fir,last,directory[last,fir])
 
 # strings, list, tuple, dictionary
-# string 不可变，不可以对其中的字符赋值; 多用list替代
-# list 可变，key必须是数字，可以对其组成元素进行增删改
-# dict 可变，key可以是
-# tuple 不可变，常用于return返回的结果，形参，字典键
+# number：int float bool 
+# string 'name' 不可变，不可以对其中的字符赋值; 多用list替代 可切片
+# list [1, 2, 3] 可变，key必须是数字，可以对其组成元素进行增删改 可切片
+# tuple (0, 1, 2) 不可变，常用于return返回的结果，形参，字典键， 可切片
+# dict {'name':'zhangsan', 'age':20} 可变，key可以是string等非数字
+# set {1,2,3} 元素不可以重复，不能切片， 运算的单位是集合
 
