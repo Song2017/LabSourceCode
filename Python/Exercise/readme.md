@@ -4,6 +4,6 @@
 ## Debugging
 [The Python Debugger](https://docs.python.org/3/library/pdb.html)
 
-## Image
-[Python Datastructure](/pythondatastructure.png)
+## Python Datastructure
+![Python Datastructure](pythondatastructure.png)
 
