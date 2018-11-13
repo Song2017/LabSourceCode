@@ -20,7 +20,7 @@ SourceCode Tourial
 [The Python Debugger](https://docs.python.org/3/library/pdb.html)
 
 ### Python Datastructure
-![Python Datastructure](python/exercise/pythondatastructure.png)
+![Python Datastructure](Python/Exercise/pythondatastructure.png)
 
 
 # Reading List
