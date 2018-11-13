@@ -13,7 +13,14 @@ SourceCode Tourial
 
 ## Python
 [Python for Everybody_Exploring Data Using Python 3_Charles R. Severance](https://www.py4e.com/html3/01-intro)
+### Python 进阶
+[Python 进阶](https://docs.pythontab.com/interpy/Generators/Generators/)    
+[英文版: Python Tips](http://book.pythontips.com/en/latest/lambdas.html)    
+### Debugging
+[The Python Debugger](https://docs.python.org/3/library/pdb.html)
 
+### Python Datastructure
+![Python Datastructure](python/exercise/pythondatastructure.png)
 
 
 # Reading List

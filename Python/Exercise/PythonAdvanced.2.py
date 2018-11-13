@@ -18,7 +18,18 @@ print(p_data[0],p_data[1])
 # python中的所有东西都是一个object，所以每个变量都包含对象实例。
 # 启动对象时，会为其分配一个唯一的object id，可以通过id（object）获得。 is 运算符判断object的id是否相等
 # 对象的类型在运行时定义，一旦设置永远不会改变，但可以重新定义，可以通过type（object）获得 
-# 但对象的状态（值）有的是可以改变的，这就是可变对象，反之，为不可变对象 
+# 但对象的状态（值）有的是可以改变的，这就是可变对象，反之，为不可变对象
+# 对某种数据类型可变性的具体定义，应该看变量的具体使用情况，而不是通过id方法获取的内存地址。
+#   内存地址体现的是底层实现， 使用的结果才是我们应该关心的 
+asfd='...asd'
+print('\nid(asfd)', id(asfd),"\nid('...asd')", id('...asd'))
+'''
+>>> asd = '...asd'
+>>> id(asd)
+11405856
+>>> id('...asd')
+11406144
+'''
 # 可变对象： list，dict，set，byte array
 # 不可变对象：int，float，complex，string，tuple，frozen set [注意：set的不可变版本]，bytes
 a='asd'
