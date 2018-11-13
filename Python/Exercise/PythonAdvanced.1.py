@@ -1,7 +1,7 @@
 # Python 进阶
 
 # 可选参数
-# 使用:函数装饰器，猴子补丁(程序运行时(runtime)修改某些代码)
+# 使用:函数装饰器,猴子补丁(程序运行时(runtime)修改某些代码)
 # *args
 def test_asterisk(f_arg, *arg_vars):
     print('f_arg', f_arg)
@@ -32,8 +32,8 @@ test_args('yasoob', 'python', 'eggs', 'test', 123123, **{'name': 'yasoob'})
     c:continue 继续执行
     w:where 显示当前正在执行的代码行的上下文信息
     a:args 打印当前函数的参数列表
-    s:step 执行当前代码行，并停在第一个能停的地方(相当于单步进入)
-    n:next 继续执行到当前函数的下一行，或者当前行直接返回(单步跳过)
+    s:step 执行当前代码行,并停在第一个能停的地方(相当于单步进入)
+    n:next 继续执行到当前函数的下一行,或者当前行直接返回(单步跳过)
     p:print  p expression
 '''
 
@@ -41,13 +41,13 @@ test_args('yasoob', 'python', 'eggs', 'test', 123123, **{'name': 'yasoob'})
 # 生成器(Generators)
 '''
 迭代(Iteration):当我们使用一个循环来遍历某个东西的过程
-迭代器(Iterator): 遍历一个容器(特别是列表)的对象，
+迭代器(Iterator): 遍历一个容器(特别是列表)的对象,
     定义了next(Python2) 或者__next__方法的对象
 可迭代对象(Iterable): 能提供迭代器的任意对象,
-    定义了可以返回一个迭代器的__iter__方法，或者可以支持下标索引的__getitem__方法
-生成器(Generators): 生成器是只迭代一次的迭代器.这是因为它们并没有把所有的值存在内存中，而是在运行时生成值.
-    通过yield每次返回一个单次运行的值， 而不是直接返回占用大量空间的一个值
-    调用:用for循环，或可进行迭代的函数或结构
+    定义了可以返回一个迭代器的__iter__方法,或者可以支持下标索引的__getitem__方法
+生成器(Generators): 生成器是只迭代一次的迭代器.这是因为它们并没有把所有的值存在内存中,而是在运行时生成值.
+    通过yield每次返回一个单次运行的值, 而不是直接返回占用大量空间的一个值
+    调用:用for循环,或可进行迭代的函数或结构
     next(): 它允许我们获取一个序列的下一个元素. yield所有值后会触发 StopIteration exception
 '''
 def fibon(n):
@@ -79,7 +79,7 @@ class Reverse:
         return self.data[self.index]
 
 
-# Map:将函数映射到集合的每个元素，多与lambda连用
+# Map:n个输入源返回n个结果 将函数映射到集合的每个元素,多与lambda连用
 # map(function_to_apply, list_of_inputs)
 # lambda:匿名函数 
 # 参数:操作(参数)
@@ -95,13 +95,13 @@ for i in range(5):
     value = map(lambda x: x(i), funcs)
     print(list(value))
 
-# Filter: 过滤表中的元素， 返回所有符合要求的元素 
+# Filter: 过滤表中的元素, 返回所有符合要求的元素 
 # filter(function, iterable)
-# 可用推导式替换，推导式的可读性更好
+# 可用推导式替换,推导式的可读性更好
 pr = filter(lambda x: 1==1, range(-5,5))
 print(list(pr))
 
-# Reduce 对一个列表计算返回结果:第一个元素与第二个计算，其结果与第三个元素运算
+# Reduce 多个输入源返回一个结果,对一个列表计算返回结果:第一个元素与第二个计算,其结果与第三个元素运算
 # reduce(function, iterable[, initializer])
 from functools import reduce
 pro = reduce(lambda x,y:x*y, range(1, 5))
@@ -111,11 +111,11 @@ print(pro)
 # 数据结构
 # strings, list, tuple, dictionary
 # number:int float bool 
-# string 'name' 不可变，不可以对其中的字符赋值; 多用list替代 可切片
-# list [1, 2, 3] 可变，key必须是数字，可以对其组成元素进行增删改 可切片
-# tuple (0, 1, 2) 不可变，常用于return返回的结果，形参，字典键， 可切片
-# dict {'name':'zhangsan', 'age':20} 可变，key可以是string等非数字 {}
-# set {1,2,3} 元素不可以重复，不能切片， 运算的单位是集合
+# string 'name' 不可变,不可以对其中的字符赋值; 多用list替代 可切片
+# list [1, 2, 3] 可变,key必须是数字,可以对其组成元素进行增删改 可切片
+# tuple (0, 1, 2) 不可变,常用于return返回的结果,形参,字典键, 可切片
+# dict {'name':'zhangsan', 'age':20} 可变,key可以是string等非数字 {}
+# set {1,2,3} 元素不可以重复,不能切片, 运算的单位是集合
 # set 集合:不能包含重复的值 不能切片
 some_list = ['a', 'b', 'c', 'b', 'd', 'm', 'n', 'n']
 dup = set([x for x in some_list if some_list.count(x) > 1])
@@ -129,21 +129,21 @@ print(input_set.difference(valid))
 
 
 # 三元运算符
-# 如果条件为真，返回真 否则返回假 
+# 如果条件为真,返回真 否则返回假 
 # condition_is_true if condition else condition_is_false
 is_fat = True
 print('fat' if is_fat else 'not fat')
-# 结合元组使用 true means 1, 因为元组要先建数据，所以两个表达式都会执行
+# 结合元组使用 true means 1, 因为元组要先建数据,所以两个表达式都会执行
 print(('skinny','fat')[is_fat])
 
 
 # 装饰器
 # 一切皆对象:对象可以作为赋值给变量或是作为参数传递给函数(类似js)
-# 不同语言对对象的定义不同，python中的对象只要有属性或方法就可以，不要求可子类化，
+# 不同语言对对象的定义不同,python中的对象只要有属性或方法就可以,不要求可子类化,
 def hi(name='benji'):
     return 'hi '+name
 print(hi())
-greet = hi #greet不是调用hi函数，而是分配到新的内存
+greet = hi #greet不是调用hi函数,而是分配到新的内存
 print(greet())
 del hi
 #print(hi()) #NameError: name 'hi' is not defined
@@ -240,7 +240,7 @@ def addition_func(x):
     return x+x
 print(addition_func(4))
 # 带参数的装饰器
-# 装饰器方法本身需要接收函数作为入参，为避免形参冲突，再嵌套一层函数用来接收其他入参
+# 装饰器方法本身需要接收函数作为入参,为避免形参冲突,再嵌套一层函数用来接收其他入参
 from functools import wraps
 def logit(logfile='out.log'):
     def logging_decorator(func):
@@ -263,8 +263,8 @@ def myfunc2():
 myfunc2()
 
 # Decorate Class 
-# 装饰类代码比装饰函数简洁，易于拓展，包裹函数可以通过类属性获取新功能的参数，不需要嵌套函数
-# __call__()方法能够让类的实例对象，像函数一样被调用
+# 装饰类代码比装饰函数简洁,易于拓展,包裹函数可以通过类属性获取新功能的参数,不需要嵌套函数
+# __call__()方法能够让类的实例对象,像函数一样被调用
 class logitClass(object): 
     def __init__(self, logfile='out2.log'):
         self.logfile = logfile
