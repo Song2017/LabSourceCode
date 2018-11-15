@@ -1,6 +1,6 @@
 # Python 进阶
 
-# 可选参数
+# 1 可选参数
 # 使用:函数装饰器,猴子补丁(程序运行时(runtime)修改某些代码)
 # *args
 def test_asterisk(f_arg, *arg_vars):
@@ -26,7 +26,7 @@ def test_args(arg1, *arg2, **arg3):
 test_args('yasoob', 'python', 'eggs', 'test', 123123, **{'name': 'yasoob'})
 
 
-#　Debugging
+#　2 Debugging
 '''
     python -m pdb my_script.py
     c:continue 继续执行
@@ -38,7 +38,7 @@ test_args('yasoob', 'python', 'eggs', 'test', 123123, **{'name': 'yasoob'})
 '''
 
 
-# 生成器(Generators)
+# 3 生成器(Generators)
 '''
 迭代(Iteration):当我们使用一个循环来遍历某个东西的过程
 迭代器(Iterator): 遍历一个容器(特别是列表)的对象,
@@ -79,7 +79,7 @@ class Reverse:
         return self.data[self.index]
 
 
-# Map:n个输入源返回n个结果 将函数映射到集合的每个元素,多与lambda连用
+# 4 Map:n个输入源返回n个结果 将函数映射到集合的每个元素,多与lambda连用
 # map(function_to_apply, list_of_inputs)
 # lambda:匿名函数 
 # 参数:操作(参数)
@@ -108,7 +108,7 @@ pro = reduce(lambda x,y:x*y, range(1, 5))
 print(pro)
 
 
-# 数据结构
+# 5 数据结构
 # strings, list, tuple, dictionary
 # number:int float bool 
 # string 'name' 不可变,不可以对其中的字符赋值; 多用list替代 可切片
@@ -128,7 +128,7 @@ print(input_set.intersection(valid))
 print(input_set.difference(valid))
 
 
-# 三元运算符
+# 6 三元运算符
 # 如果条件为真,返回真 否则返回假 
 # condition_is_true if condition else condition_is_false
 is_fat = True
@@ -137,7 +137,7 @@ print('fat' if is_fat else 'not fat')
 print(('skinny','fat')[is_fat])
 
 
-# 装饰器
+# 7 装饰器
 # 一切皆对象:对象可以作为赋值给变量或是作为参数传递给函数(类似js)
 # 不同语言对对象的定义不同,python中的对象只要有属性或方法就可以,不要求可子类化,
 def hi(name='benji'):
