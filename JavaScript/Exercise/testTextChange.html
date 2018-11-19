@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Number Range</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript">
+        window.onload=function(){
+            var ele = document.body.querySelector("input[type=number]");
+            ele.onkeyup = createValidator(ele);
+        }
+        function createValidator(element) {
+            return function() {
+                var min = parseInt(element.getAttribute("min")) || 0;
+                var max = parseInt(element.getAttribute("max")) || 0;
+
+                var value = parseInt(element.value) || min;
+                element.value = value; // make sure we got an int
+
+                if (value < min) element.value = min;
+                if (value > max) element.value = max;
+            }
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <input id='num1' type="number" min=1 max="100">
+</body>
+
+</html>

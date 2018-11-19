@@ -225,6 +225,8 @@ print(data[:])
 # 18 python 行式命令
 '''
 python -m/-c
+python -c command [arg] ...，启动 Python 解释器 这种方法可以在 命令行 执行 Python 语句，类似于 shell 中的 -c 选项。一般将 命令 用单引号包裹起来。
+python -m module [arg] ... 将 Python 模块也可以当作脚本使用 命令调用它们，这类似在命令行中键入完整的路径名执行 模块 源文件一样。
 # ??? 共享文件
 python -m http.server
 # 脚本性能分析
