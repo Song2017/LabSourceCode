@@ -1,1 +1,0 @@
-Load per stud = (((OD/2.0)*(OD/2.0)*3.1415)-((ID/2.0)*(ID/2.0)*3.1415))*Press*LoadFactor/(# of studs) Stud Torque=Load_Per_Stud*0.2*Stud_Diameter/12.0
