@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script>
+        window.onload = function () {
+            var img_panel = document.getElementById("imgPanel");
+            // 竖直滚动条将默认拉到底部
+            img_panel.scrollTop = img_panel.scrollHeight;
+            // window.scroll(x-coord, y-coord)  设置滚动条的绝对位置
+            // x-coord 值表示你想要置于左上角的像素点的横坐标。
+            // y-coord 值表示你想要置于左上角的像素点的纵坐标。
+            // https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll
+            // img_panel.scroll(100,10)
+        }
+    </script>
+    <style>
+        .imgPanel {
+            width: 500px;
+            height: 450px;
+            overflow: scroll;
+            border-style: ridge;
+        }
+    </style>
+    <title>Image Panel</title>
+</head>
+
+<body>
+    <!-- div作为图片的容器, img加载图片-->
+    <div id="imgPanel" class="imgPanel">
+        <img alt="imgPanel" src="images/http-message.gif">
+    </div>
+</body>
+
+</html>

@@ -2,28 +2,58 @@
 
 # 1 可选参数
 # 使用:函数装饰器,猴子补丁(程序运行时(runtime)修改某些代码)
-# *args
+# *name 必须在 **name 之前出现
+# 可选参数打印出来的参数的顺序是未定义
+# 可选参数应该是是参数列表中的最后一个，因为它们将把所有的剩余输入参数传递给函数
+def cheeseshop(kind, *arguments, **keywords):
+    print("-- Do you have any", kind, "?")
+    print("-- I'm sorry, we're all out of", kind)
+    for arg in arguments:
+        print(arg)
+    print("-" * 40)
+    keys = sorted(keywords.keys())
+    for kw in keys:
+        print(kw, ":", keywords[kw])
+cheeseshop("Limburger", "It's very runny, sir.",
+           "It's really very, VERY runny, sir.",
+           shopkeeper="Michael Palin",
+           client="John Cleese",
+           sketch="Cheese Shop Sketch")
+# 元组参数 *args
 def test_asterisk(f_arg, *arg_vars):
     print('f_arg', f_arg)
     for arg in arg_vars:
         print('arg in arg_vars', arg)
 
-
 test_asterisk('yasoob', 'python', 'eggs', 'test')
-# **dargs: 只能单独使用
+# 字典参数 **dargs
 def test_kvps(**arg_vars):
     for (key, v) in arg_vars.items():
         print("{0} == {1}".format(key, v))
 
 test_kvps(**{'name': 'yasoob'})
-# 同时使用时的顺序不能改变
+# 使用时的顺序不能改变
 def test_args(arg1, *arg2, **arg3):
     print('f_arg', arg1)
     for arg in arg2:
         print('arg in arg_vars', arg)
     for (key, v) in arg3.items():
         print("{0} == {1}".format(key, v))
-test_args('yasoob', 'python', 'eggs', 'test', 123123, **{'name': 'yasoob'})
+test_args('yasoob', 'python', 'eggs', 'test', 123123, name = 'yasoob')
+# * 操作符来自动把参数列表拆开
+# ** 操作符分拆关键字参数为字典
+args = [3, 6]
+list(range(*args))  # 等价于list(range(3,6))
+def parrot(voltage, state='a stiff', action='voom'):
+    print('voltage, state, action: ',voltage, state, action, end=' ')
+d = {"voltage": "four million", "state": "bleedin' demised"}
+parrot(**d)   #voltage, state, action:  four million bleedin' demised voom 
+"""
+parrot()                     # required argument missing
+parrot(voltage=5.0, 'dead')  # non-keyword argument after a keyword argument
+parrot(110, voltage=220)     # duplicate value for the same argument
+parrot(actor='John Cleese')  # unknown keyword argument
+"""  
 
 
 #　2 Debugging

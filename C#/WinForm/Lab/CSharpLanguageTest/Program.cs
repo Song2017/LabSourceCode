@@ -1,18 +1,14 @@
-﻿//#define DEBUG
-//#undef DEBUG
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using System.IO;
 using System.Xml.Linq;
 
-namespace WindowsFormsApplication1
+namespace Temp
 {
     static class Program
     {
-
-
         private readonly static string dataPath = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\Data\"));
 
         /// <summary>
@@ -23,7 +19,7 @@ namespace WindowsFormsApplication1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Form2());
 
             //nullAbleTest();
             //#if TRACE
@@ -37,6 +33,7 @@ namespace WindowsFormsApplication1
              MessageBox.Show("","!DEBUG");
 #endif
         }
+
 
         //可空的数据类型
         private static void nullAbleTest()
@@ -103,7 +100,7 @@ namespace WindowsFormsApplication1
 
             Console.ReadLine();
             #endregion
-            
+
 
         }
 
@@ -194,5 +191,6 @@ namespace WindowsFormsApplication1
             public DateTime OrderDate { get; set; }
             public decimal Total { get; set; }
         }
+
     }
 }

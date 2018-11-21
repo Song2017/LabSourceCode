@@ -204,7 +204,7 @@ style属性
 5. 使用场景: 
     1. 根据元素在DOM树里的位置设置样式
         let headers = document.getElementsByTagName("h1");
-        for (let i=0; i<headers.length; i++) {
+        for (let i=0; i < headers.length; i++) {
             let elem = getNextElement(headers[i].nextSibling);
             elem.style.color = "red";
         }  
@@ -230,7 +230,7 @@ style属性
         }}
     3. 事件发生时设置元素样式
         let rows = document.getElementsByTagName('tr');
-        for (let i=0;i<rows.length;i++){
+        for (let i=0;i< rows.length;i++){
         rows[i].onmouseover = function(){this.style.fontWeight = "bold";}
         rows[i].onmouseout = function(){this.style.fontWeight = "normal";}
         }
