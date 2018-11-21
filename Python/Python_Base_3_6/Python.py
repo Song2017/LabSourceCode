@@ -1,4 +1,6 @@
 # Python 简介
+
+
 # 数字
 # 除法(/)永远返回一个浮点数。
 # // 整除； % 计算余数; ** 乘幂;  复数 j 或 J 表示虚数部分 3+5j
@@ -8,9 +10,11 @@ print(3+5j)
 # 字符串
 # 字符串可以视作字符数组, 支持切片和索引, 但它是不可变的
 # 用单引号 ('...') 或双引号 ("...") 标识。\ 可以用来转义引号
-print('"Isn\'t," she said.')  # "Isn't," she said.
+# "Isn't," she said.
+print('"Isn\'t," she said.')  
 # r raw 返回原是字符串
-print(r'"Isn\'t," she said.')  # "Isn't," she said.
+# "Isn't," she said.
+print(r'"Isn\'t," she said.')  
 # 字符串文本能够分成多行。一种方法是使用三引号："""...""" 或者 '''...'''
 # 行尾换行符会被自动包含到字符串中，但是可以在行尾加上 \ 来避免这个行为,没有第一行
 print("""\
@@ -32,7 +36,7 @@ print('squares[:], squares[1], squares[-1], squares[-3:], [-1, 0]+squares',
 
 # Python流程控制
 # if
-#x = int(input("please input an integer: "))
+# x = int(input("please input an integer: "))
 x = 0
 if x < 0:
     print('{} is smaller than 0'.format(x))
@@ -42,7 +46,8 @@ elif x > 0:
     print('{} is bigger than 0'.format(x))
 # for
 words = ['cat', 'eat', 'fish', 'is so cute']
-for w in words[:]:  # [:]: 返回原数组的浅拷贝对象
+# [:]: 返回原数组的浅拷贝对象
+for w in words[:]:  
     if len(w) > 6:
         words.insert(-1, 'insert')
 print(words)
@@ -166,7 +171,8 @@ test_args('yasoob', 'python', 'eggs', 'test', 123123, name = 'yasoob')
 # * 操作符来自动把参数列表拆开
 # ** 操作符分拆关键字参数为字典
 args = [3, 6]
-list(range(*args))  # 等价于list(range(3,6))
+# 等价于list(range(3,6))
+list(range(*args))  
 # 关键字参数 keyword = value
 def parrot(voltage, state='a stiff', action='voom', type='Norwegian Blue'):
     print("action, state, type: ", action, state,type, end=' .. ')
@@ -183,4 +189,44 @@ parrot(actor='John Cleese')  # unknown keyword argument
 
 # Lambda 匿名函数
 # 通过 lambda 关键字，可以创建短小的匿名函数 lambda a, b: a+b
-# 语义上讲，它们只是普通函数定义中的一个语法技巧。类似于嵌套函数定义，lambda 形式可以从外部作用域引用变量
+# 语义上讲，它们只是普通函数定义中的一个语法技巧。类似于嵌套函数定义，
+# lambda 形式可以从外部作用域引用变量
+def add(n):
+    return lambda x:x+n
+# add(5) 不是简单的单入参函数, <function add.<locals>.<lambda> at 0x003194B0>    
+add(5) 
+f=add(10)
+# 等价于f(x=2) x是lambda中引用的x
+f(2) 
+# 匿名函数可以作为参数传递
+pairs = [(1,'one'),(2,'two'),(3,'three'),(4,'four')]
+# pair[1]: pairs的组成元组的第二个元素: one ,  two , three , four
+pairs.sort(key=lambda pair: pair[1])  
+print('pairs',pairs)
+
+
+# 文档字符串
+#第一行应该是关于对象用途的简介。不用明确的陈述对象名或类型, 应该以大写字母开头，以句号结尾。
+#如果文档字符串有多行，第二行应该空出来，与接下来的详细描述明确分隔
+def doc_string():
+    """    Just document.
+
+    this is just document detail
+    """
+print(doc_string.__doc__)
+
+
+# 函数注释
+# 函数的额外注释, 是关于用户自定义的函数的完全可选的、随意的元数据信息
+# funcdef ::=  [decorators] "def" funcname "(" [parameter_list] ")" 
+# ["->" expression] ":" suite
+def mysum(a, b: int, c: 'the default is 5' = 5)-> 'Nothing to see here':
+    '''    Return a+b+c.
+    __annotations__ 是函数的一个属性，类型为 dict.可以在程序运行时动态地修改注释
+    '''
+    result = a+b+c 
+    mysum.__annotations__['return'] += result
+    return result
+print(mysum('1','3','2'))  
+print(mysum.__annotations__)  
+
