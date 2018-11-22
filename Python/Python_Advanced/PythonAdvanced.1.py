@@ -79,6 +79,8 @@ parrot(actor='John Cleese')  # unknown keyword argument
     通过yield每次返回一个单次运行的值, 而不是直接返回占用大量空间的一个值
     调用:用for循环,或可进行迭代的函数或结构
     next(): 它允许我们获取一个序列的下一个元素. yield所有值后会触发 StopIteration exception
+    生成器是数据的生产者 协程则是数据的消费者. yield可获得一个协程.协程会消费掉发送给它的值, 
+    详见 学习二:协程(Coroutines)
 '''
 def fibon(n):
     a = b = 1
@@ -93,7 +95,7 @@ test_string = 'te'
 test = iter(test_string)
 print(next(test))
 print(next(test))
-# print(next(test) ) # StopIteration
+# print(next(test) ) # 因为 'te'只有两个字符, 所以第三次会触发 StopIteration
 # iter and next implement
 class Reverse:
     """Iterator for looping over a sequence backwards."""

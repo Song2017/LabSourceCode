@@ -3,7 +3,7 @@ from __future__ import print_function
 
 # 8 Global和Return
 # Return 返回结果,变量,函数,类...
-# 返回多个值可以用 元组（常用）,列表,字典
+# 返回多个值可以用 元组(常用),列表,字典
 def profile():
     name = 'benji'
     age = 30
@@ -11,15 +11,15 @@ def profile():
 p_data = profile()
 print(p_data[0], p_data[1])
 # global 变量意味着我们可以在函数以外的区域都能访问这个变量
-# 尽量不要使用
+# 尽量不要使用尽量不要使用尽量不要使用
 
 
 # 9 Mutation和Immutation
-# python中的所有东西都是一个object,所以每个变量都包含对象实例。
-# 启动对象时,会为其分配一个唯一的object id,可以通过id（object）获得。 is 运算符判断object的id是否相等
-# 对象的类型在运行时定义,一旦设置永远不会改变,但可以重新定义,可以通过type（object）获得
-# 但对象的状态（值）有的是可以改变的,这就是可变对象,反之,为不可变对象
-# 对某种数据类型可变性的具体定义,应该看变量的具体使用情况,而不是通过id方法获取的内存地址。
+# python中的所有东西都是一个object,所以每个变量都包含对象实例.
+# 启动对象时,会为其分配一个唯一的object id,可以通过id(object)获得. is 运算符判断object的id是否相等
+# 对象的类型在运行时定义,一旦设置永远不会改变,但可以重新定义,可以通过type(object)获得
+# 但对象的状态(值)有的是可以改变的,这就是可变对象,反之,为不可变对象
+# 对某种数据类型可变性的具体定义,应该看变量的具体使用情况,而不是通过id方法获取的内存地址.
 #   内存地址体现的是底层实现, 使用的结果才是我们应该关心的
 asfd = '...asd'
 print('\nid(asfd)', id(asfd), "\nid('...asd')", id('...asd'))
@@ -38,16 +38,16 @@ print("a='asd'\na is 'asd' ", a is 'asd',
 b = [1]
 print("b=[1]\nb is [1] ", b is [1], '\nid(b)', id(b), "\nid([1])", id([1]))
 # 不可变对象的不可变性是指对象本身不可变,其组成元素可能可变
-# 例如 元组（12,[1,2,3]）没有改变自身元素的方法,但其组成元素[1,2,3]是可变的
+# 例如 元组(12,[1,2,3])没有改变自身元素的方法,但其组成元素[1,2,3]是可变的
 # 按值传递: 入参是不可变对象,经过函数运算后,入参的值不发生改变
 # 按引用传递: 入参是可变对象,经过函数运算后,原入参的值发生改变
 
 
 # 10 __slots__ 魔法方法
-# 在Python中，每个类都有实例属性。Python是动态语言，根据类创建的实例可以任意绑定属性
+# 在Python中，每个类都有实例属性.Python是动态语言，根据类创建的实例可以任意绑定属性
 # 默认情况下Python用一个字典来保存一个对象的实例属性，这允许我们在运行时去设置任意的新属性，
 # __slots__来告诉Python不要使用字典，而只给一个固定集合的属性分配空间
-# name是类属性，score是实例属性。同名时实例属性会覆盖掉类属性
+# name是类属性，score是实例属性.同名时实例属性会覆盖掉类属性
 class Student(object):
     # 使用__slots__后将不能再使用实例属性:AttributeError: 'Student' object has no attribute 'score'
     # 只给一个固定集合的属性分配空间,使用的内存可降低40%-50%
@@ -156,7 +156,9 @@ print('perry.type', perry.type)
 perry.type
 
 
-# 13 枚举 enumerate 遍历数据并自动计数
+# 13 枚举 enumerate 
+# 遍历数据并自动计数
+# 返回一个迭代器对象, 详见 学习一: 3 生成器(Generators)
 mylist = ['apple', 'banana', 'grapes', 'pear']
 # 定制从哪个数字开始枚举 2 apple 3 banana 4 grapes 5 pear
 for c, val in enumerate(mylist, 2):
@@ -225,8 +227,8 @@ print(data[:])
 # 18 python 行式命令
 '''
 python -m/-c
-python -c command [arg] ...，启动 Python 解释器 这种方法可以在 命令行 执行 Python 语句，类似于 shell 中的 -c 选项。一般将 命令 用单引号包裹起来。
-python -m module [arg] ... 将 Python 模块也可以当作脚本使用 命令调用它们，这类似在命令行中键入完整的路径名执行 模块 源文件一样。
+python -c command [arg] ...，启动 Python 解释器 这种方法可以在 命令行 执行 Python 语句，类似于 shell 中的 -c 选项.一般将 命令 用单引号包裹起来.
+python -m module [arg] ... 将 Python 模块也可以当作脚本使用 命令调用它们，这类似在命令行中键入完整的路径名执行 模块 源文件一样.
 # ??? 共享文件
 python -m http.server
 # 脚本性能分析
@@ -249,6 +251,7 @@ print(a.__dict__)
 
 # 19 For - Else
 # else从句会在循环正常结束时执行
+# 类似的还有 while .. else ..
 for n in range(2, 20):
     for i in range(2, n):
         if n % i == 0:
@@ -301,10 +304,10 @@ except ImportError:
 
 # 23 协程 Coroutines
 # 协同程序和线程差不多，也就是一条执行序列，拥有自己独立的栈、局部变量和指针，
-# 同时又与其他协同程序共享全局变量和其他大部分东西。
+# 同时又与其他协同程序共享全局变量和其他大部分东西.
 # 与线程区别:一个具有多个线程的程序可以同时运行几个线程，而协同程序却需要彼此协作地运行
 # 就是说一个具有多个协同程序的程序在任意时刻只能和运行一个协同程序
-# 生成器是数据的生产者 协程则是数据的消费者. yield可获得一个协程。协程会消费掉发送给它的值
+# 生成器是数据的生产者 协程则是数据的消费者. yield可获得一个协程.协程会消费掉发送给它的值
 def grep(pattern):
     print("searching for", pattern)
     while True:
@@ -312,8 +315,6 @@ def grep(pattern):
         line = (yield)
         if pattern in line:
             print(line)
-
-
 search = grep('coroutine')
 # next() 启动一个协程,send()方法向它传值, close()方法来关闭一个协程
 next(search)  # output: searching for coroutine
@@ -326,25 +327,18 @@ search.close()
 # 函数缓存允许我们将一个函数对于给定参数的返回值缓存起来
 # python 3.2之后使用lru_cache
 from functools import lru_cache
-
-
 @lru_cache(maxsize=32)
 def fib(n):
     if n < 2:
         return n
     return fib(n-2)+fib(n-1)
-
-
 print([fib(x) for x in range(10)])
 # 清空缓存
 fib.cache_clear()
 # python 2 实现缓存机制
 from functools import wraps
-
-
 def memorize(function):
     memo = {}
-
     @wraps(function)
     def wrapper(*args):
         # print('*args',*args)#*args 6
@@ -357,20 +351,16 @@ def memorize(function):
             memo[args] = rv
             return rv
     return wrapper
-
-
 @memorize
 def fib2(n):
     if n < 2:
         return n
     return fib2(n-2)+fib2(n-1)
-
-
 print('fib2(10)', fib2(10))
 print('fib2(5)', fib2(5))
 
 
-# 上下文管理器 Context managers
+# 25 上下文管理器 Context managers
 # 上下文管理器允许你在有需要的时候，精确地分配和释放资源,
 # 常见的, 资源的加锁和解锁，以及关闭已打开的文件with
 with open('download.csv', 'r+') as f:
@@ -396,7 +386,7 @@ class MyFile(object):
 # 我们使用.write()来写文件
 # with语句调用之前暂存的__exit__方法
 #    异常发生 :type,value和traceback传递给__exit__方法
-#             __exit__返回True，异常就被处理了。返回True以外的任何东西，with将抛出异常
+#             __exit__返回True，异常就被处理了.返回True以外的任何东西，with将抛出异常
 # __exit__方法关闭了文件
 with MyFile('download.csv', 'r+') as f:
     f.write('this is from with key word')

@@ -1,6 +1,4 @@
-# Python 简介
-
-
+# 3 Python 简介
 # 数字
 # 除法(/)永远返回一个浮点数。
 # // 整除； % 计算余数; ** 乘幂;  复数 j 或 J 表示虚数部分 3+5j
@@ -34,7 +32,8 @@ print('squares[:], squares[1], squares[-1], squares[-3:], [-1, 0]+squares',
       squares[:], squares[1], squares[-1], squares[-3:], [-1, 0]+squares)
 
 
-# Python流程控制
+
+# 4 Python流程控制
 # if
 # x = int(input("please input an integer: "))
 x = 0
@@ -220,6 +219,7 @@ print(doc_string.__doc__)
 # 函数的额外注释, 是关于用户自定义的函数的完全可选的、随意的元数据信息
 # funcdef ::=  [decorators] "def" funcname "(" [parameter_list] ")" 
 # ["->" expression] ":" suite
+"""
 def mysum(a, b: int, c: 'the default is 5' = 5)-> 'Nothing to see here':
     '''    Return a+b+c.
     __annotations__ 是函数的一个属性，类型为 dict.可以在程序运行时动态地修改注释
@@ -228,5 +228,26 @@ def mysum(a, b: int, c: 'the default is 5' = 5)-> 'Nothing to see here':
     mysum.__annotations__['return'] += result
     return result
 print(mysum('1','3','2'))  
+#{'b': <class 'int'>, 'c': 'the default is 5', 'return': 'Nothing to see here132'}
 print(mysum.__annotations__)  
+"""
 
+# 编码风格
+# 代码的易读性对大型复杂程序的多人协作, 代码维护至关重要,可以有效的缩短时间
+'''
+使用 4 空格缩进，而非 TAB
+折行以确保其不会超过 79 个字符
+使用空行分隔函数和类，以及函数中的大块代码
+可能的话，注释独占一行
+使用文档字符串
+把空格放到操作符两边，以及逗号后面，但是括号里侧不加空格：a = f(1, 2) + g(3, 4)
+统一函数和类命名,推荐类名用 驼峰命名， 函数和方法名用 小写_和_下划线。总是用 self 作为方法的第一个参数
+不要使用花哨的编码，如果你的代码的目的是要在国际化环境。Python 的默认情况下，UTF-8，甚至普通的 ASCII 总是工作的最好
+#!/usr/bin/python  
+# -*- coding: utf-8 -*- 
+'''
+
+
+
+# 5 数据结构
+# 列表
