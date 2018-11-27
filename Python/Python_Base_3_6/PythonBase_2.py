@@ -2,7 +2,7 @@
 # 模块的目的是 更好的复用文件中的函数
 # Python 提供了一个方法可以从文件中获取定义，在脚本或者解释器的一个交互式实例中使用。这样的文件被称为 模块
 # 模块是包括 Python 定义和声明的文件。文件名就是模块名加上 .py 后缀。
-# 模块的模块名（做为一个字符串）可以由全局变量 __name__ 得到 
+# 模块的模块名(做为一个字符串)可以由全局变量 __name__ 得到 
 import fibo
 print('fibo.fib(10)', end=' ')
 fibo.fib(10)
@@ -16,7 +16,7 @@ from fibo import fib, fib_ary
 fib(56)
 
 # 作为脚本来执行模块
-# 通常用来为模块提供一个便于测试的用户接口（将模块作为脚本执行测试需求）
+# 通常用来为模块提供一个便于测试的用户接口(将模块作为脚本执行测试需求)
 '''
 python fibo.py 123
 fib. __name__ __main__
@@ -59,7 +59,7 @@ import pathlib
 compileall.compile_dir(pathlib.Path('../Python_Base_3_6/'), force=True)
 '''
 # 标准模块
-# Python 带有一个标准模块库，并发布有独立的文档，名为 Python 库参考手册（此后称其为“库参考手册”） 
+# Python 带有一个标准模块库，并发布有独立的文档，名为 Python 库参考手册(此后称其为“库参考手册”) 
 # sys ，这个模块内置于所有的 Python 解释器
 # 交互模式下定义主提示符sys.ps1 和辅助提示符字符串 sys.ps2
 
@@ -83,7 +83,7 @@ echo()
 '''
 #　　文件夹被python解释器视作package需要满足两个条件：
 #　　1、文件夹中必须有__init__.py文件，该文件可以为空，但必须存在该文件。
-#　　2、不能作为顶层模块来执行该文件夹中的py文件（即不能作为主函数的入口）。
+#　　2、不能作为顶层模块来执行该文件夹中的py文件(即不能作为主函数的入口)。
 #       使用相对导入的时候一定要注意包路径和包的查找路径。要在最顶层的目录添加到 sys.path 中，或者 在最顶层运行脚本
 #   ValueError: attempted relative import beyond top-level package
 from ..Python_Advanced import PythonAdvanced_1
@@ -101,7 +101,7 @@ PythonAdvanced_1.test_asterisk('yasoob', 'python', 'eggs', 'test')
 s = 'Hello, world.'
 print('str(s)',str(s))
 print('repr(s)',repr(s))
-#'!a' (应用 ascii())，'!s' （应用 str() ）和 '!r' （应用 repr() 
+#'!a' (应用 ascii())，'!s' (应用 str() )和 '!r' (应用 repr() 
 import math
 print('The value of PI is approximately {!r}.'.format(math.pi))
 print('The value of PI is approximately {0:.3f}.'.format(math.pi))
@@ -117,5 +117,223 @@ print('Jack: {Jack:d}; Sjoerd: {Sjoerd:d}; Dcab: {Dcab:d}'.format(**table))
 # Class 类 
 # 像模块一样，Python 的类并没有在用户和定义之间设立绝对的屏障，而是依赖于用户不去“强行闯入定义”的优雅。
 # 另一方面，类的大多数重要特性都被完整的保留下来：
-# 类继承机制允许多重继承，派生类可以覆盖（override）基类中的任何方法或类，可以使用相同的方法名称调用基类的方法。
+# 类继承机制允许多重继承，派生类可以覆盖(override)基类中的任何方法或类，可以使用相同的方法名称调用基类的方法。
 # 对象可以包含任意数量的私有数据
+# Python 作用域和命名空间 
+# 命名空间 是从命名到实例对象的映射. 通过python字典实现 
+# 不同的命名空间在不同的时刻创建，有不同的生存期:  
+#   包含内置命名的命名空间在 Python 解释器启动时创建，会一直保留。模块的全局命名空间在模块定义被读入时创建
+#   调用函数时，就会为它创建一个局部命名空间，并且在函数返回或抛出一个并没有在函数内部处理的异常时被删除 
+# 作用域 就是一个 Python 程序可以直接访问命名空间的正文区域 
+# python引用变量的顺序： 当前作用域局部变量->外层作用域变量->当前模块中的全局变量->python内置变量 
+# 尽管作用域被静态的定义, 但他们使用时是动态的
+#   首先搜索最内层的作用域，它包含局部命名任意函数包含的作用域，
+#       是内层嵌套作用域搜索起点，包含非局部，但是也非全局的命名
+#   接下来的作用域包含当前模块的全局命名
+#   最外层的作用域(最后搜索)是包含内置命名的命名空间 
+# nolocal, global
+# nolocal: https://docs.python.org/3/reference/simple_stmts.html#nonlocal
+# 使用当前函数或块级作用域的外层作用域(非全局)中的变量;可以取多次嵌套后的外层变量 
+# global: https://docs.python.org/3/reference/simple_stmts.html#global
+# 全局变量在函数或块级作用域内有读权限没有写权限, global用来赋予写权限
+# !!! nolocal只是引用, 不能引用在外层作用域中未声明的变量; global可以直接声明
+def scope_test():
+    def fun_local():
+        #1 spam作用域只局限于fun_local内部
+        spam = 'local spam'
+    def fun_nolocal():
+        #2 nonlocal将spam提升到scope_test函数的作用域
+        nonlocal spam
+        spam = 'nolocal spam'
+        def fun_localInlocal():
+            nonlocal spam
+            spam = 'fun_localInlocal spam'
+            print('IN fun_localInlocal', spam)
+        fun_localInlocal()
+    def fun_global():
+        #3 global将spam提升到scope_test函数所在模块的作用域
+        global spam
+        spam = 'global spam'
+    #4 spam作用域为scope_test内部
+    spam = 'test spam'
+    #test spam: fun_local里的spam未被访问, 下方spam实际为#4
+    fun_local()
+    print('after local assignment:', spam)
+    #nolocal spam: fun_nolocal.spam被提升到scope_test作用域, spam从test spam重新赋值为nolocal spam
+    fun_nolocal()
+    print('after nolocal assignment:', spam)
+    #nolocal spam: fun_global.spam被提升出scope_test作用域,等同于#5
+    # 所以下方的spam仍然指向#4, fun_global内改变的是#5
+    fun_global()
+    print('after global assignment:', spam)
+#5 
+spam1 = 'global out'
+scope_test()
+# global spam: fun_global函数内被重新赋值
+print('In global scope:', spam)
+# 类定义
+'''
+class ClassName:
+    <statement-1>
+    ...
+    <statement-N>
+'''
+class MyClass:
+    """A simple example class"""
+    i = 123
+    def func(self):
+        return 'hello world: ' + str(self.i)
+# 类对象支持两种操作：属性引用和实例化
+# 实例化 使用函数符号() 将类对象看作是一个返回新的类实例的无参数函数
+myClass = MyClass()
+# 属性引用 obj.name 类对象创建后，类命名空间中所有的命名都是有效属性名
+# 123 <function MyClass.func at 0x01EE9618> 123 hello world: 123
+print('MyClass.i, MyClass.func, myClass.i, myClass.func(): ',
+    MyClass.i, MyClass.func, myClass.i, myClass.func())
+
+# __new__(): 在创建类实例时发生调用. https://docs.python.org/3/reference/datamodel.html#object.__new__
+# __init__(self[, ...]): 在类实例创建(__new__())后但还未返回给调用者时调用
+# 多用来初始化对象的属性, 视作构造函数; 返回None将抛出TypeError错误
+class Complex():
+    def __init__(self, real =0, imag=0):
+        self.r = real
+        self.i = imag
+x = Complex(1,2)
+print('x, x.i, x.r',x, x.i, x.r)
+
+# 实例对象
+# 实例对象唯一可用的操作是属性引用, 包括数据引用和方法引用
+# 数据对象是类实例的属性, Python是动态语言，根据类创建的实例可以任意绑定属性
+# 这意味着不仅可以引用类中定义的属性, 实例自身可以再绑定, 但会增加性能成本, 
+# __slot__可以限制这种任意绑定的行为, 删除属性 del x.counter
+x.counter = 1
+x.counter = x.counter + 1
+print('x.counter, x.i', x.counter, x.i)
+del x.counter
+del x.i 
+# AttributeError: 'Complex' object has no attribute 'i'
+# print('x, x.i, x.r',x, x.i, x.r)
+# 方法对象 myClass.func()
+# 工作原理: 引用非数据属性的实例属性时，会搜索它的类。
+#   如果这是有效的函数对象类属性，就会将实例对象和函数对象封装进一个抽象对象：这就是方法对象 
+#   以一个参数列表调用方法对象时，它被重新拆封，
+#   用实例对象和原始的参数列表构造一个新的参数列表，然后函数对象调用这个新的参数列表 
+# myClass.func 是一个方法对象，它可以存储起来以后调用
+myFunc = myClass.func()
+print('myFunc',myFunc)
+# 类实例.fun() = 类.fun(类实例)
+print('myClass.func(), MyClass.func(myClass)', 
+    myClass.func(), MyClass.func(myClass))
+
+# 类变量和实例变量
+# 实例变量用于对每一个实例都是唯一的数据，类变量用于类的所有实例共享的属性和方法
+# 可变对象, 例如列表和字典, 作为类变量声明时, 即使作为实例变量初始化也会被所有类实例共享
+#       可变对象不应该作为类变量, 若不想被共享, 应该作为实例变量被声明
+class Dog:
+    classList = []
+    def __init__(self, name):
+        self.name = name
+        # 不会被所有类实例共享
+        self.insList = []
+    def add_classList(self, tricks):
+        self.classList.append(tricks)
+        self.insList.append(tricks)
+d = Dog('Fido')
+e = Dog('Buddy')
+d.add_classList('roll over')
+e.add_classList('play dead')
+# d.classList, d.insList:  ['roll over', 'play dead'] ['roll over']
+print('d.classList, d.insList: ',d.classList, d.insList)
+
+# Note
+# 数据属性会覆盖同名的方法属性。为了避免意外的名称冲突, 做一些约定 
+#   大写方法名称的首字母，使用一个唯一的小字符串(也许只是一个下划线)作为数据属性名称的前缀，或者方法使用动词而数据属性使用名词
+# 数据属性可以被方法引用，也可以由一个对象的普通用户(客户)使用。
+#   客户应该谨慎的使用数据属性, 客户可以向一个实例对象添加他们自己的数据属性，而不会影响方法的正确性
+# 类不能用来实现纯净的数据类型
+# 从方法内部引用数据属性(或其他方法)并没有快捷方式, nolocal, global 
+# 方法的第一个参数被命名为 self。这仅仅是一个约定：
+#   对 Python 而言，名称 self 绝对没有任何特殊含义, 但有些 类查看器 程序也可能是遵循此约定编写
+# 类属性的任何函数对象都为那个类的实例定义了一个方法。
+#   函数定义代码不一定非得定义在类中：也可以将一个函数对象赋值给类中的一个局部变量 
+def f1(self, x, y):
+    return min(x,y)
+class C:
+    f = f1
+    def g(self):
+        return 'hello world'
+    # h 严格等于g
+    h = g
+c = C()
+print('c.f(1,-1), c.h()',c.f(1,-1), c.h())
+# 通过 self 参数的方法属性，方法可以调用其它的方法
+class Bag:
+    def __init__(self):
+        self.data = []
+    def add(self, x):
+        self.data.append(x)
+    def add2(self, x):
+        self.add(x)
+        self.add(x)
+b = Bag()
+b.add2('this is going to be added twice')
+print(b.data)
+# 每个值都是一个对象，因此每个值都有一个 类( class ) (也称为它的 类型( type ) )，它存储为 object.__class__
+# 全局作用域确有很多合法的用途：其一是方法可以调用导入全局作用域的函数和方法，也可以调用定义在其中的类和函数
+
+# 类继承
+'''
+# 基类与派生类定义在一个作用域内
+class DerivedClassName(BaseClassName):
+    <statement-1>
+    ...
+    <statement-N>
+# 基类定义在另一个模块
+class DerivedClassName(modname.BaseClassName):
+    <statement-1>
+    ...
+    <statement-N>    
+'''
+# 派生类定义的执行过程和基类是一样的。
+#   构造派生类对象时，就记住了基类。这在解析属性引用的时候尤其有用：如果在类中找不到请求调用的属性，就搜索基类。
+#   如果基类是由别的类派生而来，这个规则会递归的应用上去。
+# 派生类可能会覆盖其基类的方法,Python 中的所有方法本质上都是 虚 方法
+# 派生类中的覆盖方法扩充基类中的重名方法, 调用基类方法然后拓展，
+#   调用方式：BaseClassName.methodname(self, arguments)
+# Python中两个用于继承的函数
+#   函数 isinstance() 用于检查实例类型： isinstance(obj, int)
+#   函数 issubclass() 用于检查类继承： issubclass(bool, int) 为 True
+
+# 多继承
+'''
+# 动态的线性化算法，super()调用方法的优先级为从左到右的, 有高到低 
+# 父类的父类优先级比父类更低: Base1 > Base2 > Base
+class DerivedClassName(Base1, Base2):
+    <statement-1>
+    ...
+    <statement-N>
+'''
+class Base(object):
+    def echo(self):
+        print('Base')
+    def echoBase(self):
+        print('Base')
+class Base1(Base):
+    def echo(self):
+        print('Base--1')
+class Base2(Base):
+    def echo(self):
+        print('Base--2')
+class Derived(Base1, Base2):
+    def echo(self):
+        super().echo()
+        print('Derived')
+d = Derived()
+# Base--1 Derived
+d.echo() 
+# Base
+d.echoBase()
+
+# 私有变量
+# 只能从对像内部访问的“私有”实例变量，在 Python 中不存在。
+# 变通的方法：以一个下划线开头的命名（例如 _spam ）会被处理为 API 的非公开部分 
