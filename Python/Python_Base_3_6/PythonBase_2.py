@@ -336,4 +336,100 @@ d.echoBase()
 
 # 私有变量
 # 只能从对像内部访问的“私有”实例变量，在 Python 中不存在。
-# 变通的方法：以一个下划线开头的命名（例如 _spam ）会被处理为 API 的非公开部分 
+# 变通的方法：以一个下划线开头的命名(包括属性和函数),例如 _spam会被处理为 API 的非公开部分 
+class Mapping:
+    __test = 'test'
+    def __init__(self, iterable):
+        self.items_list = []
+        self.__update(iterable)
+    def update(self, iterable):
+        for item in iterable:
+            self.items_list.append(item)
+    # __update是基类方法私有的, 不会被子类重写
+    __update = update
+m = Mapping(['iter1','iter2'])
+# m.__test # 'Mapping' object has no attribute '__test'
+print(m.items_list)
+class MappingSub(Mapping):
+    # def __init__(self):self.items_list = []
+    # 子类重写了基类的update(), 但无法修改__update, 
+    # 不能重写__init__, 会破坏基类中调用__init__
+    def update(self, keys, values):
+        for item in zip(keys, values):
+            self.items_list.append(item)
+msub = MappingSub('BASE')
+msub.update('qwe','1234')
+# ['B', 'A', 'S', 'E', ('q', '1'), ('w', '2'), ('e', '3')]
+print(msub.items_list)     
+
+# 结构体
+# 通过创建空的类,作为结构体类型
+class Employee:
+    __slots__ = ["name","dept","salary"]
+john = Employee() 
+# Fill the fields of the record
+john.name = 'John Doe'
+john.dept = 'computer lab'
+john.salary = 1000
+print('john.name,john.dept,john.salary',john.name,john.dept,john.salary)
+
+# 用户自定义异常
+# 用户自定义异常类要继承Exception或其派生类
+# 抛出异常 raise Class/Class()
+#raise B # __main__.B: B ErrorInfo
+#raise B() #__main__.B: B ErrorInfo
+class B(Exception):
+    def __init__(self):
+        super().__init__(self) #初始化父类
+        self.errorinfo='B ErrorInfo'
+    def __str__(self):
+        return self.errorinfo 
+class CC(B):
+    pass
+class D(CC):
+    pass
+# 异常的抛出顺序: 抛出第一个相符的异常. 这就是说, 如果将异常的基类放在第一个匹配的位置, 它的子类异常就没有机会匹配
+# 如果B在最前会打印: B B B 
+for cls in [B, CC, D]:
+    try:
+        raise cls()
+    except D:
+        print("D", end=' ')
+    except CC:
+        print("CC", end=' ')
+    except B:
+        print("B", end=' ')
+
+# 迭代器
+# for语句在容器类中会调用__iter__(), 该函数返回一个定义了 __next__() 方法的迭代器对象，它在容器中逐一访问元素。
+# 没有后续的元素时， __next__() 抛出一个 StopIteration 异常通知 for 语句循环结束
+# 实现迭代器机制: 定义一个返回__next__()方法返回值的__iter__()函数, 如果已经定义了__next__(), 只要返回self
+class Reverse:
+    def __init__(self, data):
+        self.data = data
+        self.index = len(data)
+    def __next__(self):
+        if self.index <=0 : raise StopIteration
+        self.index -= 1
+        return self.data[self.index]
+    def __iter__(self):
+        return self
+#f d s a        
+for item in Reverse('asdf'):
+    print(item, end=' ')
+# 生成器
+# 生成器(Generators): 生成器是只迭代一次的迭代器.这是因为它们并没有把所有的值存在内存中,而是在运行时生成值.
+#    通过yield每次返回一个单次运行的值, 而不是直接返回占用大量空间的一个值
+#    调用:用for循环,或可进行迭代的函数或结构
+#    next(): 它允许我们获取一个序列的下一个元素. yield所有值后会触发 StopIteration exception 
+#       next() 被调用时，生成器回复它脱离的位置（它记忆语句最后一次执行的位置和所有的数据值）
+#    生成器是数据的生产者 协程则是数据的消费者. yield可获得一个协程.协程会消费掉发送给它的值
+# 生成器表达式 range, zip
+#set(word  for line in page  for word in line.split())
+#max((student.gpa, student.name) for student in graduates)
+from math import pi, sin
+sine_table = {x: sin(x*pi/180) for x in range(0, 91)}
+print('sine_table ',sine_table)
+xvec = [10, 20, 30]
+yvec = [7, 5, 3]
+print(sum(x*y for x,y in zip(xvec, yvec)) )
