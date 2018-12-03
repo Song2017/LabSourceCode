@@ -22,28 +22,26 @@ print('QuickSort([90,0,-1,22,3])', QuickSort([90,0,-1,22,3]))
 # 双向排序: 提高非随机输入的性能
 # 不需要额外的空间,在待排序数组本身内部进行排序
 def swap(arr, l, u):
-    temp = arr[l]
-    arr[l] = arr[u]
-    arr[u] = temp
+    arr[l] ,arr[u]= arr[u],arr[l]
     return arr 
 import random
 def QuickSort_Perl(arr, l, u):
     # if u-l < 50 : return arr
     if l >= u: return arr
+    # 随机选取基准值, 并将基准值替换到数组第一个元素
     swap(arr,l, int(random.uniform(l,u)))
     temp = arr[l]
-    i = l
-    j = u
+    i,j = l,u  
     while True :
+        # 第一个元素是基准值,所以要跳过
         i+=1
-        while i < u and arr[i] < temp: i+=1
-        j-=1
+        # 在小区间中, 进行排序
+        while i <= u and arr[i] <= temp: i+=1
+        # 因为j肯定大于i, 所以索引值肯定在小区间中
         while arr[j] > temp: j-=1
         if i > j: break
-        t = arr[i]
-        arr[i]=arr[j]
-        arr[j]=t
-    swap(arr, l,j)
+        arr[i], arr[j] =arr[j],arr[i]
+    swap(arr, l, j)
     QuickSort_Perl(arr, l, j-1)
     QuickSort_Perl(arr, j+1, u)
     return arr
