@@ -31,11 +31,9 @@ SourceCode Tourial
 [oauth2](https://oauth.net/)     
 [sqlitebrowser.org](http://sqlitebrowser.org)     
 [python-garbage-collector](https://rushter.com/blog/python-garbage-collector/)    
-### Debugging
-[The Python Debugger](https://docs.python.org/3/library/pdb.html)
-### Python Datastructure
-![Python Datastructure](Python/Exercise/pythondatastructure.png)
-
+### Library
+[The Python Debugger](https://docs.python.org/3/library/pdb.html)    
+[Regular expression operations](https://docs.python.org/3/library/re.html#module-re)
 
 # Reading List
 ## Linux

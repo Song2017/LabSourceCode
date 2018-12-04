@@ -22,3 +22,8 @@
 [oauth2](https://oauth.net/)     
 [sqlitebrowser.org](http://sqlitebrowser.org)    
 [python-garbage-collector](https://rushter.com/blog/python-garbage-collector/)
+
+### LIB
+[shutil — High-level file operations](https://docs.python.org/3/library/shutil.html#module-shutil)
+[urllib3](https://urllib3.readthedocs.io/en/latest/)
+[Requests: HTTP for Humans™](https://requests.readthedocs.io/en/latest/)
