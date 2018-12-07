@@ -1,11 +1,13 @@
-# /usr/bin/env python
-# coding=utf8
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import hashlib
 import random
 import openpyxl
 from openpyxl import Workbook
 import requests
+
+# 使用: 将要翻译的内容放到c:\_Work\source.xlsx的Sheet1的第1列
 
 # set baidu develop parameter
 apiurl = 'http://api.fanyi.baidu.com/api/trans/vip/translate'
@@ -36,9 +38,9 @@ def translateBaidu(content, fromLang='en', toLang='zh'):
         print(e)
 
 
-def excelTrans(srcFilename=r'c:\_Work\source.xlsx', desFilename=r'c:\_Work\result.xlsx'
-               srcSheet='Sheet2',  srcColumn=1, srcRowBegin=1, srcRowEnd=28, 
-               desColumn=1, desSheet='result2'):
+def excelTrans(srcFilename=r'c:\_Work\source.xlsx', desFilename=r'c:\_Work\result.xlsx',
+               srcSheet='Sheet1',  srcColumn=1, srcRowBegin=1, srcRowEnd=28, 
+               desColumn=1, desSheet='result1'):
     wb = openpyxl.load_workbook(srcFilename)
     ws = wb[srcSheet]
     wb2 = Workbook()
