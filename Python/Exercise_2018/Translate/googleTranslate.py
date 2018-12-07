@@ -1,8 +1,22 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import requests # pip install requests
 import json
 import execjs  # pip install PyExecJS
 import urllib3  # pip install urllib3
 
+'''
+author by Benji 
+date at 2018.12.07
+
+实现: 模拟浏览器中Google翻译的url请求
+    不同于Baidu直接给出API, Google翻译需要调用其封装的lib
+
+参考:   https://www.jianshu.com/p/95cf6e73d6ee
+        https://cloud.google.com/translate/docs/apis
+
+'''
 
 class PyJsParams():
     def __init__(self):
@@ -59,7 +73,6 @@ def buildUrl(text, tk):
 
 def translate(text, jsParas):
     url = buildUrl(text, jsParas.getTk(text))
-    res = ''
     try:
         # 添加headers, 模仿浏览器行为
         headers = requests.utils.default_headers()
@@ -68,20 +81,8 @@ def translate(text, jsParas):
         urllib3.disable_warnings()
         # solve: SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate
         r = requests.get(url, headers=headers, verify=False)
-        result = json.loads(r.text)
-        if result[7] != None:
-            try:
-                correctText = result[7][0].replace(
-                    '<b><i>', ' ').replace('</i></b>', '')
-                correctUrl = buildUrl(correctText, jsParas.getTk(correctText))
-                correctR = requests.get(correctUrl)
-                newResult = json.loads(correctR.text)
-                res = newResult[0][0][0]
-            except Exception as e:
-                print(e)
-                res = result[0][0][0]
-        else:
-            res = result[0][0][0]
+        result = json.loads(r.text)  
+        res = str(result[0][0][0])
     except Exception as e:
         res = ''
         print("翻译"+text+"失败")
@@ -96,3 +97,8 @@ if __name__ == '__main__':
     jsParas = PyJsParams()
     res = translate('小顺子给春宫娘娘请安了', jsParas)
     print(res)
+    
+'''
+output
+Xiaoshun gave the Spring Palace girl an appointment.
+'''
