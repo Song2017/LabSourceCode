@@ -28,4 +28,8 @@ int main(int argc, char* argv[]){
     }
     return 0;
 }
-
+3. 为什么数组的索引从0开始
+可能有历史原因, 但个人倾向于是因为便于计算物理位置. 
+    索引从0开始: a[i]_address = base_address + i * data_type_size
+    索引从1开始: a[i]_address = base_address + (i - 1) * data_type_size
+寻址公式是基础中的基础, 执行的频率肯定也很高. 多出的一步计算消耗, 完全可以通过程序猿的条件设置抵消掉. 

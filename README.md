@@ -1,6 +1,10 @@
 # SourceCode
 SourceCode Tourial
 
+## DataStructure and Algrithem
+[数据结构与算法之美_RMB](https://time.geekbang.org/column/126)
+[www.geeksforgeeks.org/data-structures](https://www.geeksforgeeks.org/data-structures/)
+
 ## Html5-CSS3
 [html5-css3-fundamentals-development-for-absolute-beginners](https://mva.microsoft.com/en-US/training-courses/html5-css3-fundamentals-development-for-absolute-beginners-14207)      
 
@@ -51,7 +55,7 @@ SourceCode Tourial
 [unittest](https://docs.python.org/3/library/unittest.html#module-unittest)    
 [pprint data pretty printer](https://docs.python.org/3/library/pprint.html#module-pprint)    
 [string.Template(template)](https://docs.python.org/3/library/string.html#string.Template)    
-[threading — Thread-based parallelism](https://docs.python.org/3/library/threading.html#module-threading)      
+[threading — Thread-based parallelism](https://docs.python.org/3/library/threading.html#module-threading)     
 [logging — Logging facility for Python](https://docs.python.org/3/library/logging.html#module-logging)     
 [bisect — Array bisection algorithm](https://docs.python.org/3/library/bisect.html#module-bisect)    
 [heapq — Heap queue algorithm¶](https://github.com/python/cpython/blob/3.7/Lib/heapq.py)    
