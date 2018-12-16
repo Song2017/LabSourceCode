@@ -6,8 +6,8 @@
 3. 存储的数据具有相同类型, 保证了每个数据元素占用的物理空间大小都是相等的
 ### 特性
 1. 内存连续和类型相同的限制使得数组拥有特性: **随机访问**, 按下标随机访问数组元素:
-    一维数组: **a[i]_address = base_address + i * data_type_size** 
-    二维m*n数组: **a[i][j] = base_address + (i*n+j) * data_type_size**
+    一维数组: a[i]_address = base_address + i * data_type_size
+    二维m * n数组: a[i][j] = base_address + (i * n + j) * data_type_size
 2. 假设要访问第3个元素, 通过公式可以直接得到内存地址:base_address+3*data_type_size
 3. 为了保持数组随机访问的特性, 插入和删除要付出很大的代价维护数组.
     插入: 在末位插入,不需要移动数据, 是O(1), 但首位需要将所有元素都后移一位, 就是O(n).
