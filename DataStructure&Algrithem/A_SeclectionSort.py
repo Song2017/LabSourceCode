@@ -1,5 +1,6 @@
 # 选择排序 
 # 每次选择出一个最值，需要排序的元素越来越少
+# 又称为冒泡排序法, 自然界中, 气泡的密度比水小, 在水中,越大的气泡受到的浮力也就越大, 就会先到达水面
 # O（n**2） n+(n-1)+...1=n/2(n+1)
 def FindMin(arr):
     if not arr or len(arr) <=0 : 
@@ -16,6 +17,7 @@ def SelectionSort(arr):
     minIndex=0
     for i in range(len(arr)):
         minIndex = FindMin(arr)
+        # arr数组中的最小值被弹出
         sortedArr.append(arr.pop(minIndex))
     return sortedArr
 
