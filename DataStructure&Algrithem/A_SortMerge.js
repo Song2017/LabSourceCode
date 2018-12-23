@@ -15,8 +15,7 @@ function mergesort(items) {
     if (items.length == 1) {
         return items;
     }
-
-
+ 
     var work = [];
 
     for (var i = 0, len = items.length; i < len; i++) {
