@@ -184,6 +184,7 @@ print(inspect.getmembers(mylist))
 
 
 # 15 推导式 comprehensions：list dict set
+# 推导式的类型决定了推导式返回结果的类型
 # 是可以从一个数据序列构建另一个新的数据序列的结构体
 # 列表推导式 list  variable = [out_exp for out_exp in input_list if out_exp == 2]
 squard = [x**2 for x in range(10) if x > -1]

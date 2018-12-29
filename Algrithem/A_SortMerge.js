@@ -10,7 +10,7 @@ function merge(left, right) {
     }
     return result.concat(left).concat(right);
 }
-
+//for
 function mergesort(items) {
     if (items.length == 1) {
         return items;
@@ -33,6 +33,7 @@ function mergesort(items) {
     return work[0];
 }
 
+//recursive
 function mergesort2(items) {
     if (items.length == 1) {
         return items;

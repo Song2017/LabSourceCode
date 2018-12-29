@@ -19,9 +19,7 @@
 #       递归条件 继续调用函数自身的条件
 # O(nlogn) n:每层元素的个数; logn:调用栈的高度.
 #          O(n):处理每层n个元素的时间; O(logn): 需要处理的层数
-def QuickSort(arr):
-    if not arr:
-        return
+def QuickSort(arr): 
     arrLen = len(arr)
     if arrLen < 2:
         return arr
@@ -32,9 +30,25 @@ def QuickSort(arr):
     # 推导式简单实现(pivot, len(arr)]
     greater = [i for i in arr[:] if i > pivot]
     return QuickSort(less) + QuickSort(greater)
-
 print('QuickSort([90,0,-1,22,3])', QuickSort([90, 0, -1, 22, 3]))
 
+# 用快速排序查找第K大元素 1=<K<=len(arr)
+def QuickSortPosK(arr, K):
+    # 基准值为数组首位,末位,中间位数字的平均值
+    if len(arr) == 1 : return arr[0]
+    pivot = arr[-1]
+    # 推导式简单实现[i, pivot]
+    less = [i for i in arr[:] if i <= pivot]
+    greater = [i for i in arr[:] if i > pivot]
+    lenLess = len(less)
+    if lenLess == K:
+        return less[-1]
+    elif lenLess > K:
+        return QuickSortPosK(less[:-1], K)
+    elif lenLess < K:
+        return QuickSortPosK(greater, K-lenLess)
+ 
+print('QuickSortPosK',QuickSortPosK([90, 0, -1, 22, 3,3,3],4))
 
 # 编程珠玑实现
 # 双向排序: 提高非随机输入的性能
