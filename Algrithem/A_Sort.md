@@ -274,11 +274,11 @@ O(mklog2k)代入k=n/m得O(nlog2[n/m]), 根据log函数的特性得到O(n(log2n-l
 但是桶排序非常适合数据密集分布的数据, 像考试的分数, 几百万的数据只会密集分布在100(百分制)个区间内
 适合于外部排序,就是数据存储在外部磁盘中，数据量比较大，内存有限，无法将数据全部加载到内存中
     
-假设有10GB的订单数据，需按订单金额（假设金额都是正整数）进行排序,但内存有限，仅几百MB
+假设有10GB的订单数据，需按订单金额(假设金额都是正整数)进行排序,但内存有限，仅几百MB
 解决思路：
 扫描一遍文件，看订单金额所处数据范围，比如1元-10万元，那么就分100个桶。
 第一个桶存储金额1-1000元之内的订单，第二个桶存1001-2000元之内的订单，依次类推。
-每个桶对应一个文件，并按照金额范围的大小顺序编号命名（00，01，02，…，99）。
+每个桶对应一个文件，并按照金额范围的大小顺序编号命名(00，01，02，…，99)。
 然后将100个小文件依次放入内存并用快排排序。
 所有文件排好序后，只需按照文件编号从小到大依次读取每个小文件并写到大文件中即可
 ### Counting sort 计数排序
@@ -343,13 +343,6 @@ print(countingSort([1, 2, 3, 4, 9, 3, 4, 1, 2, 3]))
         使用计数排序, 用数组元素的指定数位的值构造好计数桶后, 从后向前遍历待排序数组, 
             根据桶的值, 直接插入到已排序数组, 时间复杂度为O(n)
         从低位向高位迭代, 进行元素的最大长度次迭代, 排序完成
-
-统计数据值, 转换为正整数. 存在小数,乘10倍增; 有负数, 加最小值绝对值归零
-根据数据范围造桶, 然后往桶里添加计数, 注意计数的规则,前一个桶的数加上自身桶里的数, 是一个递增的数列
-进行排序, 为了稳定性,从后向前遍历数据, 
-    根据数据的值从桶里取数,这个数就是排序后的数据位置, 
-    取数后要将桶的数的值减一, 这就是当前桶对应的待排序数据的下一个数据位置, 也是当前数据对应的已排序数组索引
-待排序数组遍历完成后, 已排序数组也就插入完成
 #### 应用
 基数排序对要排序的数据是有要求的，需要可以分割出独立的“位”来比较，而且位之间有递进的关系. 
 每一位的数据范围不能太大，要可以用线性排序算法来排序，否则，基数排序的时间复杂度就无法做到 O(n) 
@@ -399,3 +392,226 @@ def RadixCounting(arrPos):
         arrEleCount[i] += arrEleCount[i-1]
     return arrEleCount
 ``` 
+### 排序优化
+如何实现一个通用的、高性能的排序函数
+排序算法为了提升性能, 主要有两种方式, 分治法或构建辅助数据,
+    分治法都会都会有logn的复杂度, 像, 归并排序,快速排序, 希尔排序
+    构建辅助数据的多为特殊数据, 像基数排序, 计数排序, 桶排序.
+但对于小规模数据,分治法或构件辅助数据需要的额外运算, 不足以弥补带来的提升, 
+多直接用冒泡排序, 选择排序或直接插入排序. 
+
+排序算法	平均时间复杂度	最坏时间复杂度	空间复杂度	是否稳定
+冒泡排序	O(n^2)    	    O(n^2)    	  O(1)     	是
+选择排序	O(n^2)    	    O(n^2)    	  O(1)     	是
+直接插入排序 O(n^2)    	    O(n^2)    	   O(1)     是
+归并排序	O(nlogn)    	O(nlogn)      O(n)O(n)	不是/是
+快速排序	O(nlogn)    	O(n^2)    	  O(logn)	不是/是
+堆排序	    O(nlogn)    	O(nlogn)      O(1)     	不是
+希尔排序	O(nlogn)    	O(ns)O(ns)	  O(1)     	不是
+计数排序	O(n+k)    	    O(n+k)        O(n+k)	是
+基数排序	O(n∗M)          O(n∗M)    	  O(M) 	    是 
+
+#### .Net FrameWork Array Sort
+
+    桌面版本4.5
+        IntrospectiveSort(keys, values, index, length, comparer)
+        如果待排序数组长度小于16
+            <=3: 直接交换1,2 1,3 2,3
+            插入排序 InsertionSort
+        如果待排序数组长度大于16: 
+            根据二分法得到分层深度, 然后选取分区, 递归降低深度为0, 调用堆排序
+            if (depthLimit == 0) Heapsort(keys, values, lo, hi, comparer); return;
+            depthLimit--;
+            PickPivotAndPartition(keys, values, lo, hi, comparer);
+            IntroSort(keys, values, num2 + 1, hi, depthLimit, comparer);
+            hi = num2 - 1;
+    其他版本 
+        DepthLimitedQuickSort(keys, values, index, length + index - 1, comparer, 32)
+        使用快速排序降低递归深度, 深度降为0后, 调用堆排序 
+##### C# InsertionSort
+```
+private static void InsertionSort(TKey[] keys, TValue[] values, int lo, int hi, IComparer<TKey> comparer)
+{
+    for (int i = lo; i < hi; i++)
+    {
+        int num = i;
+        TKey tkey = keys[i + 1];
+        TValue tvalue = (values != null) ? values[i + 1] : default(TValue);
+        while (num >= lo && comparer.Compare(tkey, keys[num]) < 0)
+        {
+            keys[num + 1] = keys[num];
+            if (values != null)
+            {
+                values[num + 1] = values[num];
+            }
+            num--;
+        }
+        keys[num + 1] = tkey;
+        if (values != null)
+        {
+            values[num + 1] = tvalue;
+        }
+    }
+}   
+```
+##### C# FloorLog2
+```
+internal static int FloorLog2(int n)
+{
+    int num = 0;
+    while (n >= 1)
+    {
+        num++;
+        n /= 2;
+    }
+    return num;
+}
+```
+##### C# PickPivotAndPartition
+```
+private static int PickPivotAndPartition(TKey[] keys, TValue[] values, int lo, int hi, IComparer<TKey> comparer)
+{
+    int num = lo + (hi - lo) / 2;
+    ArraySortHelper<TKey, TValue>.SwapIfGreaterWithItems(keys, values, comparer, lo, num);
+    ArraySortHelper<TKey, TValue>.SwapIfGreaterWithItems(keys, values, comparer, lo, hi);
+    ArraySortHelper<TKey, TValue>.SwapIfGreaterWithItems(keys, values, comparer, num, hi);
+    TKey tkey = keys[num];
+    ArraySortHelper<TKey, TValue>.Swap(keys, values, num, hi - 1);
+    int i = lo;
+    int num2 = hi - 1;
+    while (i < num2)
+    {
+        while (comparer.Compare(keys[++i], tkey) < 0)
+        {
+        }
+        while (comparer.Compare(tkey, keys[--num2]) < 0)
+        {
+        }
+        if (i >= num2)
+        {
+            break;
+        }
+        ArraySortHelper<TKey, TValue>.Swap(keys, values, i, num2);
+    }
+    ArraySortHelper<TKey, TValue>.Swap(keys, values, i, hi - 1);
+    return i;
+}
+```
+##### C# Heapsort
+```
+private static void Heapsort(TKey[] keys, TValue[] values, int lo, int hi, IComparer<TKey> comparer)
+{
+    int num = hi - lo + 1;
+    for (int i = num / 2; i >= 1; i--)
+    {
+        ArraySortHelper<TKey, TValue>.DownHeap(keys, values, i, num, lo, comparer);
+    }
+    for (int j = num; j > 1; j--)
+    {
+        ArraySortHelper<TKey, TValue>.Swap(keys, values, lo, lo + j - 1);
+        ArraySortHelper<TKey, TValue>.DownHeap(keys, values, 1, j - 1, lo, comparer);
+    }
+} 
+private static void DownHeap(TKey[] keys, TValue[] values, int i, int n, int lo, IComparer<TKey> comparer)
+{
+    TKey tkey = keys[lo + i - 1];
+    TValue tvalue = (values != null) ? values[lo + i - 1] : default(TValue);
+    while (i <= n / 2)
+    {
+        int num = 2 * i;
+        if (num < n && comparer.Compare(keys[lo + num - 1], keys[lo + num]) < 0)
+        {
+            num++;
+        }
+        if (comparer.Compare(tkey, keys[lo + num - 1]) >= 0)
+        {
+            break;
+        }
+        keys[lo + i - 1] = keys[lo + num - 1];
+        if (values != null)
+        {
+            values[lo + i - 1] = values[lo + num - 1];
+        }
+        i = num;
+    }
+    keys[lo + i - 1] = tkey;
+    if (values != null)
+    {
+        values[lo + i - 1] = tvalue;
+    }
+}
+```
+##### C# DepthLimitedQuickSort
+```
+internal static void DepthLimitedQuickSort(TKey[] keys, TValue[] values, int left, int right, IComparer<TKey> comparer, int depthLimit)
+{
+    while (depthLimit != 0)
+    {
+        int num = left;
+        int num2 = right;
+        int num3 = num + (num2 - num >> 1);
+        ArraySortHelper<TKey, TValue>.SwapIfGreaterWithItems(keys, values, comparer, num, num3);
+        ArraySortHelper<TKey, TValue>.SwapIfGreaterWithItems(keys, values, comparer, num, num2);
+        ArraySortHelper<TKey, TValue>.SwapIfGreaterWithItems(keys, values, comparer, num3, num2);
+        TKey tkey = keys[num3];
+        for (;;)
+        {
+            if (comparer.Compare(keys[num], tkey) >= 0)
+            {
+                while (comparer.Compare(tkey, keys[num2]) < 0)
+                {
+                    num2--;
+                }
+                if (num > num2)
+                {
+                    break;
+                }
+                if (num < num2)
+                {
+                    TKey tkey2 = keys[num];
+                    keys[num] = keys[num2];
+                    keys[num2] = tkey2;
+                    if (values != null)
+                    {
+                        TValue tvalue = values[num];
+                        values[num] = values[num2];
+                        values[num2] = tvalue;
+                    }
+                }
+                num++;
+                num2--;
+                if (num > num2)
+                {
+                    break;
+                }
+            }
+            else
+            {
+                num++;
+            }
+        }
+        depthLimit--;
+        if (num2 - left <= right - num)
+        {
+            if (left < num2)
+            {
+                ArraySortHelper<TKey, TValue>.DepthLimitedQuickSort(keys, values, left, num2, comparer, depthLimit);
+            }
+            left = num;
+        }
+        else
+        {
+            if (num < right)
+            {
+                ArraySortHelper<TKey, TValue>.DepthLimitedQuickSort(keys, values, num, right, comparer, depthLimit);
+            }
+            right = num2;
+        }
+        if (left >= right)
+        {
+            return;
+        }
+    }
+    ArraySortHelper<TKey, TValue>.Heapsort(keys, values, left, right, comparer);
+}
+```
