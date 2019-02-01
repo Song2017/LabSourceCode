@@ -32,7 +32,7 @@ def QuickSort(arr):
     return QuickSort(less) + QuickSort(greater)
 print('QuickSort([90,0,-1,22,3])', QuickSort([90, 0, -1, 22, 3]))
 
-# 用快速排序查找第K大元素 1=<K<=len(arr)
+# 用快速排序查找第K大元素(非索引值) 1=<K<=len(arr)
 def QuickSortPosK(arr, K):
     # 基准值为数组首位,末位,中间位数字的平均值
     if len(arr) == 1 : return arr[0]
@@ -48,7 +48,7 @@ def QuickSortPosK(arr, K):
     elif lenLess < K:
         return QuickSortPosK(greater, K-lenLess)
  
-print('QuickSortPosK',QuickSortPosK([90, 0, -1, 22, 3,3,3],4))
+print('QuickSortPosK',QuickSortPosK([90, 0, -1, 22, 3, 3, 3],4))
 
 # 编程珠玑实现
 # 双向排序: 提高非随机输入的性能

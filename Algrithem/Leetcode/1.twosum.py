@@ -4,6 +4,8 @@ class Solution(object):
         :type nums: List[int]
         :type target: int
         :rtype: List[int]
+        通过和与已知加数计算出未知加数, 通过hash结构缓存所有待比较数
+        判断未知加数是否存在于待比较数中
         """ 
         for i in range(len(nums)): 
             for j in range(i+1, len(nums)):
