@@ -5,12 +5,14 @@ using System.Text;
 
 namespace testLicensesClear
 {
-    //去除LicensesClear.licx的只读属性 偷师大神代码
+    //去除LicensesClear.licx的只读属性  
     static class Program
     {
         //添加外部工具时参数可选为解决方案目录
         static void Main(string[] args)
         {
+            //Test();
+
             if (args == null || args.Length <= 0)
             {
                 //LicensesClear(new DirectoryInfo(FilePathHelper.GetDirectoryName(FilePathHelper.GetAbsolutePath(string.Empty))));
@@ -51,9 +53,21 @@ namespace testLicensesClear
 
             }
         }
+
+        static void Test()
+        {
+            int i = 0;
+            int[] ary = new int[3];
+            ary[3] = 0;
+            for (; i <= 3; i++) {
+                ary[i] = 0;
+                Console.WriteLine("hello world");
+            }
+
+        }
     }
 
-
+         
 
 
 }

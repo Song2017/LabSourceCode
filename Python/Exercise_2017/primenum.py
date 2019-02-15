@@ -3,7 +3,7 @@
 
 num = int(input('enter a number : '))
 
-floor = int(num/2 + 1)
+floor = int(num//2 + 1)
 
 if num<= 1:
 	print('prime num is greater than 1')

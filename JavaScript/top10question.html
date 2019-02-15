@@ -5,7 +5,83 @@
     <title>
         top 10 javascript questions
     </title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        // 1. 作用域（Scope）
+        (function () {
+            var a = b = 5; //b: window.b
+        })();
+        console.log(b); //5 
+        // 2: 创建 “原生(native)” 方法
+        String.prototype.repeatify = String.prototype.repeatify || function (times) {
+            var str = '';
+            for (var i = 0; i < times; i++) {
+                str += this;
+            }
+            return str;
+        };
+        console.log('hello'.repeatify(3));
+        // 3. 变量提升（Hoisting） 
+        function test() {
+            console.log(a);
+            console.log(foo());
+
+            var a = 1;
+
+            function foo() {
+                return 2;
+            }
+        }
+
+        test(); // undefined 2
+        //4.在javascript中，`this`是如何工作的
+        //JavaScript中关键字this所引用的是函数上下文，取决于函数是如何调用的，而不是怎么被定义的
+        var fullname = 'John Doe';
+        var obj = {
+            fullname: 'Colin Ihrig',
+            prop: {
+                fullname: 'Aurelio De Rosa',
+                getFullname: function () {
+                    return this.fullname;
+                }
+            }
+        };
+        console.log(obj.prop.getFullname()); //Aurelio De Rosa
+        var test = obj.prop.getFullname; //test: ƒ () {return this.fullname;}
+        console.log(test()); //John Doe
+        //5. apply也是由call底层实现的.前者参数是数组,后者要一个个的传递
+        console.log(test.call(obj.prop));
+        //6. 闭包
+        for (var i = 0; i < 5; i++) {
+            setTimeout(function () {
+                console.log(i);
+            }, 1000);
+        }
+        // 等1s后迅速打印 5 5 5 5 5
+        // 等1s后迅速打印 0 1 2 3 4 
+        for (var i = 0; i < 5; i++) {
+            (function (i) {
+                setTimeout(function () {
+                    console.log(i);
+                }, 1000)
+            })(i);
+        }
+        // 7. 短路运算
+        console.log(1 && 2 && 0); //0
+        console.log(1 && 0 && 1); //0
+        console.log(1 && 2 && 3); //3
+        //9 setTimeout
+        function printing() {
+            console.log(1);
+            setTimeout(function () {
+                console.log(2);
+            }, 1000);
+            setTimeout(function () {
+                console.log(3);
+            }, 0);
+            console.log(4);
+        }
+        printing(); // 1 4 3 2
+    </script>
 </head>
 
 <body>
@@ -54,8 +130,8 @@
             // ==vs=== 
             // ==进行类型转换 1 == ‘1’ == true
             console.log(0 == ''); //true
-            console.log(0 == '0');//true
-            console.log('' == '0');//false
+            console.log(0 == '0'); //true
+            console.log('' == '0'); //false
             console.log("abc" == new String("abc"));
             console.log("abc" === new String("abc")); // false, string type !=== object type
 
@@ -65,12 +141,24 @@
             console.log(d.getMonth() + '/' + d.getDate() + '/' + d.getFullYear());
 
             //check if javascript objects are equal
-            var a = { id: 123, name: 'abc' };
-            var b = { id: 123, name: 'abc' };
-            var c = { id: 123, name: 'c' };
-            var d = { id: 123, name: 'd' };
-            console.log(JSON.stringify(a) === JSON.stringify(b));//true
-            console.log(JSON.stringify(c) === JSON.stringify(d));//false
+            var a = {
+                id: 123,
+                name: 'abc'
+            };
+            var b = {
+                id: 123,
+                name: 'abc'
+            };
+            var c = {
+                id: 123,
+                name: 'c'
+            };
+            var d = {
+                id: 123,
+                name: 'd'
+            };
+            console.log(JSON.stringify(a) === JSON.stringify(b)); //true
+            console.log(JSON.stringify(c) === JSON.stringify(d)); //false
 
             function compare(a, b) {
                 if (Object.keys(a).length != Object.keys(b).length)
@@ -81,8 +169,8 @@
 
                 return true;
             }
-            console.log(compare(a, b));//true
-            console.log(compare(c, d));//false
+            console.log(compare(a, b)); //true
+            console.log(compare(c, d)); //false
 
             //sort array
 
@@ -90,15 +178,16 @@
             // var is scoped to the nearest function block 
             // let is scoped to the nearest enclosing block, loop
             function funcVar() {
-                for (var i = 0; i < 5; i++) { }
+                for (var i = 0; i < 5; i++) {}
                 if (typeof i === 'undefined')
                     console.log('i is undefined');
                 else
                     console.log('i is defined');
                 return '';
             }
+
             function funcLet() {
-                for (let j = 0; j < 5; j++) { }
+                for (let j = 0; j < 5; j++) {}
                 if (typeof j === 'undefined')
                     console.log('j is undefined');
                 else
@@ -120,7 +209,10 @@
             //check if an array contains an object with a certain attribute value
             var arr = [1, 2, 3];
             for (let i = 0; i < 100; i++)
-                arr.push({ id: Math.floor(Math.random() * 100) });
+                arr.push({
+                    id: Math.floor(Math.random() * 100)
+                });
+
             function containA(arr, id) {
                 for (let i = 0; i < arr.length; i++)
                     if (arr[i].id == id)
@@ -129,8 +221,11 @@
                 return false;
             }
             console.log(containA(arr, 2));
+
             function containB(arr, id) {
-                var containers = arr.filter(function (obj) { return obj.id == id; }).length >= 1;
+                var containers = arr.filter(function (obj) {
+                    return obj.id == id;
+                }).length >= 1;
                 return containers;
             }
             console.log(containA(arr, 1));
