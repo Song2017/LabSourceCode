@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="dist/ag-grid-community.min.noStyle.js"></script>
+    <!-- <script src="https://unpkg.com/ag-grid-enterprise/dist/ag-grid-enterprise.min.noStyle.js"></script> -->
+    <link rel="stylesheet" href="dist/styles/ag-grid.css">
+    <link rel="stylesheet" href="dist/styles/ag-theme-balham.css">
+</head>
+
+<body>
+    <h1>ag-grid!</h1>
+    <button onclick="getSelectedRows()">Get Selected Rows</button>
+    <div id="myGrid" style="height: 600px;width:500px;" class="ag-theme-balham"></div>
+    <script type="text/javascript" charset="utf-8">
+        var colDefs = [{
+                headerName: "Make",
+                field: "make",
+                checkboxSelection: function (params) {
+                    return true;
+                }
+            },
+            {
+                headerName: "Model",
+                field: "model"
+            },
+            {
+                headerName: "Price",
+                field: "price",
+                aggFunc: 'sum'
+
+            }
+        ];
+        var rowData = [{
+                make: "bhge",
+                model: "rv",
+                price: 7123
+            },
+            {
+                make: "masonalion",
+                model: "cv",
+                price: 7123
+            }
+
+        ];
+        var gridOptions = {
+            columnDefs: colDefs,
+            rowData: rowData,
+            enableSorting: true,
+            enableFilter: true,
+            rowSelection: 'multiple',
+            checkboxSelection: true,
+            pagination: true,
+            paginationPageSize: 10,
+        };
+        new agGrid.Grid(document.querySelector('#myGrid'), gridOptions);
+        // get remote data
+        fetch('https://api.myjson.com/bins/15psn9').then(function (response) {
+            return response.json();
+        }).
+        then(function (data) {
+            gridOptions.api.setRowData(data);
+        })
+        // SelectedRows
+        function getSelectedRows() {
+            var selectedNodes = gridOptions.api.getSelectedNodes();
+            var selecteddata = selectedNodes.map(function (node) {
+                return node.data
+            }).map(function (node) {
+                return node.make + '_' + node.model
+            }).join(', ');
+            alert('selectNodes: ' + selecteddata);
+        }
+    </script>
+
+</body>
+
+</html>

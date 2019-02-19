@@ -29,7 +29,11 @@
             <td class="ocuppy">22.2</td>
         </tr>
     </table>
-    <div id="divSample"> <span> how show this in 2.2</span></div>
+    <div id="divSample"> 
+        <span> how show this in 2.2</span>
+        <button value="test button"></button>
+        <input value="test input">
+    </div>
     <input type="button" onclick="buttonClick()" value="click me" />
 </body>
 <script>
@@ -43,11 +47,11 @@
             tab1.style.display = "block";
             tab2.style.display = "none";
 
-            tab1.querySelector('.ocuppy') = divSample;
+            tab1.querySelector('.ocuppy').innerHTML = divSample.innerHTML
         } else {
             tab1.style.display = "none";
             tab2.style.display = "block";
-
+            tab2.querySelector('.ocuppy').innerHTML = divSample.innerHTML
         }
     }
 </script>
