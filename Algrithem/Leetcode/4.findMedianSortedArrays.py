@@ -42,7 +42,9 @@ class Solution:
         """
         nums = nums1+nums2
         nums.sort()
+        # 得到的是索引
         mid = (len(nums) - 1) / 2.0
+        # 根据取整后的结果判断数组的个数奇偶性
         if mid == int(mid):
             return nums[int(mid)]
         else:

@@ -6,6 +6,7 @@ class Solution:
         uniqueStart: 不重复子字串的起始索引
         existCharIndexs: 字符在原字符串中的最大的索引
         将不重复的字符串缓存为一个区, 每次移动时从比对一个字符提升到比对不重复字符串缓存区
+        O(n)&O(n)
         """
         uniqueStart = maxLength = 0
         existCharIndexs = {}

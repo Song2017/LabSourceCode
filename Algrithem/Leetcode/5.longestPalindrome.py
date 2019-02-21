@@ -19,7 +19,7 @@ class Solution:
             if i+p[i] > mx:
                 id, mx = i, i+p[i]
         mxp = max(p)
-        cindex = [i for i, v in enumerate(p) if v ==mxp][-1] 
+        cindex = [i for i, v in enumerate(p) if v == mxp][-1]
         return si[cindex-mxp+1:cindex+mxp].replace(sc, '')
 
 
