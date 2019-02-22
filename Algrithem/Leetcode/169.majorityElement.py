@@ -3,6 +3,7 @@ class Solution:
         """
         :type nums: List[int]
         :rtype: int
+        查找众数
         hash反存值和出现的次数
         """
         #利用字典表反存值:出现的次数
