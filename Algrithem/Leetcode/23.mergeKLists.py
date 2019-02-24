@@ -11,15 +11,15 @@ class Solution(object):
         :type lists: List[ListNode]
         :rtype: ListNode
         使用分治思想, K个list的整体排序递归分解为两两List的有序
-        """ 
+        """
         if len(lists) == 0:
             return None
         if len(lists) == 1:
             return lists[0]
 
         left = self.mergeKLists(lists[:len(lists)//2])
-        right = self.mergeKLists(lists[len(lists)//2:]) 
-        
+        right = self.mergeKLists(lists[len(lists)//2:])
+
         return self.mergeTwoLists(left, right)
 
     def mergeTwoLists(self, l1, l2):
@@ -38,26 +38,6 @@ class Solution(object):
             rtn.next = l1
         if l2:
             rtn.next = l2
-        return head.next
-
-    def mergeKListsArray(self, lists):
-        """
-        :type lists: List[ListNode]
-        :rtype: ListNode
-        获取所有值转为列表, 进行排序, 然后重新返回新的链表
-        空间复杂度O(n*m)
-        """
-        l = []
-        for nodes in lists:
-            while nodes:
-                l.append(nodes.val)
-                nodes = nodes.next
-        l.sort()
-        head = ListNode(-1)
-        temp = head
-        for i in l:
-            temp.next = ListNode(i)
-            temp = temp.next
         return head.next
 
     def mergeKListsFast(self, lists):
@@ -81,14 +61,14 @@ class Solution(object):
                 # tail用来关联所有的链表值, 下面是tail的数据结构
                 #     1 2 3 4 5 10
                 #     |   |
-                #     1   3 
+                #     1   3
                 if v in head:
                     tail[v].next = l
                     tail[v] = l
                 else:
                     head[v] = l
                     tail[v] = l
-                l = l.next 
+                l = l.next
         keys = list(head.keys())
         keys.sort()
         r = ListNode(0)
@@ -98,9 +78,29 @@ class Solution(object):
             temp = tail[k]
         return r.next
 
+    def mergeKListsArray(self, lists):
+        """
+        :type lists: List[ListNode]
+        :rtype: ListNode
+        获取所有值转为列表, 进行排序, 然后重新返回新的链表
+        空间复杂度O(n*m)
+        """
+        l = []
+        for nodes in lists:
+            while nodes:
+                l.append(nodes.val)
+                nodes = nodes.next
+        l.sort()
+        head = ListNode(-1)
+        temp = head
+        for i in l:
+            temp.next = ListNode(i)
+            temp = temp.next
+        return head.next
+
 
 head = ListNode(1)  # 测试代码
-p1 = ListNode(2)   
+p1 = ListNode(2)
 p2 = ListNode(3)
 p3 = ListNode(4)
 head.next = p1
@@ -118,5 +118,3 @@ result = s.mergeKLists([head, head2, head3])
 while result:
     print(11, result.val)
     result = result.next
-
-        
