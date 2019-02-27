@@ -37,7 +37,7 @@ class Solution:
 
 
 so = Solution()
-#print(so.threeSum([-1, 23, -5, 6, 77, 1, 0]))
+# print(so.threeSum([-1, 23, -5, 6, 77, 1, 0]))
 print(so.firstMissingPositive([1, 2, 0]))
 print(so.firstMissingPositive([3, 4, -1, 1]))
 print(so.firstMissingPositive([33333333]))
