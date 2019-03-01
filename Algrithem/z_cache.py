@@ -1,49 +1,15 @@
+from collections import deque
+# collections.deque is a collection, while Queue.Queue is a communications mechanism.
+circular_queue = deque([1, 2], maxlen=4)
+circular_queue.append(3)
+circular_queue.extend([4])
 
-from datetime import datetime
+# at this point you have [1,2,3,4]
+print(circular_queue.popleft())  # --> 1 
+print(circular_queue.pop())  #  --> 4
 
-def test(n):
-    # 设置最大递归深度
-    maxDepth = 10 
-    cache = {}
-    def funcRecursion(n, recursionDepth): 
-        # 函数调用记录
-        # print(datetime.now().strftime('%H:%M:%S.%f'))
-        recursionDepth = recursionDepth + 1 
-        if recursionDepth > maxDepth: raise Exception("stack overflow")
-        if n==1: 
-            cache[1] = 1
-            return 1 
-        elif n==2:
-            cache[2] = 2
-            return 2
-        # 若已被缓存,则返回缓存值; 若无, 则获取前两次的递归值
-        # 因为进行了缓存, 前两次的递归值不需要再递归获取
-        if not n in cache.keys():
-            cache[n]  =  funcRecursion(n-1, recursionDepth) + funcRecursion(n-2, recursionDepth) 
-        return cache[n]
-    return funcRecursion(n, 0)
-print(test(9))  
-#print(test(12))  
-
-def test1(n):
-    # 设置最大递归深度
-    maxDepth = 100
-    recursionDepth = 0
-    def funcRecursion(n):
-        nonlocal recursionDepth
-        if recursionDepth >= maxDepth: return "stack overflow"
-        recursionDepth = (recursionDepth + 1)
-        if n==1: return 1
-        return funcRecursion(n-1) + n
-
-    return funcRecursion(n)
-print(test1(99)) 
-#print(test1(101))
-
-def test11(n):
-    sum=0
-    for i in range(1, n+1):
-        sum+=i
-    return sum
-print(test11(99)) 
-print(test11(101))
+# key step. effectively rotate the pointer
+# circular_queue.rotate(-1)  # negative to the left. positive to the right
+print(circular_queue[-1])  # 3
+print(circular_queue[0])
+print(circular_queue)
