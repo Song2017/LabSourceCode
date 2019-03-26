@@ -9,48 +9,11 @@
 </head>
 
 <body>
-    <table id="tab1" border="1" style="display:none">
-        <tr>
-            <td>11.1</td>
-            <td>11.2</td>
-        </tr>
-        <tr>
-            <td>12.1</td>
-            <td class="ocuppy">12.2</td>
-        </tr>
-    </table>
-    <table id="tab2" border="1">
-        <tr>
-            <td>21.1</td>
-            <td>21.2</td>
-        </tr>
-        <tr>
-            <td>22.1</td>
-            <td class="ocuppy">22.2</td>
-        </tr>
-    </table>
-    <div id="divSample"> <span> how show this in 2.2</span></div>
-    <input type="button" onclick="buttonClick()" value="click me" />
-    <input type="checkbox" unchecked />
+    <a href="http://www.baidu.com"> <img
+            src="https://raw.githubusercontent.com/ag-grid/ag-grid/master/packages/ag-grid-docs/src/images/frost.png"></a>
 </body>
 <script>
-    var tab1 = document.querySelector('#tab1');
-    var tab2 = document.querySelector('#tab2');
-    var divSample = document.querySelector('#divSample');
 
-    function buttonClick() {
-        var tab1Style = tab1.style.display;
-        if (tab1Style == "none") {
-            tab1.style.display = "block";
-            tab2.style.display = "none";
-
-            tab1.querySelector('.ocuppy') = divSample;
-        } else {
-            tab1.style.display = "none";
-            tab2.style.display = "block";
-
-        }
-    }
 </script>
 
 </html>

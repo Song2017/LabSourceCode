@@ -1,91 +1,163 @@
-function popFieldMenu_EditClick() {
-    popFieldMenu.Hide(), dtgFieldMenuEdit.PerformCallback(), popFieldMenuEdit.Show()
-}
-
-function btnNewField_Click() {
-    dtgFieldMenuEdit.AddNewRow()
-}
-
-function dtgFieldMenuEdit_CustomButtonClick() {
-    dtgFieldMenuEdit.GetRowValues(dtgFieldMenuEdit.GetFocusedRowIndex(), "MENUENTRY", dtgFieldMenuEdit_OnGetRowValues)
-}
-
-function dtgFieldMenuEdit_OnGetRowValues(values) {
-    eval(lstFieldMenu.mainElement.getAttribute("MasterClientID")).SetText(values), popFieldMenuEdit.Hide()
-}
-
-function btnShowFieldMenu_Click(s, e) {
-    var menuNumber, masterControl, masterClientID = s.mainElement.getAttribute("MasterClientID"),
-        eleId = s.mainElement.id;
-    if (masterClientID) masterControl = eval(masterClientID), menuNumber = masterControl.mainElement.getAttribute("MenuNumber"), hdfFLP.Set("FLP", masterControl.mainElement.getAttribute("FLP"));
-    else {
-        masterClientID = eleId.slice(eleId.lastIndexOf("ASPxText"), eleId.lastIndexOf("_"));
-        var customMenus = sessionStorage.getItem("MenuNumbersCustom");
-        customMenus && (menuNumber = JSON.parse(customMenus)[masterClientID])
+function createImageSpan(imageMultiplier, image) {
+    var resultElement = document.createElement("span");
+    for (var i = 0; i < imageMultiplier; i++) {
+        var imageElement = document.createElement("img");
+        imageElement.src = "https://raw.githubusercontent.com/ag-grid/ag-grid/master/packages/ag-grid-docs/src/images/" + image;
+        resultElement.appendChild(imageElement);
     }
-    hdfFLP.Set("MenuNumber", menuNumber), 51 == menuNumber || 23 == menuNumber || 25 == menuNumber || 11 == menuNumber || 180 == menuNumber || 181 == menuNumber ? btnEditFieldsMenu.SetVisible(!1) : btnEditFieldsMenu.SetVisible("true" == lblRoleValue.GetText().toLowerCase()), popFieldMenu.SetPopupElementID(eleId), popFieldMenu.Show(), lstFieldMenu.mainElement.setAttribute("MasterClientID", masterClientID), lstFieldMenu.PerformCallback(), popFieldMenuEdit.SetPopupElementID(eleId)
+    return resultElement;
 }
 
-function btnShowFieldMenuForForceMenu_Click(s, e) {
-    var masterClientID = void 0 === s.globalName ? "" : s.globalName.substr(0, s.globalName.length - 7),
-        masterControl = eval(masterClientID);
-    masterControl.SetText(lblValue_For_Menu.GetText()), 8 == e.htmlEvent.keyCode && (masterControl.SetText(""), lblValue_For_Menu.SetText(""), OnEditorValueChanged(s, e));
-    var menuNumber = masterControl.mainElement.getAttribute("MenuNumber");
-    menuNumber <= 0 || (hdfFLP.Set("MenuNumber", menuNumber), hdfFLP.Set("FLP", masterControl.mainElement.getAttribute("FLP")), 51 == menuNumber || 23 == menuNumber || 25 == menuNumber || 11 == menuNumber || 180 == menuNumber || 181 == menuNumber ? btnEditFieldsMenu.SetVisible(!1) : btnEditFieldsMenu.SetVisible("true" == lblRoleValue.GetText().toLowerCase()), popFieldMenu.GetVisible() || (popFieldMenu.SetPopupElementID(s.mainElement.id.substr(0, s.mainElement.id.length - 10) + "btnImageMenu"), popFieldMenu.Show(), lstFieldMenu.mainElement.setAttribute("MasterClientID", masterClientID), lstFieldMenu.PerformCallback(), popFieldMenuEdit.SetPopupElementID(s.mainElement.id)))
+/**
+ * Updates the Days of Air Frost column - adjusts the value which in turn will demonstrate the Component refresh functionality
+ * After a data update, cellRenderer Components.refresh method will be called to re-render the altered Cells
+ */
+function frostierYear(extraDaysFrost) {
+    // iterate over the rows and make each "days of air frost"
+    gridOptions.api.forEachNode(function(rowNode) {
+        rowNode.setDataValue('Days of air frost (days)', rowNode.data['Days of air frost (days)'] + extraDaysFrost);
+    })
 }
 
-function lstFieldMenu_SelectedIndexChanged() {
-    var selectedItem = lstFieldMenu.GetSelectedItem().text,
-        whiffletreeIndex = selectedItem.indexOf("- "),
-        reslutText;
-    reslutText = whiffletreeIndex > 0 && ("166" == hdfFLP.Get("MenuNumber") || "169" == hdfFLP.Get("MenuNumber") || "170" == hdfFLP.Get("MenuNumber")) ? selectedItem.substr(whiffletreeIndex + 1, selectedItem.length - whiffletreeIndex).replace(/(^\s*)|(\s*$)/g, "") : lstFieldMenu.GetSelectedItem().text, "246" == hdfFLP.Get("MenuNumber") || "247" == hdfFLP.Get("MenuNumber") || "248" == hdfFLP.Get("MenuNumber") || "292" == hdfFLP.Get("MenuNumber") || "293" == hdfFLP.Get("MenuNumber") || "294" == hdfFLP.Get("MenuNumber") || "342" == hdfFLP.Get("MenuNumber") || "343" == hdfFLP.Get("MenuNumber") || "344" == hdfFLP.Get("MenuNumber") || "462" == hdfFLP.Get("MenuNumber") || "463" == hdfFLP.Get("MenuNumber") || "465" == hdfFLP.Get("MenuNumber") || "466" == hdfFLP.Get("MenuNumber") ? "" == eval(lstFieldMenu.mainElement.getAttribute("MasterClientID")).GetText() ? eval(lstFieldMenu.mainElement.getAttribute("MasterClientID")).SetText(reslutText) : eval(lstFieldMenu.mainElement.getAttribute("MasterClientID")).SetText(eval(lstFieldMenu.mainElement.getAttribute("MasterClientID")).GetText() + "\r\n" + reslutText) : eval(lstFieldMenu.mainElement.getAttribute("MasterClientID")).SetText(reslutText), "1000" == hdfFLP.Get("MenuNumber") && ASPxMemo2Equipment.SetText(ASPxMemo2Equipment.GetText() + " " + reslutText), "177" == hdfFLP.Get("MenuNumber") && "ebtxtConfigRecORIFDESIGNATION" == lstFieldMenu.mainElement.getAttribute("MasterClientID") && ebtxtConfigRecORIFICEAREA.SetText(""), "177" == hdfFLP.Get("MenuNumber") && "ebtxtConfigShiORIFDESIGNATION" == lstFieldMenu.mainElement.getAttribute("MasterClientID") && ebtxtConfigShiORIFICEAREA.SetText(""), "322" == hdfFLP.Get("MenuNumber") && "txtHandledBy" == lstFieldMenu.mainElement.getAttribute("MasterClientID") && chkHandled.SetChecked(!0), popFieldMenu.Hide()
-}
+/**
+ * Demonstrating function cell renderer
+ * Visually indicates if this months value is higher or lower than last months value
+ * by adding an +/- symbols according to the difference
+ */
+function deltaIndicator(params) {
+    var element = document.createElement("span");
+    var imageElement = document.createElement("img");
 
-function lstPartNameMenu_SelectedIndexChanged() {
-    eval(lstPartNameMenu.mainElement.getAttribute("MasterClientID")).SetText(lstPartNameMenu.GetSelectedItem().text), popPartNamesMenu.Hide()
-}
-var raiseSelectedIndexChanged = !1;
-
-function btnShowUniqueEntry_Click(s, e, grid) {
-    var masterControl;
-    raiseSelectedIndexChanged = !1;
-    var masterClientID = s.mainElement.getAttribute("MasterClientID"),
-        eleId = s.mainElement.id,
-        key = "";
-    if (grid) {
-        var index = grid.GetFocusedRowIndex();
-        key = index > -1 ? grid.GetRowKey(index) : ""
+    // visually indicate if this months value is higher or lower than last months value
+    if (params.value > 15) {
+        imageElement.src = "https://raw.githubusercontent.com/ag-grid/ag-grid/master/packages/ag-grid-docs/src/images/fire-plus.png"
+    } else {
+        imageElement.src = "https://raw.githubusercontent.com/ag-grid/ag-grid/master/packages/ag-grid-docs/src/images/fire-minus.png"
     }
-    if (masterClientID) masterControl = eval(masterClientID), hdfFLP.Set("DataField", masterControl.mainElement.getAttribute("DataField") + "|" + key);
-    else {
-        masterClientID = eleId.slice(eleId.lastIndexOf("ASPxText"), eleId.lastIndexOf("_"));
-        var customMenus = sessionStorage.getItem("DataFieldsCustom");
-        customMenus && hdfFLP.Set("DataField", JSON.parse(customMenus)[masterClientID])
+    element.appendChild(imageElement);
+    element.appendChild(document.createTextNode(params.value));
+    return element;
+}
+
+/**
+ * Demonstrating Component Cell Renderer
+ */
+function DaysFrostRenderer() {
+    this.eGui = document.createElement("span");
+}
+DaysFrostRenderer.prototype.init = function (params) {
+    this.rendererImage = params.rendererImage;
+    this.value = params.value;
+    this.updateImages();
+};
+DaysFrostRenderer.prototype.updateImages = function() {
+    var daysFrost = this.value;
+    for (var i = 0; i < daysFrost; i++) {
+        var imageElement = document.createElement("img");
+        imageElement.src = "https://raw.githubusercontent.com/ag-grid/ag-grid/master/packages/ag-grid-docs/src/images/" + this.rendererImage;
+        this.eGui.appendChild(imageElement);
     }
-    popUniqueEntry.SetPopupElementID(eleId), popUniqueEntry.Show(), lstUniqueEntry.PerformCallback(), lstUniqueEntry.mainElement.setAttribute("MasterClientID", masterClientID)
+};
+DaysFrostRenderer.prototype.getGui = function getGui() {
+    return this.eGui;
+};
+DaysFrostRenderer.prototype.refresh = function (params) {
+    this.value = params.value;
+
+    this.eGui.innerHTML = '';
+    this.updateImages();
+};
+
+/**
+ *  Cell Renderer by Property (using the api)
+ */
+function daysSunshineRenderer(params) {
+    var daysSunshine = params.value / 24;
+    return createImageSpan(daysSunshine, params.rendererImage);
 }
 
-function chkShowAll_CheckedChanged() {
-    lstUniqueEntry.PerformCallback()
+/**
+ *  Cell Renderer by Property (using the grid options parameter)
+ */
+function rainPerTenMmRenderer(params) {
+    var rainPerTenMm = params.value / 10;
+    return createImageSpan(rainPerTenMm, params.rendererImage);
 }
 
-function lstUniqueEntry_EndCallback(e, t) {
-    e.itemsValue.length <= 5 ? $("#" + e.GetMainElement().id).height(80) : e.itemsValue.length > 20 ? $("#" + e.GetMainElement().id).height(400) : $("#" + e.GetMainElement().id).height(20 * e.itemsValue.length), raiseSelectedIndexChanged = !0
-}
-
-function lstFieldMenu_EndCallback(e, t) {
-    e.itemsValue.length < 5 ? $("#" + e.GetMainElement().id).height(80) : e.itemsValue.length > 20 ? $("#" + e.GetMainElement().id).height(400) : $("#" + e.GetMainElement().id).height(20 * e.itemsValue.length)
-}
-
-function lstUniqueEntry_SelectedIndexChanged() {
-    if (raiseSelectedIndexChanged) {
-        try {
-            var selectedText = lstUniqueEntry.GetSelectedItem().text,
-                maxlength = $("#" + eval(lstUniqueEntry.mainElement.getAttribute("MasterClientID")).mainElement.id + "_I").attr("maxlength");
-            "-1" == maxlength && (maxlength = eval(lstUniqueEntry.mainElement.getAttribute("MasterClientID")).txtBox.inputMaxLength), "" == maxlength || "-1" == maxlength ? eval(lstUniqueEntry.mainElement.getAttribute("MasterClientID")).SetText(selectedText) : (selectedText.length > maxlength && (selectedText = selectedText.substr(0, maxlength)), eval(lstUniqueEntry.mainElement.getAttribute("MasterClientID")).SetText(selectedText))
-        } catch (e) {
-            eval(lstUniqueEntry.mainElement.getAttribute("MasterClientID")).SetText(selectedText)
+var columnDefs = [
+    {
+        headerName: "Month",
+        field: "Month",
+        width: 75,
+        cellStyle: {color: 'darkred'}
+    },
+    {
+        headerName: "Max Temp (˚C)",
+        field: "Max temp (C)",
+        width: 120,
+        cellRenderer: 'deltaIndicator'           // Function cell renderer
+    },
+    {
+        headerName: "Min Temp (˚C)",
+        field: "Min temp (C)",
+        width: 120,
+        cellRenderer: 'deltaIndicator'           // Function cell renderer
+    },
+    {
+        headerName: "Days of Air Frost",
+        field: "Days of air frost (days)",
+        width: 233,
+        cellRenderer: 'daysFrostRenderer',       // Component Cell Renderer
+        cellRendererParams: {
+            rendererImage: 'frost.png'         // Complementing the Cell Renderer parameters
         }
-        popUniqueEntry.Hide()
+    },
+    {
+        headerName: "Days Sunshine",
+        field: "Sunshine (hours)",
+        width: 190,
+        cellRenderer: 'daysSunshineRenderer',
+        cellRendererParams: {
+            rendererImage: 'sun.png'           // Complementing the Cell Renderer parameters
+        }
+
+    },
+    {
+        headerName: "Rainfall (10mm)",
+        field: "Rainfall (mm)",
+        width: 180,
+        cellRenderer: 'rainPerTenMmRenderer',
+        cellRendererParams: {
+            rendererImage: 'rain.png'          // Complementing the Cell Renderer parameters
+        }
     }
-}
+];
+
+var gridOptions = {
+    columnDefs: columnDefs,
+    rowData: null,
+    components:{
+        deltaIndicator: deltaIndicator,
+        daysFrostRenderer: DaysFrostRenderer,
+        daysSunshineRenderer: daysSunshineRenderer,
+        rainPerTenMmRenderer: rainPerTenMmRenderer
+    }
+};
+
+// setup the grid after the page has finished loading
+document.addEventListener('DOMContentLoaded', function () {
+    var gridDiv = document.querySelector('#myGrid');
+    new agGrid.Grid(gridDiv, gridOptions);
+
+    // do http request to get our sample data - not using any framework to keep the example self contained.
+    // you will probably use a framework like JQuery, Angular or something else to do your HTTP calls.
+    var httpRequest = new XMLHttpRequest();
+    httpRequest.open('GET', 'https://raw.githubusercontent.com/ag-grid/ag-grid/master/packages/ag-grid-docs/src/weather_se_england.json');
+    httpRequest.send();
+    httpRequest.onreadystatechange = function () {
+        if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+            var httpResult = JSON.parse(httpRequest.responseText);
+            gridOptions.api.setRowData(httpResult);
+        }
+    };
+});
