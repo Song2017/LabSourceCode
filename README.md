@@ -4,15 +4,15 @@ SourceCode Tourial
 ## DataStructure and Algrithem
 [数据结构与算法之美_RMB](https://time.geekbang.org/column/126)    
 [c-online-compiler](https://www.jdoodle.com/c-online-compiler)     
-[www.geeksforgeeks.org/data-structures](https://www.geeksforgeeks.org/data-structures/)     
+[www.geeksforgeeks.org/data-structures](https://www.geeksforgeeks.org/data-structures/)    
+[Leetcode_python](https://github.com/Song2017/Leetcode_python)    
 
-## Html5-CSS3
-[html5-css3-fundamentals-development-for-absolute-beginners](https://mva.microsoft.com/en-US/training-courses/html5-css3-fundamentals-development-for-absolute-beginners-14207)      
-
-## Http
+## Web
+### Http
 [https://www.w3.org/Protocols/rfc2616/rfc2616.txt](https://www.w3.org/Protocols/rfc2616/rfc2616.txt)
-
-## JavaScript　　　
+### H5_C3
+[html5-css3-fundamentals-development-for-absolute-beginners](https://mva.microsoft.com/en-US/training-courses/html5-css3-fundamentals-development-for-absolute-beginners-14207)      
+### JavaScript　　　
 [Source code for 'DOM Scripting' by Jeremy Keith and Jeffrey Sambells](https://github.com/Apress/dom-scripting-10)
 
 ## Python
@@ -40,7 +40,7 @@ SourceCode Tourial
 [sqlitebrowser.org](http://sqlitebrowser.org)     
 [python-garbage-collector](https://rushter.com/blog/python-garbage-collector/)    
 
-### Library
+### Python Library
 [library](https://docs.python.org/3/library/index.html)  
 [Built-in Functions](https://docs.python.org/3/library/functions.html#built-in-functions)    
 [struct — Interpret bytes as packed binary data](https://docs.python.org/3/library/struct.html#struct.unpack)
@@ -62,13 +62,16 @@ SourceCode Tourial
 [heapq — Heap queue algorithm¶](https://github.com/python/cpython/blob/3.7/Lib/heapq.py)    
 [decimal — Decimal fixed point and floating point arithmetic](https://docs.python.org/3/library/decimal.html#module-decimal)    
 
-# Reading List
+# Learn
 ## Linux
 [Linux Documentation Project Guides](http://www.tldp.org/guides.html)    
 [Kernel](http://www.tldp.org/LDP/tlk/tlk-toc.html)     
 [Shell](http://www.learnlinux.org.za/courses/build/shell-scripting/ch01s03.html)    
 [Bash](http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html#toc2)    
-
+## University
+[Peking University](https://github.com/lib-pku/libpku)    
+[Tsinghua University](https://github.com/Trinkle23897/THU-CST-Cracker)    
+[Zhejiang University](https://github.com/QSCTech/zju-icicles)    
 # Tool
 [Pic Zip](https://www.yasuotu.com/)     
 [Pic Convert](https://jinaconvert.com/cn/convert-to-gif.php)     
