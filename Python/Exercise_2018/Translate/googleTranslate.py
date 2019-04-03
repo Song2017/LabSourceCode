@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import requests # pip install requests
+import requests  # pip install requests
 import json
 import execjs  # pip install PyExecJS
 import urllib3  # pip install urllib3
 
 '''
-author by Benji 
+author by Benji
 date at 2018.12.07
 
 实现: 模拟浏览器中Google翻译的url请求
@@ -17,6 +17,7 @@ date at 2018.12.07
         https://cloud.google.com/translate/docs/apis
 
 '''
+
 
 class PyJsParams():
     def __init__(self):
@@ -81,7 +82,7 @@ def translate(text, jsParas):
         urllib3.disable_warnings()
         # solve: SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate
         r = requests.get(url, headers=headers, verify=False)
-        result = json.loads(r.text)  
+        result = json.loads(r.text)
         res = str(result[0][0][0])
     except Exception as e:
         res = ''
@@ -91,13 +92,14 @@ def translate(text, jsParas):
     finally:
         return res
 
+
 toLang = 'en'
 
 if __name__ == '__main__':
     jsParas = PyJsParams()
     res = translate('小顺子给春宫娘娘请安了', jsParas)
     print(res)
-    
+
 '''
 output
 Xiaoshun gave the Spring Palace girl an appointment.

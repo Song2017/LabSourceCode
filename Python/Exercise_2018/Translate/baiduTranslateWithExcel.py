@@ -15,6 +15,8 @@ appid = '20180816000194959'
 secretKey = 'lWzwUiWmhRORknf68FCT'
 
 # 翻译内容 源语言 翻译后的语言
+
+
 def translateBaidu(content, fromLang='en', toLang='zh'):
     salt = str(random.randint(32768, 65536))
     sign = appid + content + salt + secretKey
@@ -39,7 +41,7 @@ def translateBaidu(content, fromLang='en', toLang='zh'):
 
 
 def excelTrans(srcFilename=r'c:\_Work\source.xlsx', desFilename=r'c:\_Work\result.xlsx',
-               srcSheet='Sheet1',  srcColumn=1, srcRowBegin=1, srcRowEnd=28, 
+               srcSheet='Sheet1',  srcColumn=1, srcRowBegin=1, srcRowEnd=28,
                desColumn=1, desSheet='result1'):
     wb = openpyxl.load_workbook(srcFilename)
     ws = wb[srcSheet]

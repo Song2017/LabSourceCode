@@ -2,18 +2,58 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <script>
+        var __basePath = '';
+    </script>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        .customHeaderMenuButton {
+            float: left;
+            margin: 0 0 0 3px;
+        }
+
+        .customHeaderLabel {
+            float: left;
+            margin: 0 0 0 3px;
+        }
+
+        .customSortDownLabel {
+            float: left;
+            margin: 0 0 0 3px;
+        }
+
+        .customSortUpLabel {
+            float: left;
+            margin: 0;
+        }
+
+        .customSortRemoveLabel {
+            float: left;
+            margin: 0 0 0 3px;
+            font-size: 11px;
+        }
+
+        .active {
+            color: cornflowerblue;
+        }
+    </style>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" />
+    <script src="https://unpkg.com/ag-grid-community@20.2.0/dist/ag-grid-community.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <a href="http://www.baidu.com"> <img
-            src="https://raw.githubusercontent.com/ag-grid/ag-grid/master/packages/ag-grid-docs/src/images/frost.png"></a>
-</body>
-<script>
 
-</script>
+    <div id="myGrid" style="height: 100%;" class="ag-theme-balham"></div>
+
+
+    <script src="cache.js"></script>
+</body>
 
 </html>

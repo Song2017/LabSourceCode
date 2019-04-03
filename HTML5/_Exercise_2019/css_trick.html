@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS Symbol</title>
+
+    <style type="text/css">
+        /* Space: 后代标签, 选择所有的后代p标签*/
+        div#container p {
+            font-weight: bold;
+        }
+
+        /* >: 直接后代标签, 选中所有的直接后代, 不会选中直接后代的后代*/
+        div#container>p {
+            border: 1px solid black;
+        }
+
+        /* +: 紧邻兄弟标签, 选中"直接"跟在div标签后的p标签*/
+        div+p {
+            color: green;
+        }
+
+        /* ~: 一般兄弟标签, 选中"所有"跟在div标签后的p标签*/
+        div~p {
+            background-color: yellow;
+        }
+
+        .box {
+            height: 80px;
+            width: 80px;
+        }
+
+        /* :empty css伪类表示没有子元素的任何元素*/
+        .box:empty {
+            background: lime;
+        }
+
+        /* :not() css伪类表示与选择器列表不匹配的元素*/
+        .box:not(:empty) {
+            background: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        /* Space: 后代标签, 选择所有的后代p标签*/
+        div#container p {
+        font-weight: bold;
+        }
+    </div>
+    <div>
+        /* >: 直接后代标签, 选中所有的直接后代, 不会选中直接后代的后代*/
+        div#container>p {
+        border: 1px solid black;
+        } </div>
+    <div>
+        /* +: 紧邻兄弟标签, 选中"直接"跟在div标签后的p标签*/
+        div+p {
+        color: green;
+        } </div>
+    <div>
+        /* ~: 一般兄弟标签, 选中"所有"跟在div标签后的p标签*/
+        div~p {
+        background-color: blue;
+        }
+    </div>
+    <div>
+        .box {
+        height: 80px;
+        width: 80px;
+        } </div>
+    <div>
+        /* :empty css伪类表示没有子元素的任何元素*/
+        .box:empty {
+        background: lime;
+        } </div>
+    <div>
+        /* :not() css伪类表示与选择器列表不匹配的元素*/
+        .box:not(:empty) {
+        background: pink;
+        }
+
+    </div>
+    <div id="container">
+        <p>First</p>
+        <div class="box">
+            <p>Child Paragraph</p>
+        </div>
+        <p>Second</p>
+        <p>Third</p>
+    </div>
+    <div class="box"></div>
+
+</body>
+
+</html>
