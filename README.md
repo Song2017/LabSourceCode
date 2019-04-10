@@ -71,7 +71,7 @@ Computer Language Learning Highlights Tourial
 1. [Linux Documentation Project Guides](http://www.tldp.org/guides.html)    
 2. [Kernel](http://www.tldp.org/LDP/tlk/tlk-toc.html)     
 3. [Shell](http://www.learnlinux.org.za/courses/build/shell-scripting/ch01s03.html)    
-[Bash](http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html#toc2)    
+4. [Bash](http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html#toc2)    
 ## University
 1. [Peking University](https://github.com/lib-pku/libpku)    
 2. [Tsinghua University](https://github.com/Trinkle23897/THU-CST-Cracker)    
@@ -82,6 +82,6 @@ Computer Language Learning Highlights Tourial
 2. [Pic Convert](https://jinaconvert.com/cn/convert-to-gif.php)     
 3. [c-online-compiler](https://www.jdoodle.com/c-online-compiler)     
 4. [Json Beautifier](https://beautifier.io/)        
-4. [Json to Class](https://app.quicktype.io/)        
-#Note
+5. [Json to Class](https://app.quicktype.io/)        
+# Note
 1. [Personal Blob]()
