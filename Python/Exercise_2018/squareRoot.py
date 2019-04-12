@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from datetime import datetime
+
+
 def squareByTaylor(num, precise=2):
     '''
     根据泰勒展开式计算平方根
@@ -23,6 +25,7 @@ def squareByTaylor(num, precise=2):
         preresult = result
         result = (result + num / result) / 2
     return str(result) + appendix
+
 
 def squareByBinary(num, precise=2):
     '''
