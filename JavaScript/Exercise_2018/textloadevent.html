@@ -1,0 +1,62 @@
+<html>
+
+<head>
+    <title>understanding dom</title>
+    <script type="text/javascript">
+        
+    </script>
+    <script type="text/javascript">
+        window.onload = function () {
+            console.log('log: window.load');
+        }
+        document.addEventListener('load', new function(event){console.log('log: document.load');});  
+        document.addEventListener('DOMContentLoaded ', 
+        new function(event){console.log('log: document.DOMContentLoaded ');});  
+        // log: document.load
+        // textloadevent.html:15 log: document.DOMContentLoaded 
+        // textloadevent.html:10 log: window.load 
+        
+        function runExample() {
+            var myElement = document.getElementById('second');
+            // alert(myElement.nodeName);
+            if (myElement != null) {
+                // alert(myElement.innerHTML);
+                // myElement.innerHTML = "see how i set text here";
+            }
+
+            console.log("second parentNode.nodeName is " + myElement.parentNode.nodeName);
+            console.log("second firstChild is " + myElement.firstChild);
+            console.log("second childNodes[1].nodeName is " + myElement.childNodes[0].nodeValue);
+            console.log("second lastChild nodeName is " + myElement.lastChild.nodeName);
+            console.log("second nextSibling is " + myElement.nextSibling.nodeName);
+        }
+
+        function runExample2() {
+            var anchor = document.getElementById('myAnchor');
+            // alert(anchor.href);
+            // anchor.href = "http://www.google.com";
+            anchor.setAttribute('href', 'http://www.google.com');
+            alert(anchor.getAttribute('href'));
+        }
+
+    </script>
+</head>
+
+<body>
+    <h1 id="title">understanding document object model</h1>
+    <div id="main">
+        <p id="first"> this is the first paragraph</p>
+        <p id="second"> this is text
+            <strong> second paragraph</strong>
+            <br>
+            <span id="span">this is span tag</span>
+        </p>
+    </div>
+
+    <div id="form">
+        <input type="submit" id="clickMe" value="Click Me">
+        <a href="http://www.baidu.com" id="myAnchor">baidu</a>
+    </div>
+</body>
+
+</html>
