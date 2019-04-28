@@ -17,10 +17,10 @@ class PythonOrSearch(unittest.TestCase):
         driver.get("http://localhost/VK6/Login.aspx?tc=singapore")
         print('Page Title: ', driver.title)
         elem = driver.find_element_by_id("idUserName")
-        elem.send_keys("administrator", Keys.TAB)
+        elem.send_keys("admin", Keys.TAB)
         elem.send_keys(Keys.TAB)
         elem = driver.find_element_by_id("idPassword")
-        elem.send_keys("VKc@2016")
+        elem.send_keys("pw")
         elem = driver.find_element_by_id("idSignin")
         elem.click()
 
