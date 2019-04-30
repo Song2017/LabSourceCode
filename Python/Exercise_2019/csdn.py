@@ -16,12 +16,12 @@ class PythonOrSearch(unittest.TestCase):
         count = 100
         while count > 0:
             count -= 1
+            print(count)
             driver = self.driver
-            driver.get(
-                "https://blog.csdn.net/sgs595595/article/details/89360804")
+            driver.get("https://blog.csdn.net/sgs595595/article/details/89360804")
             print(count)
 
-            time.sleep(15)
+            time.sleep(10)
 
     def tearDown(self):
         self.driver.quit()
