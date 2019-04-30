@@ -76,6 +76,7 @@ Computer Language Learning Highlights Tourial
 1. [Peking University](https://github.com/lib-pku/libpku)    
 2. [Tsinghua University](https://github.com/Trinkle23897/THU-CST-Cracker)    
 3. [Zhejiang University](https://github.com/QSCTech/zju-icicles)     
+4. [ShangHaiJiaoTong University](https://github.com/CoolPhilChen/SJTU-Courses)
 
 # Tool
 1. [Pic Zip](https://www.yasuotu.com/)     
