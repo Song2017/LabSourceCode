@@ -33,16 +33,21 @@ def translateBaidu(content, fromLang='en', toLang='zh'):
         }
         response = requests.get(apiurl, paramas)
         jsonResponse = response.json()  # 获得返回的结果，结果为json格式
-        dst = str(jsonResponse["trans_result"]
-                  [0]["dst"])  # 取得翻译后的文本结果
+        dst = str(jsonResponse["trans_result"][0]["dst"])  # 取得翻译后的文本结果
         return dst
     except Exception as e:
         print(e)
 
 
-def excelTrans(srcFilename=r'c:\_Work\source.xlsx', desFilename=r'c:\_Work\result.xlsx',
-               srcSheet='Sheet1',  srcColumn=1, srcRowBegin=1, srcRowEnd=28,
-               desColumn=1, desSheet='result1'):
+def excelTrans(
+        srcFilename=r'C:\Users\503027010\Desktop\VKC_Chinese_Translation.xlsx',
+        desFilename=r'c:\_Work\result.xlsx',
+        srcSheet='Sheet3',
+        srcColumn=3,
+        srcRowBegin=2,
+        srcRowEnd=44,
+        desColumn=1,
+        desSheet='result1'):
     wb = openpyxl.load_workbook(srcFilename)
     ws = wb[srcSheet]
     wb2 = Workbook()
@@ -51,9 +56,9 @@ def excelTrans(srcFilename=r'c:\_Work\source.xlsx', desFilename=r'c:\_Work\resul
     for i in range(srcRowBegin, srcRowEnd, 1):
         result = ws.cell(row=i, column=srcColumn).value
         if not (result is None):
-            ws2.cell(row=i-srcRowBegin+1,
-                     column=desColumn).value = translateBaidu(result)
-
+            ws2.cell(row=i-srcRowBegin+1, column=desColumn).value \
+                = translateBaidu(result)
+            print(11, result)
     wb2.save(desFilename)
 
 

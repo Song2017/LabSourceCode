@@ -49,6 +49,8 @@
     <Compile Include="DelegateClass.cs" />
     <Compile Include="MediaPlayer.cs" />
     <Compile Include="MyExtension.cs" />
+    <Compile Include="NQueue.cs" />
+    <Compile Include="Nqueue2.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="PersonCollection.cs" />
     <Compile Include="Point.cs" />

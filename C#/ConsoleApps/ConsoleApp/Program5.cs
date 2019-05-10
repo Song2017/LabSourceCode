@@ -11,26 +11,31 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("begin test"); Console.ReadLine();
+            Console.WriteLine("begin test");
+            Nqueue2.nQueen2(4);
 
-            IndexreMethod();
+            //NQueue nQueue = new NQueue();
+            //nQueue.solveNQueues(8);
+               
 
-            OperatorOverloadMethod();
+            //IndexreMethod();
 
-            CustomeTypeConverter();
+            //OperatorOverloadMethod();
 
-            ExtensionMethod();
+            //CustomeTypeConverter();
 
-            AnonymousClassMethod();
+            //ExtensionMethod();
 
-            PointerMethod();
+            //AnonymousClassMethod();
 
-            LinqMethod();
+            //PointerMethod();
 
-            GCMethod();
+            //LinqMethod();
 
-            Console.ReadLine();
+            //GCMethod();
+
         }
+         
 
         private static void GCMethod()
         {

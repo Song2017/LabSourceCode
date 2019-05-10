@@ -20,9 +20,7 @@ namespace ConsoleApp
         public AllTracks GetAllTracks()
         {
             return allSongs.Value;
-        }
-
-        Array
+        } 
     }
 
     internal class AllTracks
