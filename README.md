@@ -13,8 +13,8 @@ Computer Language Learning Highlights Tourial
 ### H5_C3
 1. [html5-css3-fundamentals-development-for-absolute-beginners](https://mva.microsoft.com/en-US/training-courses/html5-css3-fundamentals-development-for-absolute-beginners-14207)      
 ### JavaScript　　　
-1. [Source code for 'DOM Scripting' by Jeremy Keith and Jeffrey Sambells](https://github.com/Apress/dom-scripting-10)
-
+1. [Source code for 'DOM Scripting' by Jeremy Keith and Jeffrey Sambells](https://github.com/Apress/dom-scripting-10)    
+2. [Google Analytics](https://developers.google.com/analytics/devguides/collection/gtagjs/?hl=zh-cn)    
 ## C#
 ### .Net Core
 1. [docs-aspnetcore-2.2](https://docs.microsoft.com/en-us/aspnet/core/index?view=aspnetcore-2.2)
