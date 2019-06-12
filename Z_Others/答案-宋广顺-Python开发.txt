@@ -1,0 +1,120 @@
+第一题：
+下面显示了当前 PPIO 测试链上每个钱包地址所包含的余额数排行榜信息（数据为测试数据，仅供参考），如下所示：
+A total of 100000 accounts found                            上一页  < 1/200  >下一页
+Rank     Address                                        Balance      TxCount
+1          ppio1SDKRLjDALmN7kV874JLhZAv4Q9TKVhrhg      	30000 PPCoin   2000
+2          ppio1ZoKAKZftwkdAVXSuPnz2TLJp14pSfhvMj       29990 PPCoin   1999
+3          ppio1Yd4y3cYYZZ3pZqxnmn6xydrE4VmvWiX3d       29980 PPCoin   1998
+...
+如果上面所示的排行榜数据都是放在 redis 数据库中维护的，
+为了实现以上功能，需要用到 redis 的哪些数据结构及相应的方法？
+提示有以下几个功能点：
+1. 获取当前排行榜中的总地址（Address）数。
+2. 分页获取当前排行榜数据（根据余额数倒序排序）。包含 Rank（名次）、Address（钱包地址）、Balance（余额）
+TxCount（参与事务的总数）。
+请给出详细的设计文档。
+文档内容示例：需要使用 String 数据结构来存储各个钱包地址的余额信息，
+键名为：PPIO:Wallet:ppio1SDKRLjDALmN7kV874JLhZAv4Q9TKVhrhg，键值为该账户的余额
+通过  GET PPIO:Wallet:ppio1SDKRLjDALmN7kV874JLhZAv4Q9TKVhrhg 来获取账户
+ppio1SDKRLjDALmN7kV874JLhZAv4Q9TKVhrhg 的余额信息
+# set cache address as primary key
+r.sadd('PPIO:Wallet:address', 'ppio11', 'ppio12', 'ppio13',
+       'ppio1', 'ppio2', 'ppio3', 'ppio4', 'ppio5')
+# hash cache each row data
+r.hmset('PPIO:Wallet:ppio11',
+        {'address': 'ppio11', 'balance': 30000, 'txcount': 2000,
+         'details': "{address: ppio11, ....}"})
+r.hmset('PPIO:Wallet:ppio12',
+        {'address': 'ppio12', 'balance': 2990, 'txcount': 1999,
+         'details': "{address: ppio12, ....}"})
+r.hmset('PPIO:Wallet:ppio13',
+        {'address': 'ppio13', 'balance': 29980, 'txcount': 1998,
+         'details': "{address: ppio13, ....}"})
+r.hmset('PPIO:Wallet:ppio1',
+        {'address': 'ppio1', 'balance': 2970, 'txcount': 1997,
+         'details': "{address: ppio1, ....}"})
+r.hmset('PPIO:Wallet:ppio2',
+        {'address': 'ppio2', 'balance': 29960, 'txcount': 1996,
+         'details': "{address: ppio2, ....}"})
+r.hmset('PPIO:Wallet:ppio3',
+        {'address': 'ppio3', 'balance': 2995, 'txcount': 1995,
+         'details': "{address: ppio3, ....}"})
+r.hmset('PPIO:Wallet:ppio4',
+        {'address': 'ppio4', 'balance': 29940, 'txcount': 1994,
+         'details': "{address: ppio4, ....}"})
+r.hmset('PPIO:Wallet:ppio5',
+        {'address': 'ppio5', 'balance': 29993, 'txcount': 2000,
+         'details': "{address: ppio5, ....}"})
+r.delete('PPIO:Wallet:result')
+length = r.sort('PPIO:Wallet:address', 0, 5, by='PPIO:Wallet:*->balance',
+                desc=False, get='PPIO:Wallet:*->address',
+                store='PPIO:Wallet:result')
+print(length, r.lrange('PPIO:Wallet:result', 0, length-1))
+for i in range(length):
+    address = r.lrange('PPIO:Wallet:result', 0, length-1)[i].decode('utf-8')
+    print(i, r.hgetall('PPIO:Wallet:' + address))
+
+
+第三题：
+请实现一个简单的 Linux Shell 脚本，用于监控机器上的某个进程，如果进程退出，则需要重新拉起该进程，并输出新的进程 ID。
+进程启动命令： /usr/local/bin/ppio-demo start
+### ps + grep
+#!/bin/sh
+while true; 
+do
+	ps -fe|grep ppio-demo | grep -v grep
+	if [ $? -ne 0]
+	then
+		echo "start process"
+		/usr/local/bin/ppio-demo start
+	else
+		echo "still running"
+	fi
+	sleep 60
+done
+### pidof
+#!/bin/sh
+while true; 
+do
+	result = `pidof ppio-demo`
+	if [ -z "$result"];
+	then
+		echo "start process"
+		/usr/local/bin/ppio-demo start
+	else
+		echo "still running"
+	fi
+	sleep 60
+done
+
+第四题：
+现在有一个需求，需要你去爬取微博用户的详细数据，其中包括用户的 nickname（昵称，具有唯一性）、follow_num（关注数）、follower_num（粉丝数）、weibo_num（微博数），以及每个用户发布的所有微博信息，其中包括微博的content（内容，只需考虑文本内容）、post_time（发布时间）、repost_num（转发数）、comment_num（评论数）、like_num（点赞数）。爬取的数据需要通过 MySQL 数据库进行存储。
+
+1、请你设计出用于存储以上数据所需要的建立的 MySQL 数据库表结构及表之间的关联关系。（用 SQL 语句表示）
+2、在已爬取的数据中，如果要统计用户（昵称：PPlabs2019）历史微博的总点赞数，请你写出对应的 SQL 查询语句。
+3、在已爬取的数据中，需要按用户历史微博的总点赞数进行倒序排序，选出前 50 名用户，并显示其昵称、关注数、粉丝数。请你写出对应的 SQL 查询语句。
+4、当数据量较大时，请合理地建立索引来优化你在第 2、3 个问题中给出的 SQL 语句查询效率。
+1. CREATE TABLE IF NOT EXISTS User (
+    user_id INT AUTO_INCREMENT,
+    nickname VARCHAR(255) NOT NULL,
+    follow_num TINYINT NOT NULL DEFAULT 0,
+    follower_num TINYINT NOT NULL DEFAULT 0,
+	weibo_num TINYINT NOT NULL DEFAULT 0,
+    PRIMARY KEY (user_id)
+)  ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS Blog (
+    blog_id INT AUTO_INCREMENT,
+	user_id INT,
+    post_time DATE,
+    comment_num TINYINT NOT NULL DEFAULT 0,
+    like_num TINYINT NOT NULL DEFAULT 0,
+    content TEXT,
+    PRIMARY KEY (blog_id)
+)  ENGINE=INNODB;
+
+2. select count(b.like_num) from Blog b where b.user_id in ( select u.user_id from User u where u.nickname  = 'PPlabs2019')
+3. select u.nickname, u.follow_num, u.follower_num from User u 
+	right join (select sum(b.like_num) as likes, b.user_id as bloguser from Blog b group by b.user_id order by likes desc limit 50) t 
+	on t.bloguser = u.user_id
+4. 适当添加函数复合索引
