@@ -65,7 +65,7 @@ Computer Language Learning Highlights Tourial
 18. [bisect — Array bisection algorithm](https://docs.python.org/3/library/bisect.html#module-bisect)    
 19. [heapq — Heap queue algorithm¶](https://github.com/python/cpython/blob/3.7/Lib/heapq.py)    
 20. [decimal — Decimal fixed point and floating point arithmetic](https://docs.python.org/3/library/decimal.html#module-decimal)    
-
+21. [python_3.dis](https://docs.python.org/3/library/dis.html): Disassembler for Python bytecode     
 # Learn
 ## Linux
 1. [Linux Documentation Project Guides](http://www.tldp.org/guides.html)    
