@@ -38,5 +38,17 @@ class F(D, E):
         super().__init__()
         print('leave F')
 
-
+# 深度遍历优先
 F()
+# enter F
+# enter D
+# enter B
+# enter E
+# enter C
+# enter A
+# leave A
+# leave C
+# leave E
+# leave B
+# leave D
+# leave F

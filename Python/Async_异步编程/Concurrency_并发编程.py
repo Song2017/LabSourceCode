@@ -13,7 +13,7 @@
     1. 适用于 CPU heavy 的场景，比如 MapReduce 中的并行计算，为了加快运行速度，一般会用多个处理器来完成
 
 # asyncio.Future和concurrent.futures
-asyncio.Future: Python 3.5出现
+asyncio.Future: Python 3.5出现 https://docs.python.org/3/library/asyncio-task.html
     期程, 通过async/await, 使用协程的方式写异步程序, GIL(全局解释器锁)保证了Python 主程序只允许有一个线程执行
     可以非常有效的使用单线程内的资源, 但是不能跨线程操作.
     期程对象支持底层回调式代码(例如在协议实现中使用asyncio transports) 与高层异步/等待式代码交互.
@@ -25,21 +25,29 @@ asyncio.Future: Python 3.5出现
         使用 asyncio.Future.add_done_callback() 注册的回调函数不会立即调用，
             而是被 loop.call_soon() 调度。
         asyncio期程不能兼容 concurrent.futures.wait() 和 concurrent.futures.as_completed() 函数
-concurrent.futures: Python 3.2出现
+concurrent.futures: Python 3.2出现  https://docs.python.org/zh-cn/3/library/concurrent.futures.html
     通过提供进程池和线程池(单进程)实现异步编程. 可以很好的利用CPU多核的优势
     缺点是由操作系统控制, 不能保留程序上下文, 线程之间切换会有资源争用的情况
-    , https://docs.python.org/zh-cn/3/library/concurrent.futures.html
     异步执行可以由 ThreadPoolExecutor 使用线程或由 ProcessPoolExecutor 使用单独的进程来实现。
     两者都是实现抽像类 Executor 定义的接口: submit, map, shutdown
-选择    
+# Asyncio 工作原理
+1. Asyncio 和其他 Python 程序一样，是单线程的，它只有一个主线程，
+但是可以进行多个不同的任务（task），这里的任务，就是特殊的 future 对象, 被一个叫做 event loop 的对象所控制
+
+
+如何选择使用的技术
 1. CPU-bound的任务主要是multi-processing，
 2. IO-bound的话，如果IO比较快，用多线程，
 3. 如果IO比较慢，用asyncio，因为效率更加高
+
+
 '''
 import requests
 import time
 
 import concurrent.futures
+import asyncio
+import aiohttp
 
 
 def download(url):
@@ -68,7 +76,36 @@ def download_all(sites):
                     print('download error: ', msg)
 
 
-def main():
+def main(sites):
+    start_time = time.perf_counter()
+    download_all(sites)
+    end_time = time.perf_counter()
+    print('down load {} in {} sec.'.format(len(sites), end_time-start_time))
+
+
+async def fetch(url):
+    '''
+    async with coroutines
+    '''
+    async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(ssl=False)) as session:
+        async with session.get(url) as resp:
+            print('Read {} from {}'.format(resp.content_length, url))
+
+
+async def fetch_all(urls):
+    tasks = [asyncio.create_task(fetch(url)) for url in urls]
+    await asyncio.gather(*tasks)
+
+
+def asymain(sites):
+    start_time = time.perf_counter()
+    asyncio.run(fetch_all(sites))
+    end_time = time.perf_counter()
+    print('asymain down load {} in {} sec.'.format(
+        len(sites), end_time-start_time))
+
+
+if __name__ == '__main__':
     sites = [
         'https://blog.csdn.net/sgs595595/article/details/81747397',
         'https://blog.csdn.net/sgs595595/article/details/94589251',
@@ -76,12 +113,5 @@ def main():
         'https://blog.csdn.net/sgs595595/article/details/90896783',
         'https://blog.csdn.net/sgs595595/article/details/94017673'
     ]
-
-    start_time = time.perf_counter()
-    download_all(sites)
-    end_time = time.perf_counter()
-    print('down load {} in {} sec.'.format(len(sites), end_time-start_time))
-
-
-if __name__ == '__main__':
-    main()
+    main(sites)
+    asymain(sites)

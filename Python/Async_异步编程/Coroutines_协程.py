@@ -50,7 +50,7 @@ async def main(urls):
     # *tasks 解包列表，将列表变成了函数的参数；** dict 将字典变成了函数的参数
     await asyncio.gather(*tasks)
 print(f"started at {time.strftime('%X')}")
-asyncio.run(main(['url_1', 'url_2', 'url_3', 'url_4']))
+# asyncio.run(main(['url_1', 'url_2', 'url_3', 'url_4']))
 print(f"end at {time.strftime('%X')}")
 
 # 给某些协程任务限定运行时间，一旦超时就取消
@@ -130,7 +130,7 @@ async def fecth_content(url):
         "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) \
             Chrome/75.0.3770.100 Safari/537.36"}
     async with aiohttp.ClientSession(
-            headers=header, connector=aiohttp.TCPConnector(verify_ssl=False, ssl=False)) as session:
+            headers=header, connector=aiohttp.TCPConnector(ssl=False)) as session:
         async with session.get(url) as resp:
             return await resp.text()
 
