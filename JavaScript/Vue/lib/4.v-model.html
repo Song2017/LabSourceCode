@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue-2.6.js"></script>
+</head>
+
+<body>
+    <h1>v-model: 唯一的双向绑定指令</h1>
+    <div id='app'>
+        <p>{{msg}}</p>
+        <p>v-bind: 只能实现数据的单向绑定, 从M绑定到V中</p>
+        <input type="text" v-bind:value="msg" name="this is input" style="width: 80%">
+        <p>v-model: 实现表单元素和Model中数据的双向数据绑定
+            v-model只能运用到表单元素中: input: radio, text, address, email. select checkbox textarea
+        </p>
+        <input type="text" v-model:value="msg" name="this is input" style="width: 50%">
+    </div>
+    <h1>简易计算器</h1>
+    <div id="cal">
+        <input type="text" v-model='n1'>
+        <select v-model='opt'>
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <input type="text" v-model='n2'>
+        <input type="button" value='=' @click='calculate'>
+        <input type="text" v-model='result'>
+    </div>
+
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+
+                msg: 'hello vue, v-model'
+            },
+            methods: {
+
+            }
+
+        });
+        var vm2 = new Vue({
+            el: '#cal',
+            data: {
+                n1: 0, opt: '+', n2: 0, result: 0
+            },
+            methods: {
+                calculate() {
+                    // switch (this.opt) {
+                    //     case '+':
+                    //         this.result = parseFloat(this.n1) + parseFloat(this.n2);
+                    //         break;
+                    //     case '-':
+                    //         this.result = parseFloat(this.n1) - parseFloat(this.n2);
+                    //         break;
+                    //     case '*':
+                    //         this.result = parseFloat(this.n1) * parseFloat(this.n2);
+                    //         break;
+                    //     case '/':
+                    //         this.result = parseFloat(this.n1) / parseFloat(this.n2);
+                    //         break;
+                    // }
+                    this.result = eval('parseFloat(this.n1)' + this.opt + 'parseFloat(this.n2)');
+                }
+            }
+
+        })
+    </script>
+
+</body>
+
+</html>

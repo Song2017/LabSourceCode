@@ -51,7 +51,39 @@
         // 不提倡
         document.querySelector('#btn1').onclick = function () { alert(1) }
     </script>
+    <h4>跑马灯</h4>
+    <div id='app2'>
+        <input type="button" value="浪起来" @click='lang'>
+        <input type="button" value="低调" @click='stop'>
+        <h4>{{msg}}</h4>
+    </div>
 
+    <script>
+        // vm实例中, this指代上一级父对象, 直接在实例的属性或方法使用lambda时, this指向的对象不是vm实例, 是其上一级
+        var vm = new Vue({
+            el: '#app2',
+            data: {
+                msg: '猥琐发育, 别浪~~~',
+                intervalId: null
+            },
+            methods: {
+                lang: function () {
+                    if (this.intervalId != null) return;
+
+                    this.intervalId = setInterval(() => {
+                        this.msg = this.msg.substring(1) + this.msg.substring(0, 1);
+                    }, 400);
+                },
+                stop() {
+                    clearInterval(this.intervalId);
+                    this.intervalId = null;
+                    this.msg = '猥琐发育, 别浪~~~'
+                }
+            }
+
+        })
+
+    </script>
 </body>
 
 </html>

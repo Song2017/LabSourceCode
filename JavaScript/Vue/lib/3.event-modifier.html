@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue-2.6.js"></script>
+    <style>
+        .inner {
+            height: 150px;
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+
+<body>
+    <h4>事件修饰符</h4>
+
+    <div id="app">
+        <p>.stop阻止调用链继续冒泡, 阻止继续向外 </p>
+        <!-- 
+        <div class="inner" @click="divHandler">
+            <input type="button" value='click' @click.stop='btnHandler'>
+        </div> -->
+        <p>.prevent 阻止默认行为, 转而执行事件处理函数 </p>
+        <p>.once 只触发一次事件处理函数</p>
+        <a href="http://www.baidu.com" @click.prevent.once='linkClick'>baidu...</a>
+        <p>.capture 实现捕获触发事件机制, 由外向里时, 提前触发事件 </p>
+        <!-- <div class="inner" @click.capture="divHandler">
+            <input type="button" value='click' @click='btnHandler'>
+        </div> -->
+        <p>.self 实现只有点击当前元素时, 才会触发事件处理函数 </p>
+        <div class="inner" @click.self="divHandler">
+            <input type="button" value='click' @click='btnHandler'>
+        </div>
+        <p>.self只会阻止自己身上冒泡行为的触发, 不会阻止其他元素冒泡行为的触发
+            .stop停止所有外层冒泡的时间
+        </p>
+    </div>
+
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {
+                divHandler() {
+                    console.log(' this is div handler')
+                },
+                btnHandler() {
+                    console.log(' this is btn handler')
+                },
+                linkClick() {
+                    console.log(' this is baidu link')
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue-2.6.js"></script>
+</head>
+
+<body>
+    <h3>v-if & v-show</h3>
+    <p>
+        v-if: 每次都会重新创建或删除元素, 有较高的切换性能消耗
+    </p>
+    <p>
+        v-show:只是切换了display:none样式, 需要较高的渲染消耗
+    </p>
+    <div id='app'>
+        <input type="button" value="toggle" @click='toggle'>
+        <input type="button" value="toggle2" @click='flag=!flag'>
+        <h4 v-if='flag'>this is v-if</h4>
+        <h4 v-show='flag'>this is v-show</h4>
+
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                flag: true
+            },
+            methods: {
+                toggle() {
+                    this.flag = !this.flag
+                }
+            }
+
+        })
+
+    </script>
+
+</body>
+
+</html>
