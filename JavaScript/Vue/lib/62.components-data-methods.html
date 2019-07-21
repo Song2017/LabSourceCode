@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue-2.6.js"></script>
+</head>
+
+<body>
+
+    <div id='app'>
+        <h1>{{msg}}</h1>
+        <mycom3></mycom3>
+        <counter></counter>
+        <counter></counter>
+    </div>
+
+    <template id="tmp1">
+        <div>
+            <input type="button" value="+1" @click='incre'>
+            <h5>{{count}}</h5>
+        </div>
+    </template>
+    <script>
+        // 组件可以有自己的data, 但是组件中的data必须是一个function, 而且要返回object
+        // 否则多次引用时, data中的对象会互相影响
+        Vue.component('mycom3', {
+            template: '<div>{{msgc}} -- components </div>',
+            data() {
+                return { msgc: 'this is components data' }
+            },
+
+        })
+        Vue.component('counter', {
+            template: '#tmp1',
+            data() {
+                return { count: 0 }
+            },
+            methods: {
+                incre() {
+                    this.count++;
+                }
+            }
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'vue components'
+            }
+        })
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue-2.6.js"></script>
+    <!--vue resource 依赖于vue-->
+    <script src="./vue-resource-1.5.1.js"></script>
+</head>
+
+<body>
+    <div id='app'>
+        {{msg}} <br>
+        <input type="button" value="get" @click='getInfo'>
+        <input type="button" value="post - error" @click='postInfo'>
+        <input type="button" value="jsonp" @click='jsonpInfo'>
+    </div>
+
+    <script>
+        // 请求的路径前面不能以/开头
+        Vue.http.options.root = 'https://api.myjson.com/bins/';
+        Vue.http.options.emulateJSON = true;
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'vue resource: vue resource 依赖于vue /nthis.$http.jsonp',
+            },
+            methods: {
+                getInfo() {
+                    console.log('getInfo');
+                    this.$http.get('ly7d1').then(function (result) {
+                        console.log(result.data);
+                    })
+                },
+                postInfo() {
+                    console.log('postInfo');
+                    // 手动发起的post, moren没有表单格式
+                    this.$http.post('15psn9', {},
+                        { emulateJSON: true }).then(result => {
+                            console.log(result.data);
+                        })
+                },
+                jsonpInfo() {
+                    console.log('jsonpInfo');
+                    this.$http.jsonp('ly7d1').then(function (result) {
+                        console.log(result.body);
+                    })
+                },
+            }
+        })
+
+    </script>
+
+</body>
+
+</html>

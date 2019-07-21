@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue-2.6.js"></script>
+    <style>
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+            transform: translateX(150px);
+        }
+
+        .v-enter-active,
+        .v-leave-active {
+            transition: all 0.5s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='app'>
+        <h1>{{msg}}</h1>
+        <a href="" @click.prevent='flag=true'>login</a>
+        <a href="" @click.prevent='flag=false'>counter</a>
+        <login v-if='flag'></login>
+        <counter v-else='flag'></counter>
+        <h3>component vue提供的组件展示标签, 是一个占位符, :is指定要展示的组件的名称</h3>
+        <a href="" @click.prevent='comName="login"'>login</a>
+        <a href="" @click.prevent='comName="counter"'>counter</a>
+        <!-- 动画标签, out-in设置切换的模式 -->
+        <transition mode='out-in'>
+            <component :is="comName"></component>
+        </transition>
+
+    </div>
+    <template id="tmp1">
+        <div>
+            <input type="button" value="+1" @click='incre'>
+            <h5>{{count}}</h5>
+        </div>
+    </template>
+    <script>
+        Vue.component('login', {
+            template: '<h4>login page </h4>',
+        });
+        Vue.component('counter', {
+            template: '#tmp1',
+            data() {
+                return { count: 0 }
+            },
+            methods: {
+                incre() {
+                    this.count++;
+                }
+            }
+        });
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'vue components',
+                flag: true,
+                comName: 'login',
+            }
+        });
+    </script>
+
+</body>
+
+</html>
