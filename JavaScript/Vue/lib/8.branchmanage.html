@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="./vue-2.6.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
 </head>
 
 <body>
@@ -20,10 +20,11 @@
             </div>
             <div class="panel-body form-inline">
                 <label>ID: <input type="text" class="form-control" v-model='id'></label>
-                <label>Name: <input type="text" class="form-control" v-model='name'></label>
+                <label>Name: <input type="text" class="form-control" v-model='name' @keyup.enter='addbranch'></label>
                 <!--事件绑定机制中加小括号可以传参-->
                 <input type="button" value="add" class="btn btn-primary" @click='addbranch'>
-                <label>Search: <input type="text" class="form-control" v-model='keywords'></label>
+                <label>Search: <input type="text" class="form-control" 
+                    v-model='keywords' v-focus v-color="'blue'" v-fw='100' v-fs="'30px'"></label>
             </div>
         </div>
 
@@ -55,11 +56,22 @@
             var dt = new Date(date);
 
             if (pattern && pattern.toLowerCase() === 'yyyy-mm-dd') {
-                return `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`
+                return `${dt.getFullYear()}-${(dt.getMonth() + 1).toString().padStart(2, '0')
+                    }-${dt.getDate().toString().padStart(2, '0')}`
             }
             else {
-                return `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()} ${dt.getHours()}:${dt.getMinutes()}:${dt.getSeconds()}`
+                return `${dt.getFullYear()}-${(dt.getMonth() + 1).toString().padStart(2, '0')}-` +
+                    `${dt.getDate().toString().padStart(2, '0')} ${dt.getHours().toString().padStart(2, '0')}` +
+                    `:${dt.getMinutes().toString().padStart(2, '0')}:${dt.getSeconds().toString().padStart(2, '0')}`
             }
+        });
+        // 自定义指令
+        Vue.directive('focus', {
+            inserted: function (el) { el.focus(); },
+        });
+        // 自定义指令
+        Vue.directive('color', {
+            bind: function (el, binding2) { el.style.color = binding2.value; },
         });
         var vm = new Vue({
             el: '#app',
@@ -67,14 +79,14 @@
                 id: '',
                 name: '', keywords: '',
                 list: [
-                    { id: 1, name: 'benchi', ctime: new Date().toLocaleString() },
-                    { id: 2, name: 'bmw', ctime: new Date().toLocaleString() },
+                    { id: 1, name: 'benchi', ctime: new Date() },
+                    { id: 2, name: 'bmw', ctime: new Date() },
                 ]
             },
             methods: {
                 addbranch() {
                     this.list.push(
-                        { id: this.id, name: this.name, ctime: new Date().toLocaleString() });
+                        { id: this.id, name: this.name, ctime: new Date() });
                     this.id = this.name = '';
                 },
                 del(id) {
@@ -100,6 +112,18 @@
                     // return newlist;
 
                     return this.list.filter(item => { if (item.name.includes(keywords)) return true; })
+                }
+            },
+            directives: {
+                'fw': {
+                    bind: function (el, bind) {
+                        el.style.fontWeight = bind.value;
+                    }
+                },
+                // 默认写到 bind和update中
+                'fs': function (el, binding) {
+                    console.log(binding)
+                    el.style.fontSize = binding.value;
                 }
             }
 

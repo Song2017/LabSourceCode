@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue-2.6.js"></script>
+</head>
+
+<body>
+    <h4>Vue过滤器 </h4>
+    <p>全局过滤器, 所有的vue实例都可以使用</p>
+    <p>私有过滤器, 定义在vue实例内部, 只有声明的vue实例都可以使用, 名字冲突时, 私有的优先级高</p>
+    <p>定义 // data就是管道符传来的数据</p>
+    <p>Vue.filter('NameFilter',function(data){return data + '123';})</p>
+    <p>使用: {{name|namefilter}}</p>
+    <p>只能用在mustache({{}})和v-bind</p>
+    <h4>按键修饰符: 注意不要使用已经被浏览器锁定的快捷键</h4>
+    <p>Vue.config.keyCodes.home = 36; < input type="text" value="home" @keyup.home='press'>
+    </p>
+    <h4>获取焦点: 注意不要使用已经被浏览器锁定的快捷键</h4>
+
+    <div id='app'>
+        <p :style="{'color':'red'}">{{msg|msgFormat('duckduck')|msgAppend}}</p>
+        <input type="text" id='input1' value="press 36" @keyup.36='press'>
+        <input type="text" value="home" @keyup.home='press'>
+    </div>
+
+    <div id="app2">
+        <p>{{msg|msgAppend}}</p>
+    </div>
+    <script>
+        //按键修饰符
+        Vue.config.keyCodes.home = 36;
+        //过滤器
+        Vue.filter('msgFormat', function (data, arg) {
+            return data.replace(/轻轻/g, arg);
+        });
+        Vue.filter('msgAppend', function (data) {
+            return data + '---apend';
+        });
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: '轻轻地我走了, 正如我轻轻的来'
+            },
+            methods: {
+                press() {
+                    alert(36 + 'home')
+                }
+            },
+            filters: {
+                msgAppend: function (data) {
+                    return data + '~~~';
+                }
+            }
+        });
+        var vm2 = new Vue({
+            el: '#app2',
+            data: {
+                msg: '轻轻地我走了, 正如我轻轻的来'
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>
