@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <script src="./vue-2.6.js"></script>
+    <script src="./script/vue-2.6.js"></script>
 </head>
 
 <body>
     <div id='app'>
+        <p>父传子属性: 子组件声明props: [] <br>
+            子调父方法: this.$emit('func', JSON.stringify(this.somemsg));</p>
         <h1>{{msg}} --- {{dataFromChild}}</h1>
         <!-- 父组件可以通过属性绑定(v-bind)的形式 v-bind:parentmsg='msg', 把值传给子组件内部 -->
         <!-- 父组件通过事件绑定机制(v-on)向子组件传递方法 -->

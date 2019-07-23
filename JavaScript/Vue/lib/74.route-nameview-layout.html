@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./script/vue-2.6.js"></script>
+    <script src="./script/vue-router-3.0.7.js"></script>
+    <style>
+        html,
+        body,
+        h2 {
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: orange;
+            height: 60px;
+        }
+
+        .container {
+            display: flex;
+            height: 600px;
+        }
+
+        .left {
+            background-color: lightblue;
+            flex: 2;
+        }
+
+        .main {
+            background-color: pink;
+            flex: 8;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='app'>
+        <p>单个url对应多个组件: components: {
+                'default': header,
+                'left': leftBox,
+                'main': mainBox
+            },</p>
+        <router-view> </router-view>
+        <div class="container">
+            <router-view name="left"> </router-view>
+            <router-view name="main"> </router-view>
+        </div>
+    </div>
+
+
+    <script>
+        //组件模板对象
+        var header = {
+            template: "<h2 class='header'>header component </h2>",
+
+        };
+        var leftBox = {
+            template: "<h2 class='left'>left component </h2>",
+
+        };
+        var mainBox = {
+            template: "<h2 class='main'>mainBox component </h2>",
+
+        };
+        //创建路由对象
+        var routerObj = new VueRouter({
+            routes: [
+                {
+                    path: "/", components: {
+                        'default': header,
+                        'left': leftBox,
+                        'main': mainBox
+                    },
+                },
+                // { path: "/left", component: leftBox, },
+                // { path: "/main", component: mainBox, },
+
+            ],
+        });
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'hello vue router nest'
+            },
+            //将路由对象注册到vue实例
+            router: routerObj,
+        })
+
+    </script>
+
+</body>
+
+</html>

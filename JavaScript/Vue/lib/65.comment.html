@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./script/vue-2.6.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div id='app'>
+        <cmt-box v-on:refresh='loadComments'></cmt-box>
+        <ul class="list-group">
+            <li class='list-group-item' v-for='item in list' :key="item.id">
+                <span class="badge">评论人: {{item.user}}</span>
+                {{item.content}}
+            </li>
+        </ul>
+        <h3 ref='myh3'>this is for ref: get DOM</h3>
+        <input type="button" value="get Element" @click="getElement">
+    </div>
+    <template id="tmp1">
+        <div>
+            <div class="form-group">
+                <label>评论人:</label>
+                <input type="text" class="form-control" v-model='user'>
+            </div>
+            <div class="form-group">
+                <label>评论内容:</label>
+                <input type="text" class="form-control" v-model='content'>
+            </div>
+            <div class="form-group">
+                <input type="button" value="发表评论" class="btn btn-primary" @click='postComment'>
+            </div>
+            <hr>
+        </div>
+
+    </template>
+
+    <script>
+
+        var commentBox = {
+            template: '#tmp1',
+            data() {
+                return {
+                    user: '',
+                    content: ''
+                }
+            },
+            methods: {
+                postComment() {
+                    var comments = JSON.parse(localStorage.getItem('cmts') || '[]');
+                    var comment = { id: comments.length + 1, user: this.user, content: this.content };
+
+                    comments.unshift(comment);
+                    localStorage.setItem('cmts', JSON.stringify(comments));
+                    // this.list.push({ id: Date.now(), user: this.user, content: this.content })
+                    this.user = this.content = '';
+                    this.$emit('refresh')
+                }
+            }
+
+        }
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                list: [{ id: 1, user: 'libai', content: 'tianshengwocaibiyouyong ' },
+                { id: 2, user: 'libai2', content: '2tianshengwocaibiyouyon ' },
+                { id: 3, user: 'libai3', content: '3tianshengwocaibiyouyong ' },
+                { id: 4, user: 'libai4', content: '4tianshengwocaibiyouyong ' }]
+            },
+            methods: {
+                loadComments() {
+                    var comments = JSON.parse(localStorage.getItem('cmts') || '[]');
+                    this.list = comments
+                },
+                getElement(){
+                    // _self属性
+                    console.log(this.$refs.myh3.innerText)
+                }
+            },
+            // 默认情况下, 子组件无法访问父组件中的数据data和methods
+            components: {
+                'cmt-box': commentBox,
+            }
+        });
+    </script>
+
+</body>
+
+</html>
