@@ -13,3 +13,22 @@ npm i webpack-dev-server -D
 npm run dev
 // 将html缓存到内存中, html-webpack-plugin
 npm i html-webpack-plugin -D
+// 省略后缀名, extensions中的顺序就是补全的顺序
+    resolve: {
+        extensions: ['.js', '.jsx', '.json']
+    }
+//配置 @表示 src目录
+    resolve: {
+        alias:{
+            '@':path.join(__dirname, './src')
+        }
+//安装css loader
+npm i style-loader css-loader -D
+// babel 转换jsx为js, jsx: js中混合标准的html标签
+//jsx文件的本质还是在运行的时候被转换成了js
+npm i babel-core babel-loader@7 babel-plugin-transform-runtime -D
+npm i babel-preset-env babel-preset-stage-0 -D
+//jsx => js
+npm i babel-preset-react -D
+// config webpack.config.js
+// config .babelrc     

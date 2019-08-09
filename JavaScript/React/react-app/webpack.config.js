@@ -19,7 +19,28 @@ module.exports = {
     // 第三方模块的配置规则
     module: {
         rules: [
-            { test: /\.js|jsx$/, use: 'babel-loader', exclude: /node_modules/ }
+            { test: /\.js|jsx$/, use: 'babel-loader', exclude: /node_modules/ },
+            // css-loader?modules: 启用模块化
+            // css模块化只对ID和类样式有效果, 标签样式不生效
+            {
+                test: /\.css$/, use: [{
+                    loader: "style-loader"
+                },
+                {
+                    loader: "css-loader",
+                    options: {
+                        modules: {
+                            localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                        },
+                    }
+                }]
+            }
         ]
+    },
+    resolve: {
+        extensions: ['.js', '.jsx', '.json'],
+        alias: {
+            '@': path.join(__dirname, './src')
+        }
     }
 }

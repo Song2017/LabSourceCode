@@ -26,8 +26,8 @@ const myh1 = React.createElement('h1', { id: "myh1", title: "this is title" }, '
 ReactDOM.render(myh1, document.querySelector('#app'))
 ```
 
-## babel 
-//转换jsx为js, jsx: js中混合标准的html标签
+## jsx
+// babel 转换jsx为js, jsx: js中混合标准的html标签
 //jsx文件的本质还是在运行的时候被转换成了js
 npm i babel-core babel-loader@7 babel-plugin-transform-runtime -D
 npm i babel-preset-env babel-preset-stage-0 -D
@@ -35,3 +35,50 @@ npm i babel-preset-env babel-preset-stage-0 -D
 npm i babel-preset-react -D
 // config webpack.config.js
 // config .babelrc
+
+// jsx中标签都要有反斜线, 注释要加大括号{//, /*  */}
+// 花括号{}内部的是js, ES6中 ...是展开运算符, 用来获取对象的属性
+// 因为与js的关键字冲突, class>className, for>htmlfor
+
+## 组件
+// 创建组件
+// 1. 构造函数就是一个组件, 但是必须放回合法的虚拟DOM, 接收调用方传入数据的形参props是只读的
+// 因为标签的首字母都是大写, 所以构造函数的首字母要大写
+// 将组件分离到.jsx文件中, 文件中要引用react类包并暴露组件函数
+// 2. class关键字创建组件
+// class关键字中创建的组件, 使用外界传来的props参数不需要接收, 直接调用就行
+// this表示组件的实例对象
+// 构造函数和class关键字创建的组件的形参props都是只读的
+// 1. 构造函数组件是无状态组件 class为有状态组件
+// 2. 有状态组件可以自己定义属性并且有生命周期函数
+// 3. 无状态组件的运行效率会高一些
+// 4. props中的数据都是外界传递过来的, 只读, 不能重新赋值
+// 5. state/data 中的数据是组件私有的, 可读可写, 一般是ajax获取回来的数据
+
+## 类 class基本使用
+// 类class 语法
+// 类内部不能使用 var, class只是语法糖, 本质仍然是function
+// class内部, this指代类实例
+// class Animal {}
+    // 构造器, 默认有一个形参为空的构造器, 作用: new类的时候优先执行构造器中的代码
+    // 实例属性: 通过new出来的实例访问
+    // 静态属性: 通过构造函数直接访问, 类级别的属性
+    // 实例方法: 本质是挂载到protptype
+    // 静态方法: 挂载到构造函数上, 通过类调用的方法
+// Class Extends 类继承
+// 父类的属性和函数在子类的上一级原型链中
+// 子类中的属性和函数, 构造器自定义后, 就重写了父类    
+    // super: 语法规范, 子类使用extends父类后, 必须通过super调用父类的构造器, super就是父类构造器
+    // 子类中this只能在super之后使用 语法规范
+
+## 样式表 style
+// 行内样式, 在jsx中, 不能用字符床设置style, 使用object映射规范 style={{ color: "red" }}
+// 分散的样式对象
+// 合并成一个样式对象
+// 分出到独立的.js样式文件中
+// 使用独立的.css样式文件: 配置webpack
+// 样式冲突: vue解决方法: <style scoped></style>
+//      react中没有指令的概念, 没有scoped指令, 通过webpack设置css模块化
+//      webpack css模块化只对ID和类样式有效果, 标签样式不生效
+
+

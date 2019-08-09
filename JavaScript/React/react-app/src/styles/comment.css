@@ -1,0 +1,14 @@
+.item {
+    border: 1px dashed #ccc;
+    margin: 10px;
+    padding: 5px; 
+    box-shadow: 0 0 5px #ccc;
+}
+
+.title {
+    font-Size: 14px;
+}
+
+.content {
+    font-Size: 12px;
+}
