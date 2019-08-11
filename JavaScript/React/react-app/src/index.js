@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
-import CommentList from '@/components/styleCommentList'
+import BindEvent from '@/components/BindEvent'
+
 
 ReactDOM.render(<div>
-    {/* 这里的movie标签, 其实就是movie类的实例对象 */}
-    <CommentList></CommentList>
+    <BindEvent></BindEvent>
 </div>, document.querySelector('#app'))

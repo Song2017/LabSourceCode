@@ -1,6 +1,6 @@
 import React from 'react'
 
-import cssob2 from '@/styles/comment.css'
+import cssob2 from '@/styles/comment.scss'
 console.log(cssob2)
 
 export default function Comment(props) {

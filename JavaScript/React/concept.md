@@ -80,5 +80,34 @@ npm i babel-preset-react -D
 // 样式冲突: vue解决方法: <style scoped></style>
 //      react中没有指令的概念, 没有scoped指令, 通过webpack设置css模块化
 //      webpack css模块化只对ID和类样式有效果, 标签样式不生效
+// 安装bootstrarp
+npm i bootstrap -D -S --dev
+// 处理字体文件
+npm i url-loader file-loader -D -S --dev
+// 约定: 第三方的样式文件以.css结尾, 自己定义的样式文件以.scss或.less结尾
+npm i sass-loader node-sass -D -S --dev
 
-
+## 事件 Event
+// react中有自己的事件绑定机制, 事件的名称必须是小驼峰规则
+// 事件只接受function作为处理函数, function()是一个函数的调用结果
+// 匿名函数(箭头函数)本身就是一个匿名的function函数,  this的指向由方法外面的this决定
+<button onClick={()=>{this.clickHandler();}}>button</button>
+clickHandler=(arg)=>{
+    console.log('clickHandler'+"~"+arg)
+}
+setTimeout()方法中的this指向window, 因为是window的函数
+// React中想为state中的数据重新赋值, 不能使用this.state.xx, 要使用this.setState({})
+// 这里执行的方法是异步的, 想要立即去到最新的值时, 需要使用callback函数
+this.setState({
+    // 只会把对应的state更新, 而不会覆盖其他的
+    msg: 'setState' + arg,
+}, function () { console.log(this.data.name + this.state.msg) })
+// react中有自己的事件绑定机制, 事件的名称必须是小驼峰规则
+// 事件只接受function作为处理函数, function()是一个函数的调用结果
+// 匿名函数(箭头函数)本身就是一个匿名的function函数,  this的指向由方法外面的this决定
+// 这里的this指向BindEvent的实例
+<button onClick={() => this.clickHandler(123)}>button</button>
+// 只是设置文本框的value, 而不提供onChange处理函数, 这是文本框是只读的
+// 需要提供readOnly或onChange事件, 要把UI中的最新数据同步到state中, 需要手动监听onChange事件 
+// 获取文本框中的值: 1: 通过事件参数
+<input type="text" value={this.state.msg} onChange={(e) =>this.txtChange(e)} />

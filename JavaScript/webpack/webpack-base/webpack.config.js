@@ -20,7 +20,25 @@ module.exports = {
     module: {
         rules: [
             { test: /\.js|jsx$/, use: 'babel-loader', exclude: /node_modules/ },
-            { test: /\.css$/, use: ['style-loader', 'css-loader'] }
+            //处理第三方样式文件
+            { test: /\.css$/, use: ['style-loader', 'css-loader'] },
+            // scss: 自定义样式文件css-loader?modules: 启用模块化
+            // css模块化只对ID和类样式有效果, 标签样式不生效
+            {
+                test: /\.scss$/, use: [{
+                    loader: "style-loader"
+                },
+                {
+                    loader: "css-loader",
+                    options: {
+                        modules: {
+                            localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                        },
+                    }
+                }, { loader: "sass-loader" }]
+            },
+            //处理字体文件
+            { test: /\.ttf|woff|woff2|eot|svg$/, use: 'url-loader' },
         ]
     },
     resolve: {

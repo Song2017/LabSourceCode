@@ -32,3 +32,19 @@ npm i babel-preset-env babel-preset-stage-0 -D
 npm i babel-preset-react -D
 // config webpack.config.js
 // config .babelrc     
+
+## 样式表 style
+// 行内样式, 在jsx中, 不能用字符床设置style, 使用object映射规范 style={{ color: "red" }}
+// 分散的样式对象
+// 合并成一个样式对象
+// 分出到独立的.js样式文件中
+// 使用独立的.css样式文件: 配置webpack
+// 样式冲突: vue解决方法: <style scoped></style>
+//      react中没有指令的概念, 没有scoped指令, 通过webpack设置css模块化
+//      webpack css模块化只对ID和类样式有效果, 标签样式不生效
+// 安装bootstrarp
+npm i bootstrap -D -S --dev
+// 处理字体文件
+npm i url-loader file-loader -D -S --dev
+// 约定: 第三方的样式文件以.css结尾, 自己定义的样式文件以.scss或.less结尾
+npm i sass-loader node-sass -D -S --dev

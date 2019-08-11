@@ -24,3 +24,16 @@ create: Vue.extend 创建, 2: Vue.component 注册
 <a href="" @click.prevent='comName="login"'>login</a>
 <a href="" @click.prevent='comName="counter"'>counter</a>
 <component :is="comName"></component>
+
+生命周期
+beforeCreate, 实例初始化完成, 但是只有初始值
+this is msg
+created, 实例的属性和方法已经创建完成, data, methods可操作了
+  {{msg}} <br>   <input type="button" value="update msg" @click="update">
+beforeMount, 模板在内存中已经渲染完成, 但是没有挂载到DOM
+  this is msg <br> <input type="button" value="update msg">
+mounted, 模板已经挂载到DOM,实例创建阶段的最后一个事件, 接下来进入运行阶段界面数据:
+  this is msg <br> <input type="button" value="update msg">, msg: msg was updated
+beforeUpdate, 这时界面还没有被更新, 数据被更新了
+  界面数据: msg was updated <br> <input type="button" value="update msg">, msg: msg was updated
+updated, 这时界面被更新, 数据被更新
