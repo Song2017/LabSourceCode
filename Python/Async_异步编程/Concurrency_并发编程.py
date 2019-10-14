@@ -51,8 +51,9 @@ import aiohttp
 
 
 def download(url):
-    resp = requests.get(url)
-    print('Read {} from {}'.format(len(resp.content), url))
+    # resp = requests.get(url)
+    # print('Read {} from {}'.format(len(resp.content), url))
+    print('Read {} from {}'.format(url.split('/')[-1], url))
 
 
 def download_all(sites):
