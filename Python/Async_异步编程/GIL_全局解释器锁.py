@@ -3,6 +3,7 @@
 本质上是类似操作系统的互斥锁 Mutex
 1. CPython 引进 GIL 其实主要就是这么两个原因：
     一是设计者为了规避类似于内存管理这样的复杂的竞争风险问题（race condition）；
+    查看引用计数的方法：sys.getrefcount(a)
     二是因为 CPython 大量使用 C 语言库，但大部分 C 语言库都不是原生线程安全的
     （线程安全会降低性能和增加复杂度）
 2. GIL 是如何工作的
@@ -21,6 +22,9 @@
 
 GIL 的设计，主要是为了方便 CPython 解释器层面的编写者，而不是 Python 应用层面的程序员
 作为 Python 的使用者，我们还是需要 lock 等工具，来确保线程安全
+绕过GIL的两种思路：
+1. 绕过CPython，使用JPython等别的实现；
+2. 把关键性能代码放到其他语言中实现，比如C++
 '''
 import time
 import concurrent.futures
@@ -79,16 +83,16 @@ def test():
 
 
 if __name__ == "__main__":
-    start_time = time.perf_counter()
+    # start_time = time.perf_counter()
     # CountDown(50000000)
-    end_time = time.perf_counter()
-    print('thread run time: ', end_time-start_time)
+    # end_time = time.perf_counter()
+    # print('thread run time: ', end_time-start_time)
     # start_time = time.perf_counter()
     # multipleThread(100000000)
     # end_time = time.perf_counter()
     # print('multipleProcess run time: ', end_time-start_time)
-    start_time = time.perf_counter()
+    # start_time = time.perf_counter()
     # asyncio.run(asyncThread(50000000))
-    end_time = time.perf_counter()
-    print('asyncThread run time: ', end_time-start_time)
+    # end_time = time.perf_counter()
+    # print('asyncThread run time: ', end_time-start_time)
     test()

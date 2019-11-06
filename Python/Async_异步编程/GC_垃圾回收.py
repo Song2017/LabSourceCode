@@ -6,7 +6,9 @@ import gc
     因为循环引用需要通过不可达判定，来确定是否可以回收；
 3. Python 的自动回收算法包括标记清除和分代收集，主要针对的是循环引用的垃圾收集；
 4. 调试内存泄漏方面， objgraph 是很好的可视化分析工具
-
+    sys.getrefcount() 可以查看一个变量的引用次数, 但本身也会引入一次计数
+5. 手动释放内存
+    del a; gc.collect();
 
 Python 使用标记清除（mark-sweep）算法和分代收集（generational）
 先来看标记清除算法。
@@ -67,7 +69,7 @@ gc.collect()
 
 # 循环引用
 
-def func():
+def func2():
     a = [i for i in range(10)]
     b = [i for i in range(10)]
     print('after a, b created')
@@ -75,7 +77,7 @@ def func():
     b.append(a)
 
 
-func()
+func2()
 # a, b的内存还占用着, 需要显式调用gc.collect()
 gc.collect()
 # print(sys.getrefcount(a), sys.getrefcount(b))
