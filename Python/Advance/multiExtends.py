@@ -40,6 +40,11 @@ class F(D, E):
 
 # 深度遍历优先
 F()
+print(F.__mro__)
+# A
+# B C
+# D E
+# F
 # enter F
 # enter D
 # enter B
@@ -52,3 +57,10 @@ F()
 # leave B
 # leave D
 # leave F
+
+class F(E, D):
+    def __init__(self):
+        print('enter F')
+        super().__init__()
+        print('leave F')
+print(F.__mro__)

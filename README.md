@@ -66,6 +66,7 @@ Computer Language Learning Highlights Tourial
 19. [heapq — Heap queue algorithm¶](https://github.com/python/cpython/blob/3.7/Lib/heapq.py)    
 20. [decimal — Decimal fixed point and floating point arithmetic](https://docs.python.org/3/library/decimal.html#module-decimal)    
 21. [python_3.dis](https://docs.python.org/3/library/dis.html): Disassembler for Python bytecode     
+
 # Learn
 ## Linux
 1. [Linux Documentation Project Guides](http://www.tldp.org/guides.html)    
@@ -85,6 +86,8 @@ Computer Language Learning Highlights Tourial
 4. [Json Beautifier](https://beautifier.io/)        
 5. [Json to Class](https://app.quicktype.io/)        
 6. [Processon](https://www.processon.com/diagrams) pic edit online         
-7. [Snipaste](https://www.snipaste.com/) a simple but powerful snipping tool     
+7. [Snipaste](https://www.snipaste.com/) a simple but powerful snipping tool      
+8. [百度脑图](https://naotu.baidu.com/) edit .xmind file online    
+
 # Note
 1. [Personal Blob](https://blog.csdn.net/sgs595595)
