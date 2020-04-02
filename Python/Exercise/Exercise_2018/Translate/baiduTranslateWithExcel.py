@@ -40,12 +40,12 @@ def translateBaidu(content, fromLang='en', toLang='zh'):
 
 
 def excelTrans(
-        srcFilename=r'C:\Users\503027010\Desktop\VKC_Chinese_Translation.xlsx',
-        desFilename=r'c:\_Work\result.xlsx',
-        srcSheet='Sheet3',
-        srcColumn=3,
+        srcFilename=r'/Users/songgs/Desktop/monge_translation.xlsx',
+        desFilename=r'/Users/songgs/Desktop/monge_translation2.xlsx',
+        srcSheet='Sheet2',
+        srcColumn=2,
         srcRowBegin=2,
-        srcRowEnd=44,
+        srcRowEnd=13,
         desColumn=1,
         desSheet='result1'):
     wb = openpyxl.load_workbook(srcFilename)
