@@ -264,3 +264,19 @@ __pycache__/
 .idea
 .DS_Store
 *.iml
+venv
+.terraform
+*egg-info
+dist
+*.aws.yml
+dist
+dist.zip
+*.dynamo
+all-in.json
+all-out.json
+node_modules
+/tmp
+*.pyc
+
+# Test
+*.log
