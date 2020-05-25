@@ -1,0 +1,814 @@
+python高级编程
+	第二章 python中一切皆对象
+		2.1 python中一切皆是对象
+			讲解动态语言和静态语言的区别
+			    1. python是动态(运行时会报错)强类型(不会出现堆栈溢出等解释器定义的报错)语言
+			        函数和类也是对象,属于python的一等公民.
+			        type是元类metaclass, 元类是创建类的类.
+			               class是type的object,所以就有了object的特性
+				2. 赋值给一个变量
+				3. 可以添加到集合对象中
+				4. 可以作为参数传递给函数
+				5. 可以当做函数的返回值
+		2.2 type、object和class的关系
+		        1. object是顶层基类,class.__bases__
+		        2. object是type类的实例,同时type继承了object
+		        3. type实现了自己
+		2.3 python中的常见内置类型
+			对象的三个特征
+				身份: id()
+				类型: type()
+				值: dir()
+			None(全局只有一个)
+			数值
+				int, float, complex(d), bool
+			迭代类型: iterator, generator
+			序列类型
+				list
+				bytes、bytearray、memoryview(二进制序列)
+				range, tuple, str, array
+			映射(dict)
+			集合
+				set, frozenset
+			上下文管理类型(with)
+			其他
+				模块类型, class和实例, 函数类型
+				方法类型, 代码类型, object对象, type类型, ellipsis类型 ..., notimplemented类型
+		2.4 本章小节
+	第三章 魔法函数
+		3.1 什么是魔法函数:
+            1. 定义的格式, __xxx__, 调用：xxx(类的实例);
+            2. print(company)等价于print(str(company))等价于print(company.__str__())
+                repr(company)等价于company.__repr__()
+            3. 魔法函数是解释器中的, 不需要继承自object
+            4. len(), dict(), set()等是定义在cpython中的
+		3.2 python的数据模型以及数据模型对python的影响
+		3.3 魔法函数一览
+			3.3.1 非数学运算
+				字符串表示
+					__repr__：如果没有__str__, 则会默认调用__repr__, 默认时内存地址
+					__str__： print时会默认调用str
+				集合、序列相关
+					__len__： len函数调用
+					__getitem__: 类的实例变为可迭代的,切片方法
+					__setitem__ __delitem__ __contains__
+				迭代相关
+					__iter__: 迭代器方法,实例被迭代时会先调__iter__, 若未实现, 则调__getitem__
+					__next__
+				可调用
+					__call__
+				with上下文管理器
+					__enter__ / __exit__
+				数值转换
+					__abs__ / __bool__ / __int__ / __float__ / __hash__ / __index__
+				元类相关
+					__new__： 初始化类实例, 必须有返回值, 返回的就是新的类实例
+					__init__： 构造器
+				属性相关
+					__getattr__、 __setattr__ / __getattribute__、setattribute__ / __dir__
+				属性描述符
+					__get__、__set__、 __delete__
+				协程
+					__await__、__aiter__、__anext__、__aenter__、__aexit__
+			3.3.2 数学运算
+				一元运算符
+					__neg__(-)、__pos__(+)、__abs__
+				二元运算符
+					__lt__(<)、 __le__ <= 、 __eq__ == 、 __ne__ != 、 __gt__ > 、 __ge__ >=
+				算术运算符
+					__add__ + 、 __sub__ - 、 __mul__ * 、 __truediv__ / 、 __floordiv__ // 、 __\n\nmod__ % 、 __divmod__ divmod() 、 __pow__ ** 或 pow() 、 __round__ round()
+				反向算术运算符
+					__radd__ 、 __rsub__ 、 __rmul__ 、 __rtruediv__ 、 __rfloordiv__ 、 __rmod__ 、\n\n__rdivmod__ 、 __rpow__
+				增量赋值算术运算符
+					__iadd__ 、 __isub__ 、 __imul__ 、 __itruediv__ 、 __ifloordiv__ 、 __imod__ 、\n\n__ipow__
+				位运算符
+					__invert__ ~ 、 __lshift__ << 、 __rshift__ >> 、 __and__ & 、 __or__ | 、 __\n\nxor__ ^
+				反向位运算符
+					__rlshift__ 、 __rrshift__ 、 __rand__ 、 __rxor__ 、 __ror__
+				增量赋值位运算符
+					__ilshift__ 、 __irshift__ 、 __iand__ 、 __ixor__ 、 __ior__
+		3.4 随便举个例子说明魔法函数的重要性(len函数)
+		3.5 本章小节
+	第四章 深入类和对象
+		4.1 鸭子类型和多态
+		    1. 动态类型语言没有类型声明的限制, 依赖于方法的实现
+		4.2 抽象基类(abc模块) abstract base class
+		    1. 抽象基类不能被实例 class CacheBase(metaclass=abc.ABCMeta):
+		    2. 用途：用来强制子类必须实现某些方法；
+		4.3 使用isintance而不是type
+		    1. isintance会去对比继承链
+		4.4 类变量和对象变量
+		4.5 类属性和实例属性以及查找顺序
+		    1. MRO method resolution order (方法解释顺序)：C3算法,
+		        没有共同祖先时, 类似深度优先
+		        有共同祖先时,先进行深度优先查找,查到共同祖先就返回进行广度优先
+		4.6 静态方法、类方法以及对象方法
+		    静态方法中的类在重命名后需要手工修改
+            @staticmethod
+            def parse_from_string(date_str):
+                year, month, day = tuple(date_str.split("-"))
+                return Date(int(year), int(month), int(day))
+            @classmethod
+            def from_string(cls, date_str):
+                year, month, day = tuple(date_str.split("-"))
+                return cls(int(year), int(month), int(day))
+		4.7 数据封装和私有属性
+		    1. __xxx => _classname__xxx
+		4.8 python对象的自省机制
+		    1. 查询类属性,__dict__: 不会查找父类的属性, 可以写入值！！
+		    2. dir(), 返回所有的属性
+		4.9 super函数
+		    1. 可以重用父类的代码
+            class D(B, C):
+                def __init__(self):
+                    super(D, self).__init__() # super(D, self).__init__()
+		    2. super遵循MRO查找
+		4.10 django rest framework中对多继承使用的经验
+		    1. mixin模式特点
+                1. Mixin类功能单一
+                2. 不和基类关联,可以和任意基类组合, 基类可以不和mixin关联就能初始化成功
+                3. 在mixin中不要使用super这种用法
+		4.11 python中的with语句
+            1. try..except..else..finally:
+                finally中有return一定会被执行,没有则用except中的return
+            2. 上下文管理器协议：调用魔法函数__enter__, __exit__
+		4.12 contextlib实现上下文管理器
+            1. 必须使用生成器
+                import contextlib
+                @contextlib.contextmanager
+                def file_open(file_name):
+                    print("file open")
+                    yield {}
+                    print("file end")
+                with file_open("bobby.txt") as f_opened:
+                    print("file processing")
+		4.13 本章小结
+	第五章 自定义序列类
+		5.1 序列类型的分类
+			容器序列
+				list、tuple、deque
+			扁平序列
+				str、bytes、bytearray、array.array(元素的类型是一致的)
+			可变序列
+				list, deque,bytearray、array
+			不可变
+				str、tuple、bytes
+		5.2 序列的abc继承关系
+		5.3 序列的+、+=和extend的区别
+		    1. +=：只要是可迭代类型都可以扩展. 调用__iadd__
+		    2. append：将追加的元素作为一个整体进行拓展
+		    3. extend：迭代追加的元素, 追加其子元素
+		5.4 实现可切片的对象
+            #模式[start:end:step]
+            """
+                其中,第一个数字start表示切片开始位置,默认为0；
+                第二个数字end表示切片截止(但不包含)位置(默认为列表长度)；
+                第三个数字step表示切片的步长(默认为1).
+                当start为0时可以省略,当end为列表长度时可以省略,
+                当step为1时可以省略,并且省略步长时可以同时省略最后一个冒号.
+                另外,当step为负整数时,表示反向切片,这时start应该比end的值要大才行.
+                Note：切片后会返回一个新的同类型对象
+                实现： 传递slice对象到__getitem__
+            """
+		5.5 bisect管理可排序序列
+		    1. bisect用来处理已排序的序列,用来维持已排序的序列, 升序
+		        bisect_right：利用二分查找进行查找
+		        insort_right：排序
+		5.6 什么时候我们不该用列表
+		    1. array只能存放指定的数据类型, 内存是连在一起的
+		5.7 列表推导式、生成器表达式、字典推导式
+            1. 列表推导式: [i for i in range(20) if i / 2 == 0]
+            2. 生成器表达式 小括号不是元组, 是生成器类型:
+                (i for i in range(20) if i / 2 == 0)
+            3. 字典推导式: (i:'name'+i for i in range(20) if i / 2 == 0}
+		5.8 本章小结
+	第六章 深入python的set和dict
+		6.1 先来看看collections中的abc
+		    1. MutableMapping > Mapping > Collection > (Sized, Iterable, Container)
+		6.2 dict的常见用法
+		    1. D.copy(): 浅拷贝,
+		    2. D.get("key", "default")
+			3. setdefault: D.get("key", "default") + D["key"]="default"
+			5. update:D.update([E, ]**F):
+			    If E is present and has a .keys() method, then does:  for k in E: D[k] = E[k]
+                If E is present and lacks a .keys() method, then does:  for k, v in E: D[k] = v
+                In either case, this is followed by: for k in F:  D[k] = F[k]
+		6.3 dict的子类
+			不要去继承内置类型 dict, 有可能会失败比如update方法
+			defaultdict: 重写了__missing__方法, 没有值的会直接写
+			Counter：Dict subclass for counting hashable items
+			    c = Counter('abcdeabcdabcaba')
+		6.4 set和frozenset
+		    set 集合 fronzenset (不可变集合) 无序,不重复
+		        集合运算：差集： -； 交集： &； 并集： |； 子集：issubset
+		        性能很高： 去重计算
+            fronzenset 可以作为dict的key
+		6.5 dict和set的性能比较
+		    1.  dict的key或者set的值 都必须是可以hash的
+            不可变对象 都是可hash的, str, fronzenset, tuple,自己实现的类 __hash_
+            2. dict的内存花销大,但是查询速度快, 自定义的对象 或者python内部的对象都是用dict包装的
+            3. dict的存储顺序和元素添加顺序有关
+            4. 添加数据有可能改变已有数据的顺序
+		6.6 本章小结
+	第七章 对象引用、可变性和垃圾回收
+		7.1 python变量到底是什么
+		    python的变量实质上是一个没有类型的指针,先生成一个object, 然后指向变量名
+		7.2 ==和is的区别
+		    is会判断id()的值
+		    ==判断变量的值
+		7.3 del语句和垃圾回收
+            cpython中垃圾回收的算法是采用 引用计数
+            循环引用需要通过不可达判定,来确定是否可以回收；
+            Python 的自动回收算法包括标记清除和分代收集,主要针对的是循环引用的垃圾收集；
+		7.4 一个经典的错误
+            默认入参是容器类型时,如果没有显式指定,都统一调用默认参数.
+            当有多次调用时, 会有冲突
+		7.5 本章小结
+	第八章 元类编程
+		8.1 property动态属性, 装饰器
+		    在类中把一个方法变成属性调用,起到既能检查属性,还能用属性的方式来访问该属性的作用
+		8.2 __getattr__、__getattribute__魔法函数
+            __getattr__ 在查找不到属性的时候调用
+            __getattribute__ 查找任何属性都会调用此魔法函数
+		8.3 属性描述符和属性查找过程
+		    属性是在class模版中指定的,每个实例都有
+		    __dict__是跟随每个实例
+		    属性描述符 实现了任意魔法方法：__get__, __set__, __delete__
+		    非数据属性描述符 只实现了任意魔法方法：__get__,
+		    如果user是某个类的实例,那么user.age(以及等价的getattr(user,’age’))
+            首先调用__getattribute__.
+                如果类定义了__getattr__方法,
+                那么在__getattribute__抛出 AttributeError 的时候就会调用到__getattr__,
+                而对于描述符(__get__)的调用,则是发生在__getattribute__内部的.
+            user = User(), 那么user.age 顺序如下：
+            (1)如果“age”是出现在User或其基类的__dict__中, 且age是data descriptor, 那么调用其__get__方法, 否则
+            (2)如果“age”出现在user的__dict__中, 那么直接返回 obj.__dict__[‘age’], 否则
+            (3)如果“age”出现在User或其基类的__dict__中,
+                如果age是non-data descriptor,那么调用其__get__方法, 否则返回 __dict__[‘age’]
+            (4)如果User有__getattr__方法,调用__getattr__方法,否则抛出AttributeError
+		8.4 __new__和__init__的区别
+            #new 是用来控制对象的生成过程, 在对象生成之前
+            #init是用来完善对象的
+            #如果new方法不返回对象, 则不会调用init函数
+		8.5 自定义元类
+		    # type动态创建类. 类也是对象,type创建类的类
+		    # 元类是创建类的类 对象<-class(对象)<-type
+            # User = type("User", (), {})
+            # python中类的实例化过程,会首先寻找metaclass,顺序：自己 > 基类 > 默认
+            # 通过metaclass去创建user类去创建类对象,实例
+		8.6 元类实现简单的orm
+		8.7 本章小结
+	第九章 迭代器和生成器
+		9.1 python的迭代协议
+		    #迭代器是什么？ 迭代器是访问集合内元素的一种方式, 一般用来遍历数据
+            #迭代器和以下标的访问方式不一样,迭代器是不能返回的, 迭代器提供了一种惰性方式数据的方式
+		9.2 什么是迭代器和可迭代对象
+		    迭代器: 实现了魔法函数 __next__
+		    可迭代对象： 实现了魔法函数 __iter__,其中返回一个迭代器.
+		        迭代器模式要求__next__在迭代器中实现,功能分离, 代码解耦
+                # while True:
+                #     try:
+                #         print (next(my_itor))
+                #     except StopIteration:
+                #         pass
+                for item in company:
+                    print (item)
+		9.3 生成器函数使用
+		    #生成器函数,函数里只要有yield关键字
+		    生成器对象, python编译字节码的时候就产生了
+		9.4 生成器的原理
+            python.exe(python解释器)会用一个叫做 PyEval_EvalFramEx(c函数)去执行函数,
+            首先会创建一个栈帧(stack frame), 栈帧是字节码对象
+            所有的栈帧都是分配在堆内存上,这决定了栈帧可以独立于调用者存在
+            生成器对象对应的栈帧中存储了函数最近一次执行的位置,也就是yield关键字的位置
+            yield对应栈中的一个元素
+		    又因为生成器对象栈帧独立于调用者,所以可以多次执行同一个函数, 返回不同的值
+            def gen_func():
+                yield 1
+                name = "bobby"
+                yield 2
+                age = 30
+                return "imooc"
+            36        0 LOAD_CONST               1 (1)
+                      2 YIELD_VALUE
+                      4 POP_TOP
+            37           6 LOAD_CONST               2 ('bobby')
+                      8 STORE_FAST               0 (name)
+            38          10 LOAD_CONST               3 (2)
+                     12 YIELD_VALUE
+                     14 POP_TOP
+            39          16 LOAD_CONST               4 (30)
+                     18 STORE_FAST               1 (age)
+            40          20 LOAD_CONST               5 ('imooc')
+                     22 RETURN_VALUE
+		9.5 通过UserList来看生成器的应用
+		from collections import UserList
+        def __iter__(self):
+            i = 0
+            try:
+                while True:
+                    v = self[i]
+                    yield v
+                    i += 1
+            except IndexError:
+                return
+		9.6 生成器实现大文件读取
+		    将大的单行数据按指定字符串分行
+            # 500G, 特殊 一行
+            def myreadlines(f, newline):
+                buf = ""
+                while True:
+                    while newline in buf:
+                        pos = buf.index(newline)
+                        yield buf[:pos]
+                        buf = buf[pos + len(newline):]
+                    chunk = f.read(4096)
+
+                    if not chunk:
+                        # 说明已经读到了文件结尾
+                        yield buf
+                        break
+                    buf += chunk
+            with open("input.txt") as f:
+                for line in myreadlines(f, "{|}"):
+                    print(line)
+		9.7 本章小结
+	第十章 python socket编程
+		10.1 弄懂HTTP、Socket、TCP这几个概念
+            | 分层名称| 协议 | 系统级别 |  数据单位 |
+            | -- | -- | -- | -- |
+            | 应用层 |   smtp, http, snmp   | 应用程序 |   消息|
+            | 表示层 |   mime, html, mib   | 应用程序 |  消息|
+            | 会话层 |   ftp   | 应用程序 |消息|
+            | 传输层 | TCP UDP | OS |  段|
+            | 网络层 | ARP IP ICMP | OS | 数据报|
+            | 数据链路层 | 网卡层 | 设备驱动程序与网络接口 | 帧|
+            | 物理层 | 硬件 | 设备驱动程序与网络接口 | 0/1序列|
+
+		    HTTP: 浏览器与服务端之间通信所用的协议是HTTP(HyperText TransferProtocol)
+		    Socket: 应用程序利用套接字, 可以设置对端的IP地址、端口号, 并实现数据的发送与接收
+		        m每种协议都有特定的端口号： http： 80； https： 443
+		    TCP/UDP: TCP是面向连接的、可靠的流协议.流就是指不间断的数据结构, 你可以把它想象成排水管道中的水流.
+                UDP是不具有可靠性的数据报协议.细微的处理它会交给上层的应用去完成.
+                    在UDP的情况下, 虽然可以确保发送消息的大小却不能保证消息一定会到达
+		10.2 client和server实现通信
+			服务端
+                import socket
+                import threading
+
+                server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                server.bind(('0.0.0.0', 8000))
+                server.listen()
+                data = sock.recv(1024)
+                print(data.decode("utf8"))
+                re_data = input()
+                sock.send(re_data.encode("utf8"))
+			客户端
+                client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                client.connect(('127.0.0.1', 8000))
+                client.send(re_data.encode("utf8"))
+                data = client.recv(1024)
+			socket发送http请求
+				写类模拟urllib类
+			urllib和socket区别
+				urllib支持client,但是socket支持server、client等等
+				urllib支持http、ftp等协议属于应用层是包装过socket的
+				学习socket的目的不是为了让大家在任何时候都用socket去编程,
+				而是要知道底层后期理解协程容易、以及具体问题在解决的时候首先能想到还有socket底层可以用
+		10.3 socket实现聊天和多用户连接
+		10.4 socket模拟http请求
+            # 建立socket连接
+            client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            client.connect((host, 80))  # 阻塞不会消耗cpu
+            # 不停的询问连接是否建立好, 需要while循环不停的去检查状态
+            # 做计算任务或者再次发起其他的连接请求
+            client.send(
+                "GET {} HTTP/1.1\r\nHost:{}\r\nConnection:close\r\n\r\n".
+                    format(path, host).encode("utf8"))
+		10.5 本章小结
+	第十一章 多线程、多进程和线程池编程
+		11.1 python中的GIL
+            # gil global interpreter lock (cpython)
+            # python中一个线程对应于c语言中的一个线程
+            # gil使得同一个时刻只有一个线程在一个cpu上执行字节码, 无法将多个线程映射到多个cpu上执行
+            # gil会根据执行的字节码行数以及时间片释放gil,gil在遇到io的操作时候主动释放
+		11.2 python多线程编程
+            # 1.通过Thread类实例化
+            thread1 = threading.Thread(target=get_detail_html, args=("",))
+            # 2. 通过集成Thread来实现多线程
+            class GetDetailHtml(threading.Thread):
+                def __init__(self, name):
+                    super().__init__(name=name)
+                def run(self):
+                    print("get detail html started")
+                    time.sleep(2)
+                    print("get detail html end")
+            thread1 = GetDetailHtml("get_detail_html")
+
+            # 设置线程为守护线程, 主线程.主线程结束, 此线程也结束
+            thread2.setDaemon(True)
+            # 线程开始执行
+            thread1.start()
+            # 等待线程执行完成
+            thread1.join()
+		11.3 线程间通信-Queue
+		    # 1. 线程通信方式- 共享变量
+		    # 2, Queue： 基于deque在字节码级别是线程安全的
+		        from queue import Queue
+                detail_url_queue = Queue(maxsize=1000)
+                detail_url_queue.put(1)
+                detail_url_queue.get(1)
+                # 查看是否所有的任务都结束了
+                detail_url_queue.task_done()
+                # 任务都结束前会block住主线程
+                detail_url_queue.join()
+		11.4 线程同步(Lock、RLock、Semaphores、Condition)
+            # Disassembler of Python byte code into mnemonics
+            import dis; dis.dis(fun)
+            from threading import Lock, RLock, Condition  # 可重入的锁
+            # 1. RLock 在同一个线程里面,可以连续调用多次acquire, 一定要注意acquire的次数要和release的次数相等
+            total = 0
+            lock = RLock()
+            def add():
+                global lock
+                global total
+                for i in range(1000000):
+                    lock.acquire()
+                    lock.acquire()
+                    total += 1
+                    lock.release()
+                    lock.release()
+            # 2. condition: RLock + deque,
+            # 条件变量, 用于复杂的线程间同步
+            # 通过condition完成协同读诗
+            #   启动顺序很重要
+            #   在调用with cond之后才能调用wait或者notify方法
+            #    底层锁,condition类级别的锁,with调用时添加,会在线程调用了wait方法的时候释放,
+                 线程锁, wait会释放掉底层锁, 但同时会在deque等待队列上添加一个RLock,
+                    等到notify方法的唤醒时去掉线程锁
+            # 3. Semaphore 是用于控制进入数量的锁
+            # 通过condition实现, 通过acquire wait指定数目的线程, 通过release notify释放wait的线程
+            # 文件, 读、写, 写一般只是用于一个线程写,读可以允许有多个
+		11.5 concurrent线程池编码
+            #线程池, 为什么要线程池
+            #主线程中可以获取某一个线程的状态或者某一个任务的状态,以及返回值
+            #当一个线程完成的时候我们主线程能立即知道
+            #futures可以让多线程和多进程编码接口一致
+                from concurrent.futures import ThreadPoolExecutor, as_completed, wait, FIRST_COMPLETED
+                executor = ThreadPoolExecutor(max_workers=1)
+                # 通过submit函数提交执行的函数到线程池中, submit 是立即返回
+                # task1 = executor.submit(get_html, (3))
+                # done方法用于判定某个任务是否完成
+                # cancel取消已submit但还未执行的线程
+                # result方法可以获取task的执行结果
+                # print(task1.done())
+                # print(task2.cancel())
+                # print(task1.result())
+
+                urls = [3, 2, 4]
+                all_task = [executor.submit(get_html, (url)) for url in urls]
+                # wait可以通过子线程的状态阻塞主线程
+                wait(all_task, return_when=FIRST_COMPLETED)
+                print("main")
+                # as_completed：根据子线程完成时间返回结果
+                # for future in as_completed(all_task):
+                #     data = future.result()
+                #     print("get {} page".format(data))
+                # 通过executor的map获取已经完成的task的值, 根据入参的顺序返回结果
+                # for data in executor.map(get_html, urls):
+                #     print("get {} page".format(data))
+		11.6 多进程编程-multiprocessing
+            # windows操作系统, 进程要运行在main函数中
+            progress = multiprocessing.Process(target=get_html, args=(2,))
+            progress.start()
+            # 等待任务结束
+            print(progress.pid)
+            progress.join()
+            print("main progress end")
+
+            # 使用线程池
+            pool = multiprocessing.Pool(multiprocessing.cpu_count())
+            result = pool.apply_async(get_html, args=(3,))
+            # 等待所有任务完成, close表示不再接受新的任务
+            pool.close()
+            pool.join()
+            print(result.get())
+
+            # imap
+            # for result in pool.imap(get_html, [1,5,3]):
+            #     print("{} sleep success".format(result))
+            for result in pool.imap_unordered(get_html, [1, 5, 3]):
+                print("{} sleep success".format(result))
+		11.7 进程间通信
+            # 共享全局变量通信
+            # 共享全局变量不能适用于多进程编程,可以适用于多线程.
+            # 这是因为进程会fork一份自己的上下文, 每个进程都会有自己的全局变量
+            # Queue
+            # 要使用multiprocessing, 或是manager的
+            # multiprocessing中的queue不能用于pool进程池
+            # pool中的进程间通信需要使用manager中的queue
+            # pipe
+            # pipe的性能高于queue
+            # pipe只能适用于两个进程, recevie_pipe, send_pipe = Pipe()
+            # 进程间通信的数据结构
+            # Manager中提供的数据结构 progress_dict = Manager().dict()
+		11.8 本章小结
+	第十二章 协程和异步io
+		12.1 并发、并行、同步、异步、阻塞、非阻塞
+		    并发：在一个时间段内,有多个程序在同一个cpu上运行, 但任一时刻上只有一个程序在cpu上运行
+		    并行：任一时刻点上, n个程序分别同时运行在多个cpu上
+		    同步：代码调用IO操作(磁盘)时, 必须等待IO操作完成后才返回的调用方式
+		    异步：代码调用IO操作(磁盘)时, 不必等待IO操作完成就返回的调用方式
+		    阻塞：调用函数时, 当前线程被挂起
+		    非阻塞：调用函数时, 当前线程不会被挂起,同时立即返回
+		12.2 C10K问题和io多路复用(select、poll、epoll)
+		    阻塞式IO： 当应用进程进行系统调用时,
+		        会一直等待内核准备数据报(包括建立网络连接,下载数据等)并返回到用户空间, 然后继续执行应用
+		    非阻塞式IO： 当应用进程进行系统调用时,内核会迅速返回一个结果,然后程序需要while循环不停的去检查状态
+		        适用于下一步操作不依赖于当前IO结果, 比如做计算任务或者再次发起其他的连接请求
+		    IO复用：IO多路复用就是一种机制,一个进程可以监视多个文件描述符,一旦某个描述符就绪(读就绪或写就绪),能够通知对应的应用程序.
+		      select, poll, epoll本质上是同步IO, 因为他们在描述符就绪后, 通知应用程序自己去读或写
+		      读和写的操作过程是阻塞的.应用进程会阻塞于select调用, select会轮询多个句柄(套接字的状态)的状态,
+              当数据报准备好了之后,select来通知应用程序.然后应用程序会发起系统调用, 将准备好的数据从内核复制到用户空间
+		        select：select()的机制中提供一种fd_set的数据结构,实际上是一个long类型的数组,
+                    每一个数组元素都能与一打开的文件句柄(不管是Socket句柄,还是其他文件或命名管道或设备句柄)建立联系,
+                    建立联系的工作由程序员完成,当调用select()时,由内核根据IO状态修改fd_set的内容,
+                    由此来通知执行了select()的进程哪一Socket或文件可读.从流程上来看,使用select函数进行IO请求和同步阻塞模型没有太大的区别,甚至还多了添加监视socket,
+                    以及调用select函数的额外操作,效率更差.但是,使用select以后最大的优势是用户可以在一个线程内同时处理多个socket的IO请求.
+                    用户可以注册多个socket,然后不断地调用select读取被激活的socket,即可达到在同一个线程内同时处理多个IO请求的目的
+                    select机制的问题
+                        每次调用select,都需要把fd_set集合从用户态拷贝到内核态,如果fd_set集合很大时,那这个开销也很大
+                        同时每次调用select都需要在内核遍历传递进来的所有fd_set,如果fd_set集合很大时,那这个开销也很大
+                        为了减少数据拷贝带来的性能损坏,内核对被监控的fd_set集合大小做了限制,并且这个是通过宏控制的,大小不可改变(限制为1024)
+                poll： poll的机制与select类似,与select在本质上没有多大差别,
+                    管理多个描述符也是进行轮询,根据描述符的状态进行处理,但是poll记录socket的数组结构从数组改成了链表, 没有最大文件描述符数量的限制
+                epoll： epoll在Linux2.6内核正式提出,是基于事件驱动的I/O方式,
+                    相对于select来说,epoll没有描述符个数限制,使用一个文件描述符管理多个描述符,
+                    将用户关心的文件描述符的事件存放到内核的一个事件表中,这样在用户空间和内核空间的copy只需一次
+                    实现：  mmap： mmap 操作提供了一种机制,让用户程序直接访问设备内存,这种机制,
+                        相比较在用户空间和内核空间互相拷贝数据,效率更高.在要求高性能的应用中比较常用
+                           红黑树：红黑树是用来存储这些描述符的,因为红黑树的特性,就是良好的插入,查找,删除性能O(lgN)
+                        调用epoll_create的时候内核也是个epoll描述符创建了一个文件,毕竟在Linux中一切都是文件,而epoll面对的是一个特殊的文件
+                        epoll_ctl时除了把socket描述符放入到红黑树中之外,还会给内核中断处理程序注册一个回调函数,
+                        告诉内核,当这个描述符上有事件到达(或者说中断了)的时候就调用这个回调函数.这个回调函数的作用就是将描述符放入到rdlist中
+                           rdlist：就绪描述符链表这是一个双链表,epoll_wait()函数返回的也是这个就绪链表
+                        当内核创建了红黑树之后,同时也会建立一个双向链表rdlist,
+                        用于存储准备就绪的描述符,当调用epoll_wait的时候在timeout时间内,只是简单的去管理这个rdlist中是否有数据,
+                        如果没有则睡眠至超时,如果有数据则立即返回并将链表中的数据赋值到events数组中.
+                        这样就能够高效的管理就绪的描述符,而不用去轮询所有的描述符
+		    信号驱动式IO：
+		    异步IO：相对IO多路复用来说, 它会等到已经将数据复制到用户空间后, 再去通知应用程序
+		12.3 epoll+回调+事件循环方式url
+            # epoll并不代表一定比select好
+            # 在并发高的情况下,连接活跃度不是很高, epoll比select好
+            # 并发性不高,同时连接很活跃, select比epoll好
+            # 通过非阻塞io实现http请求
+            # select + 回调 + 事件循环
+            # 并发性高,使用单线程
+            # selector是封装后的类包, windows下调用select, linux调用epoll
+            # 通过文件描述符标记每个操作的进程, 将下一操作作为回调函数注册到select或epoll中
+                from selectors import DefaultSelector, EVENT_READ, EVENT_WRITE
+                selector = DefaultSelector()
+                selector.register(self.client.fileno(), EVENT_WRITE, self.connected)
+                def connected(self, key):
+                    selector.unregister(key.fd)
+                    self.client.send(
+                        "GET {} HTTP/1.1\r\nHost:{}\r\nConnection:close\r\n\r\n".format(
+                            self.path, self.host).encode("utf8"))
+                    selector.register(self.client.fileno(), EVENT_READ, self.readable)
+                def readable(self, key):
+                    d = self.client.recv(1024)
+                    if d:
+                        self.data += d
+                    else:
+                        selector.unregister(key.fd)
+                        data = self.data.decode("utf8")
+                        html_data = data.split("\r\n\r\n")[1]
+                        print(html_data)
+                        self.client.close()
+            # 事件循环,不停的请求socket的状态并调用对应的回调函数
+            # 1. select本身是不支持register模式
+            # 2. socket状态变化以后的回调是由程序员完成的
+                ready = selector.select()
+                for key, mask in ready:
+                    call_back = key.data
+                    call_back(key)
+		12.4 回调之痛
+		    可读性差： 回调会将代码切割成小块； 嵌套层数太多, 难理解
+		    共享状态管理困难：
+		    异常处理困难：嵌套层数太多, 难定位异常
+		12.5 C10M问题和协程
+		    协程：有多个入口的函数,
+		        可以暂停的函数, 可以暂停的函数(可以向暂停的地方传入值)
+		12.6 生成器的send和yield from
+		    # send, next
+                def gen_func():
+                    # 1. 可以产出值, 2. 可以接收值(调用方传递进来的值)
+                    html = yield "http://projectsedu.com"
+                    print("gen_func", html)
+                    # receive value from send
+                    yield 2
+                    return "bobby"
+                if __name__ == "__main__":
+                    gen = gen_func()
+                    # 启动生成器方式有两种, next(), send
+                    # 在调用send发送非none值之前,我们必须启动一次生成器, 这回运行完第一个yield
+                    # 方式有两种, 二者完全等价. 1. gen.send(None), 2. next(gen)
+                    # print(next(gen))
+                    print(gen.send(None))
+                    print('before send')
+                    print(gen.send("send ben"))
+
+                    # http: // projectsedu.com
+                    # before send
+                    # gen_func send ben
+                    # 2
+                # close在生成器函数暂停的位置引发 GeneratorExit.
+                    如果之后生成器函数正常退出、关闭或引发 GeneratorExit (由于未捕获该异常) 则关闭并返回其调用者.
+                    如果生成器产生了一个值,关闭会引发 RuntimeError
+                # throw 在生成器暂停的位置引发 type 类型的异常,并返回该生成器函数所产生的下一个值.
+                    如果生成器没有产生下一个值就退出,则将引发 StopIteration 异常.
+                    如果生成器函数没有捕获传入的异常,或引发了另一个异常,则该异常会被传播给调用者.
+		    # yield from <expr> : 可以实现协程的嵌套,它会将所提供的表达式视为一个子迭代器
+		    委托生成器的作用是：在调用方与子生成器之间建立一个双向通道
+                yield from my_iterable
+                # for value in my_iterable:
+                #     yield value
+                def middle(key):
+                    result = yield from sales_sum()
+                    yield key + "销量统计完成！！.", result
+                def sales_sum():
+                    total = 0
+                    nums = []
+                    while True:
+                        x = yield
+                        if not x:
+                            break
+                        total += x
+                        nums.append(x)
+                    return total, nums
+                def main():
+                    data_sets = {
+                        "bobby牌面膜": [1200, 1500, 3000],
+                        "bobby牌手机": [28, 55, 98, 108],
+                        "bobby牌大衣": [280, 560, 778, 70],
+                    }
+                    for key, data_set in data_sets.items():
+                        print("start key:", key)
+                        m = middle(key)
+                        m.send(None)  # 预激middle协程
+                        for value in data_set:
+                            m.send(value)  # 给协程传递每一组的值
+                        print(m.send(None))
+            yield from都做了什么 pep380
+                子生成器只是迭代器， 退出时没有close方法， 处理异常
+                子生成器内部会有异常， 这时要处理throw方法， 如果此时退出， 要返回值
+                最后，子生成器第一次接收到None，激活协程. 然后不断调用协程的send方法，
+                直到退出时， 返回值
+
+
+		12.7 生成器如何变成协程
+		    协程是单线程模式, 不能用time.sleep
+		    协程主要解决了epoll中回调函数带来的种种问题
+		12.8 async和await原生协程
+		    python为了将语义变得更加明确,就引入了async和await关键词用于定义原生的协程
+		    await等价于yield from
+		12.9 本章小结
+	第十三章 asyncio并发编程
+	    13 实现的功能
+            asyncio 是用来编写 并发 代码的库,使用 async/await 语法.
+            asyncio 被用作多个提供高性能 Python 异步框架的基础,包括网络和网站服务,数据库连接库,分布式任务队列等等.
+            asyncio 往往是构建 IO 密集型和高层级 结构化 网络代码的最佳选择.
+            包括各种特定的操作系统实现的低层级的模块化事件循环
+            对TCP, UDP, SSL, 子进程, 延时调用的具体支持
+            Future
+            yield from
+            线程
+            进程
+		13.1 事件循环
+            # 使用 asyncio, 获取协程的返回值
+            import asyncio
+            import time
+            # partial可以将带参数的函数连同参数封装成一个新的函数
+            from functools import partial
+            async def get_html(url):
+                print("start get url")
+                await asyncio.sleep(2)
+                return "bobby"
+            def callback(url, future):
+                print(url)
+                print("send email to bobby")
+            if __name__ == "__main__":
+                start_time = time.time()
+                loop = asyncio.get_event_loop()
+                # get_future = asyncio.ensure_future(get_html("http://www.imooc.com"))
+                task = loop.create_task(get_html("http://www.imooc.com"))
+                task.add_done_callback(partial(callback, "http://www.imooc.com"))
+                loop.run_until_complete(task)
+                print(task.result())
+            # gather和wait的区别: gather更加high-level, 可以支持分组操作
+                tasks = [get_html("http://www.imooc.com") for i in range(10)]
+                loop.run_until_complete(asyncio.wait(tasks))
+                # loop.run_until_complete(asyncio.gather(*tasks))
+                group1 = [get_html("http://projectsedu.com") for i in range(2)]
+                group2 = [get_html("http://www.imooc.com") for i in range(2)]
+                group1 = asyncio.gather(*group1)
+                group2 = asyncio.gather(*group2)
+                group2.cancel()
+                loop.run_until_complete(asyncio.gather(group1, group2))
+                print(time.time() - start_time)
+		13.2 协程嵌套
+            可等待 对象：对象可以在 await 语句中使用, 有三种主要类型: 协程, 任务 和 Future
+            协程 coroutine： Python 协程属于 可等待 对象,因此可以在其他协程中被等待.
+                协程函数: 定义形式为 async def 的函数; 协程对象: 调用 协程函数 所返回的对象
+            任务 Task： 被用来设置日程以便 并发 执行协程.
+                当一个协程通过 asyncio.create_task() 等函数被打包为一个 任务,该协程将自动排入日程准备立即运行
+            Future： 是一种特殊的 低层级 可等待对象,表示一个异步操作的 最终结果.
+                当一个 Future 对象 被等待,这意味着协程将保持等待直到该 Future 对象在其他地方操作完毕
+            # 1. run_until_complete vs run_forever
+            #   loop会被放到future中, 所以future可以停止执行loop,
+            #   run_until_complete就是run_forever + future cancel loop
+            # import asyncio
+            # loop = asyncio.get_event_loop()
+            # loop.run_forever()
+            # loop.run_until_complete()
+		13.3 call_soon、call_later、call_at、call_soon_threadsafe
+            import asyncio
+            def callback(sleep_times, loop):
+                print("success time {}, sleep {}".format(loop.time(), sleep_times))
+            # call_soon： 立即执行
+            # call_later：按指定顺序执行, 调用call_at
+            # call_at： 按解释器内部时钟时间执行, 通过堆存放待执行的函数
+            if __name__ == "__main__":
+                loop = asyncio.get_event_loop()
+                now = loop.time()
+                loop.call_at(now + 5, callback, 5, loop)
+                loop.call_later(1, callback, 1, loop)
+                loop.call_later(3, callback, 3, loop)
+                loop.call_soon(callback, 4, loop)
+                loop.run_forever()
+		13.4 ThreadPoolExecutor+asyncio
+		    协程中调用线程池,线程中本身的阻塞IO也会阻塞协程.
+		    但是因为线程池中有多个线程,可以极大的提高执行的效率
+            loop = asyncio.get_event_loop()
+            executor = ThreadPoolExecutor(3)
+            tasks = []
+            for url in range(20):
+                url = "http://shop.projectsedu.com/goods/{}/".format(url)
+                task = loop.run_in_executor(executor, get_url, url)
+                tasks.append(task)
+            loop.run_until_complete(asyncio.wait(tasks))
+		13.5 asyncio模拟http请求
+		    # asyncio.open_connection： 通过协程解析域名为IP地址,协议簇,
+		        然后调用socket, sock.setblocking(False)
+            reader, writer = await asyncio.open_connection(host, 80)
+            # StreamReader： 使用events注册self._sock.recv(self.max_size)
+                到selector中 self._selector.register(fd, selectors.EVENT_READ, (handle, None))
+            # async for： __anext__ + @coroutine
+            # asyncio.as_completed(tasks): 一个接一个的执行打印
+                import asyncio
+                from urllib.parse import urlparse
+                async def get_url(url):
+                    # 通过socket请求html
+                    url = urlparse(url)
+                    host = url.netloc
+                    path = url.path
+                    if path == "":
+                        path = "/"
+                    # 建立socket连接
+                    reader, writer = await asyncio.open_connection(host, 80)
+                    writer.write("GET {} HTTP/1.1\r\nHost:{}\r\nConnection:close\r\n\r\n".
+                                 format(path, host).encode("utf8"))
+                    all_lines = []
+                    async for raw_line in reader:
+                        data = raw_line.decode("utf8")
+                        all_lines.append(data)
+                    html = "\n".join(all_lines)
+                    return html
+                async def main():
+                    tasks = []
+                    for url in range(20):
+                        url = "http://shop.projectsedu.com/goods/{}/".format(url)
+                        tasks.append(asyncio.ensure_future(get_url(url)))
+                    for task in asyncio.as_completed(tasks):
+                        result = await task
+                        print(result)
+                if __name__ == "__main__":
+                    import time
+                    start_time = time.time()
+                    loop = asyncio.get_event_loop()
+                    loop.run_until_complete(main())
+                    print('last time:{}'.format(time.time() - start_time))
+		13.6 future和task
+            Future： 结果容器,是一种特殊的 低层级 可等待对象,表示一个异步操作的 最终结果.
+                asyncio中的future是非线程安全的,同时无法再设置协程的超时时间
+                回调只能通过add_done_callback()注册, 通过事件循环的call_soon()调用
+            任务 Task：是协程和Future之间的桥梁, 解决协程和线程之间的不一致
+                激活协程send(None),处理StopIteration等
+		13.7 asyncio同步和通信
+            因为协程在线程内部执行, 所以只要没有yield from, 不会有跨线程问题
+            asyncio的锁对象是协程, 锁定的是程序级别的bool对象.将要同步的协程封装到future中
+                然后放在一个deque中
+		13.8 aiohttp实现高并发爬虫
+		13.9 本章小结
+	第十四章 课程总结

@@ -8,13 +8,14 @@
 3. Linux容器基于Linux Namespace 的隔离能力、Linux Cgroups 的限制能力，以及rootfs 的文件系统, 
 而 Docker on Mac，以及 Windows Docker（Hyper-V 实现），实际上是基于虚拟化技术实现的
 #### 容器
-1. 容器，其实是一种特殊的进程, **是一个“单进程”模型**
+1. 容器，其实是一种特殊的进程, **是一个“单进程”模型**. 
+  实际上是一个由 Linux Namespace、Linux Cgroups 和 rootfs 三种技术构建出来的进程的隔离环境
 2. 进程: 一个程序运起来后的计算机执行环境的总和
 3. 容器技术的核心功能，就是通过约束和修改进程的动态表现，从而为其创造出一个“边界”
 Cgroups 技术是用来制造约束的主要手段，而 Namespace 技术则是用来修改进程视图的主要方法
-4. Docker 项目最核心的原理. 实际上就是为待创建的用户进程：
-- 启用 Linux Namespace 配置；
-- 设置指定的 Cgroups 参数；
+4. Docker 项目最核心的原理. 实际上就是为待创建的用户进程:
+- 启用 Linux Namespace 配置;
+- 设置指定的 Cgroups 参数;
 - 切换进程的根目录（Change Root）
 ##### 容器的隔离与限制
 1. 隔离 Namespace
@@ -22,7 +23,9 @@ Cgroups 技术是用来制造约束的主要手段，而 Namespace 技术则是�
 只能“看到”某些指定的内容
 - 其实就是对被隔离应用的进程空间做了手脚，使得这些进程只能看到重新计算过的进程编号，比如 PID=1。
 可实际上，他们在宿主机的操作系统里，还是原来的第 100 号进程
-- Namespace 的使用方式也非常有意思：它其实只是 Linux 创建新进程的一个可选参数: CLONE_NEWPID
+- Namespace 的使用: 通过指定 Linux 创建新进程的一个可选参数: CLONE_NEWPID.
+新创建的这个进程将会“看到”一个全新的进程空间，在这个进程空间里，它的 PID 是 1.      
+严格说，clone()是线程操作，但linux 的线程是用进程实现      
 ```int pid = clone(main_function, stack_size, CLONE_NEWPID | SIGCHLD, NULL); ```
 - 除了PID Namespace，Linux 操作系统还提供了 Mount、UTS、IPC、Network 和 User 这些 Namespace，
 用来对各种不同的进程上下文进行隔离操作
@@ -30,7 +33,7 @@ Cgroups 技术是用来制造约束的主要手段，而 Namespace 技术则是�
 那么多个容器之间使用的就还是同一个宿主机的操作系统内核。
 容器里通过 Mount Namespace 单独挂载其他不同版本的操作系统文件，但这并不能改变共享宿主机内核的事实。
 这意味着，不能在Windows宿主机上运行 Linux 容器，或者在低版本的Linux宿主机上运行高版本的Linux容器
-- Linux 内核中，有很多资源和对象是不能被 Namespace 化的，最典型的例子就是：时间
+- Linux 内核中，有很多资源和对象是不能被 Namespace 化的，最典型的例子就是:时间
 2. 限制 Cgroups
 PID Namespace只是让容器进程看不到外部的进程, 但是容器进程占用的资源（比如 CPU、内存）是与外部共享的
 - Linux Cgroups的全称是 Linux Control Group, 是 Linux 内核中用来为进程设置资源限制的一个重要功能
@@ -54,7 +57,7 @@ $ echo 20000 > /sys/fs/cgroup/cpu/container/cpu.cfs_quota_us
 - Mount Namespace 修改的，是容器进程对文件系统“挂载点”的认知。
 这就意味着，只有在“挂载”这个操作发生之后，进程的视图才会被改变。
 而在此之前，新创建的容器会直接继承宿主机的各个挂载点
-- Mount Namespace 跟其他 Namespace 的使用略有不同的地方：
+- Mount Namespace 跟其他 Namespace 的使用略有不同的地方:
 它对容器进程视图的改变，一定是伴随着挂载操作（mount）才能生效
 解决: 创建新进程时，除了声明要启用 Mount Namespace 之外，我们还需要重新挂载根目录
 ``` 
@@ -80,8 +83,8 @@ int container_main(void* arg)
 在 Linux 操作系统中，这两部分是分开存放的，操作系统只有在开机启动时才会加载指定版本的内核镜像。
 - rootfs 里打包的不只是应用，而是整个操作系统的文件和目录，
 也就意味着，应用以及它运行所需要的所有依赖，都被封装在了一起, 
-- 对一个应用来说，操作系统本身才是它运行所需要的最完整的“依赖库”
-**正是由于 rootfs 的存在，容器才有了一个被反复宣传至今的重要特性：一致性**
+- **对一个应用来说，操作系统本身才是它运行所需要的最完整的“依赖库”**
+**正是由于 rootfs 的存在，容器才有了一个被反复宣传至今的重要特性:一致性**
 ##### 分层镜像
 Docker 在镜像的设计中，引入了层（layer）的概念。
 也就是说，用户制作镜像的每一步操作，都会生成一个层，也就是一个增量 rootfs
@@ -89,10 +92,10 @@ Docker 在镜像的设计中，引入了层（layer）的概念。
 1. UnionFS (Union File System)
 最主要的功能是将多个不同位置的目录联合挂载（union mount）到同一个目录下
 - Ubuntu 16.04 和 Docker CE 18.05, 默认使用的是 AuFS 这个联合文件系统的实现
-- AuFS: Advance UnionFS, 它是对 Linux 原生 UnionFS 的重写和改进；
+- AuFS: Advance UnionFS, 它是对 Linux 原生 UnionFS 的重写和改进;
 2. 容器的rootfs的组成
 - 容器层: 第一部分，可读写层
-它是这个容器的 rootfs 最上面的一层, 它的挂载方式为：rw，即 read write。
+它是这个容器的 rootfs 最上面的一层, 它的挂载方式为:rw，即 read write。
 没有写入文件之前，目录是空的。一旦在容器里做了写操作，产生的内容就会以增量的方式出现在这个层中
 删除操作实际上创建了一个名叫.wh.foo 的文件
 - 第二部分，Init 层
@@ -117,10 +120,11 @@ whiteout: 删除只读层里一个名叫 foo 的文件，
 - - RUN 原语就是在容器里执行 shell 命令的意思。
 - - WORKDIR Dockerfile 后面的操作都以指定的目录作为当前目录 
 - - CMD Dockerfile 指定这个容器的进程
-- - ENTRYPOINT 和 CMD 都是 Docker 容器进程启动所必需的参数，完整执行格式是：“ENTRYPOINT CMD”
-默认情况下，Docker 会为你提供一个隐含的 ENTRYPOINT，即：/bin/sh -c
-CMD 的内容就是 ENTRYPOINT 的参数
+- - ENTRYPOINT 和 CMD 都是 Docker 容器进程启动所必需的参数，完整执行格式是:“ENTRYPOINT CMD”
+默认情况下，Docker 会为你提供一个隐含的 ENTRYPOINT，即:/bin/sh -c;
+**CMD 的内容就是 ENTRYPOINT 的参数**
 - - ADD 把当前目录（即 Dockerfile 所在的目录）里的文件，复制到指定容器内的目录当中
+- - COPY 仅支持将本地文件复制到容器中，而 ADD还支持 本地tar提取和远程url支持
 2. docker exec是怎么做到进入容器里的
 - Linux Namespace 创建的隔离空间虽然看不见摸不着，
 但一个进程的 Namespace 信息在宿主机上是确确实实存在的，并且是以一个文件的方式存在
@@ -143,13 +147,13 @@ lrwxrwxrwx 1 root root 0 Aug 13 14:05 uts -> uts:[4026532277]
 - 一个进程，可以选择加入到某个进程已有的 Namespace 当中，
 从而达到“进入”这个进程所在容器的目的，这正是 docker exec 的实现原理
 - 进入操作所依赖的，乃是一个名叫 setns() 的 Linux 系统调用
-当前进程要加入的 Namespace 文件的路径，比如 /proc/25686/ns/net；
+当前进程要加入的 Namespace 文件的路径，比如 /proc/25686/ns/net;
 而第二个参数，则是你要在这个 Namespace 里运行的进程，比如 /bin/bash
 3. docker commit
 - 实际上就是在容器运行起来后，把最上层的“可读写层”，加上原先容器镜像的只读层，
 打包组成了一个新的镜像。下面这些只读层在宿主机上是共享的，不会占用额外的空间。
 - 而由于使用了联合文件系统，你在容器里对镜像 rootfs 所做的任何修改，
-都会被操作系统先复制到这个可读写层，然后再修改。这就是所谓的：Copy-on-Write。
+都会被操作系统先复制到这个可读写层，然后再修改。这就是所谓的:Copy-on-Write。
 - Init 层的存在，就是为了避免你执行 docker commit 时，
 把 Docker 自己对 /etc/hosts 等文件做的修改，也一起提交掉
 4. Volume（数据卷）

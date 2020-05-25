@@ -317,3 +317,83 @@ print(r.sort('watch:leto', by="bug:*->priority", get="bug:*->details"))
 sr = r.sort('watch:leto', by="bug:*->priority",
             get="bug:*->details", store='watch_by_priority:leto')
 print(sr, r.lrange('watch_by_priority:leto', 0, 10))
+
+
+# Course
+## 小结
+1. 基于内存的, 快
+2. K, V
+3. 线程池: 单线程worker, 运行在CPU的一个核心上·
+4. 连接池: 支持很多连接. linux使用epoll机制
+5. 值类型: 5种
+6. 本地方法: 计算向数据移动, 存储的数据是有类型的(不同的类型对应不同的本地方法)
+    例如, 客户端请求列表的某一个元素, redis服务器会返回具体的值. 优化了IO
+7. 串行/单线程worker 
+    6.x版本后, IO线程可以放在其他的线程
+    并行: 访问连接
+    串行: 交易, 扣减库存时要保持强一致性, 走串行
+    解决并行和串行的链接: 栈数据结构
+
+## 数值类型使用的场景
+1. 存储是基于字节的, 所以strlen取得是字节长度
+2. 二进制安全: 数据以byte[]存储.     
+- 没有数据类型的概念, 也就不会有类型内存溢出, 但是读写的编码规则要保持一致
+- 图片可以作为key
+3. ascii基础集
+    A 65 01000001  
+    B 66 01000010  
+4. 动态排序 
+反向取数据不会重排, 数据量多余64条使用skiplist
+
+### String
+1. 字符串
+session, kv缓存, 内存级别的小文件系统
+2. 数字
+数值计数器
+3. 二进制位
+- setbit 二进制串从左向右设置
+- 统计用户一年中的登录次数, 二进制可以操作位, 所以用户要对应到二进制串中的一位
+    创建偏移量为365的二进制字节串
+### List
+1. 栈, 同向指令: lpush lpop
+2. 队列, 异向指令: lpush rpop
+3. 数组 lindex, lrange k1 0 -1
+4. 优化redis内存量, 只保留部分记录, ltrim删除最后一个元素: ltrim k1 0 -2 
+### Hash
+hset s name song; hset s age 111
+hgetall s; hincrby s age 1
+1. 聚集数据, 详情页, 用户详情
+### Set
+集合, 无序, 不重复. 不推荐, 单线程worker易卡住
+1. 随机事件: 抽奖, 二维码
+2. 并集: 共同好友
+3. 交集: 商品推荐
+### ZSet sorted_set
+有序集合, 每个元素固定增加score, rank属性
+1. 排行榜
+2. 分页
+
+## 集群(分布式)
+### 持久化
+1. 快照, 基于时间点. rdb, images, bak
+全量存储, 体积与实际数据相近, 回复速度快
+2. 日志 aof
+物理文件会不断的累加
+操作系统IO: pagecache
+3. redis默认开启rdb
+需要手工开启aof, 此时重启只会读取aof. 
+redis为了避免无用的重复占用太多体积, 4.x之后会先保存一个rdb文件, 然后在其基础上追加aof
+### 单机的通用问题
+1. 单点故障不可用
+* 全量的主备集群
+* 分布式协调: zab, raft
+* 实现的依据, paxos论文, Paxos算法是基于消息传递且具有高度容错特性的一致性算法，
+是目前公认的解决分布式一致性问题最有效的算法之一
+2. 压力/性能
+* 非全量的数据分片扩容, 将数据分散到不同的集群节点
+* 请求分片算法的位置: client, 代理层server, redis server
+### redis HA(强一致性)
+同步数据, CAP: 数据一致性, 可用性, 分区容错性最多只能同时实现两点
+强一致性会导致不可用
+redis的分布式锁是弱分布式锁, 类似的有zookeeper, etcd
+最终一致性: 必须存在某个不会挂的数据server: 多机集群 journalnode
