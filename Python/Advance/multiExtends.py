@@ -1,3 +1,7 @@
+#  MRO method resolution order (方法解释顺序)：C3算法,
+# 		        没有共同祖先时, 类似深度优先
+# 		        有共同祖先时,先进行深度优先查找,查到共同祖先就返回进行广度优先
+
 class A():
     def __init__(self):
         print('enter A')

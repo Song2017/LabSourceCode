@@ -4,10 +4,6 @@ class Solution:
     def search_binary(self, nums: list, target: int) -> list:
         if target not in nums:
             return -1
-        mid = (len(nums) - 1)//2
-        while nums[mid] != target:
-            if nums[mid] > target:
-                mid
 
 
 if __name__ == "__main__":
