@@ -262,7 +262,8 @@ __pycache__/
 
 # Mac
 .idea
-.DS_Store
+*/*.DS_Store
+*.DS_Store
 *.iml
 venv
 .terraform
