@@ -13,5 +13,5 @@ func init() {
 
 func main() {
 	flag.Parse()
-	lib.Hello(name)
+	lib5.Hello(name)
 }
