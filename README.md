@@ -88,6 +88,7 @@ Computer Language Learning Highlights Tourial
 6. [Processon](https://www.processon.com/diagrams) pic edit online         
 7. [Snipaste](https://www.snipaste.com/) a simple but powerful snipping tool      
 8. [百度脑图](https://naotu.baidu.com/) edit .xmind file online    
+9. [GPG入门指南](https://www.jianshu.com/p/268064e67719)
 
 # Note
 1. [Personal Blob](https://blog.csdn.net/sgs595595)

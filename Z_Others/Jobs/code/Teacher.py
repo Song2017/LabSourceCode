@@ -1,10 +1,10 @@
-# from cached_property import cached_property
+from cached_property import cached_property
 
 
 class Teacher:
     _id = 'xxx'
 
-    # @cached_property
+    @cached_property
     def id(self):
         return self._id
 
