@@ -1,8 +1,28 @@
 from cached_property import cached_property
 
 
-class Teacher:
+class Singleton(type):
+    """
+    An metaclass for singleton purpose.
+    Every singleton class should inherit from this class by
+        'metaclass=Singleton'
+    """
+    _instances = {}
+
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            cls._instances[cls] = \
+                super(Singleton, cls).__call__(*args, **kwargs)
+        import pdb
+        pdb.set_trace()
+        return cls._instances[cls]
+
+
+class Teacher(metaclass=Singleton):
     _id = 'xxx'
+
+    def __init__(self):
+        print("init")
 
     @cached_property
     def id(self):
@@ -15,8 +35,16 @@ class Teacher:
 
 if __name__ == "__main__":
     s = Teacher()
+    # print("call1", s())
+
     print(s.id)
     print(s.id2)
     s._id = '***'
+    print(s.id)
+    print(s.id2)
+    # print("call2", s())
+
+    s = Teacher()
+    print("---" * 10)
     print(s.id)
     print(s.id2)
