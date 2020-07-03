@@ -281,3 +281,9 @@ node_modules
 
 # Test
 *.log
+
+
+# Mac
+.idea
+.DS_Store
+*.iml
