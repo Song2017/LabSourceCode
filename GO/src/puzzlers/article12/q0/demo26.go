@@ -4,8 +4,8 @@ import "fmt"
 
 type Printer func(contents string) (n int, err error)
 
-func printToStd(contents string) (bytesNum int, err error) {
-	return fmt.Println(contents)
+func printToStd(s string) (bytesNum int, err error) {
+	return fmt.Println(s)
 }
 
 func main() {

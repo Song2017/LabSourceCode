@@ -1,7 +1,8 @@
 1. 单步执行代码,通过命令 `python -m pdb xxx.py` 启动脚本，进入单步执行模式
 2. 直接在代码里需要调试的地方放一个 `import pdb; pdb.set_trace()`，就可以设置一个断点， 
 程序会在pdb.set_trace()暂停并进入pdb调试环境，可以用pdb 变量名查看变量，或者c继续运行    
-
+3. vars(): 查看当前上下文
+4. dir(Object): 获得对象的所有属性和方法
 pdb命令行：
 
     常用

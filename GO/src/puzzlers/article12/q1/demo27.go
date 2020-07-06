@@ -9,8 +9,8 @@ type operate func(x, y int) int
 
 // 方案1。
 func calculate(x int, y int, op operate) (int, error) {
-	if op == nil {
-		return 0, errors.New("invalid operation")
+	if op == nil{
+		return 0, errors.New("invalid op")
 	}
 	return op(x, y), nil
 }

@@ -8,7 +8,7 @@ import requests
 
 print('translate begin...')
 
-# set baidu develop parameter
+# set baidu develop parameter http://api.fanyi.baidu.com/api/trans/product/apidoc
 apiurl = 'http://api.fanyi.baidu.com/api/trans/vip/translate'
 appid = '20180816000194959'
 secretKey = 'lWzwUiWmhRORknf68FCT'
@@ -40,9 +40,8 @@ def translateBaidu(content, fromLang='en', toLang='zh'):
 
 
 if __name__ == '__main__':
-    print(translateBaidu('Chunchun is lovely and so sweet heart. '))
-    print(translateBaidu('于千万人之中遇见你所要遇见的人，于千万年之中，时间的无涯的荒野里，\
-        没有早一步，也没有晚一步，刚巧牵起你的手', 'zh', 'en'))
+    # print(translateBaidu('Chunchun is lovely and so sweet heart. '))
+    print(translateBaidu('<Response service="OrderWebService"><Head>ERR</Head><ERROR code="100106">寄件方联系电话必填</ERROR></Response>', 'zh', 'en'))
 
 print('ending...')
 
