@@ -1,4 +1,4 @@
-from cached_property import cached_property
+from cached_property import cached_property, threaded_cached_property
 
 
 class Singleton(type):
@@ -17,34 +17,38 @@ class Singleton(type):
         pdb.set_trace()
         return cls._instances[cls]
 
-
-class Teacher(metaclass=Singleton):
+class Class:
+    name = "test"
+class Teacher():
     _id = 'xxx'
 
     def __init__(self):
         print("init")
 
-    @cached_property
+    @threaded_cached_property
     def id(self):
-        return self._id
+        cla = Class()
+        return cla
 
-    @property
+    @cached_property
     def id2(self):
-        return self._id
+        cla = self.id
+        cla.name="222"
+        return cla
 
 
 if __name__ == "__main__":
     s = Teacher()
     # print("call1", s())
 
-    print(s.id)
-    print(s.id2)
-    s._id = '***'
-    print(s.id)
-    print(s.id2)
-    # print("call2", s())
+    print(id(s.id.name), s.id.name)
+    print(id(s.id2.name), s.id2.name)
+    # s._id = '***'
+    # print(s.id)
+    # print(s.id2)
+    # # print("call2", s())
 
-    s = Teacher()
-    print("---" * 10)
-    print(s.id)
-    print(s.id2)
+    # s = Teacher()
+    # print("---" * 10)
+    # print(s.id)
+    # print(s.id2)
