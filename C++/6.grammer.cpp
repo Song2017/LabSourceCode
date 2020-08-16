@@ -1,4 +1,6 @@
 #include <iostream>
+#include <math.h>
+
 using namespace std;
 
 bool isLeapYear(unsigned int year)
@@ -12,6 +14,46 @@ bool isLeapYear(unsigned int year)
     else
     {
         return false;
+    }
+}
+
+int sum_100()
+{
+    int sum = 0;
+    int index = 1;
+
+    while (index <= 100)
+    {
+        sum += index;
+        index++;
+    }
+
+    sum = 0;
+    for (index = 1; index <= 10; ++index)
+    {
+        sum += index;
+    }
+
+    sum = 0;
+    index = 1;
+    do
+    {
+        sum += index;
+        index++;
+    } while (index <= 100);
+    return sum;
+}
+
+void aabb_sqrt()
+{
+    int n = 0;
+    for (int i = 30; i < 101; i++)
+    {
+        n = i * i;
+        if (n < 1000)
+            continue;
+        if (n % 100 / 10 == n % 100 % 10 && n / 1000 == n / 100 % 10)
+            cout << n << endl;
     }
 }
 
@@ -60,5 +102,8 @@ int main()
         Score score;
     };
     cout << "sizeof(Score)" << sizeof(Score) << "sizeof(Student)" << sizeof(Student) << endl;
+    // 3. 循环语句
+    cout << "1+2+3+...+100=" << sum_100() << endl;
+    aabb_sqrt();
     return 0;
 }
