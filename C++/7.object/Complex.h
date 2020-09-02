@@ -1,4 +1,7 @@
-﻿#include <iostream>
+﻿#pragma once
+#ifndef __COMPLEX_H__
+#define __COMPLEX_H__
+#include <iostream>
 
 class Complex
 {
@@ -45,4 +48,4 @@ private:
 	double _real;  // 复数的实部
 	double _image; // 复数的虚部
 };
-// #endif
+#endif

@@ -51,8 +51,22 @@ int main()
 
     cout << endl;
     // IO流基础
-    // ios > istream(cin), ostream(cout, cerr, clog) > ifstream, ofstream > iostream < fstream 
+    // ios > istream(cin), ostream(cout, cerr, clog) > ifstream, ofstream > iostream < fstream
     // IO缓存区
     // 按块缓存: 文件系统, 按行缓存: \n, 不缓存
+    // 如果输入的字符大于代码中要接收的长度, 会被缓存到缓冲区, 直接传到下一个待输入的代码处
+    // 清空IO缓冲区: cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+    int aa, index = 0;
+    while (cin >> aa)
+    {
+        cout << "number is:" << aa << endl;
+        index++;
+        if (index == 5)
+            break;
+    }
+    cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+    char ch;
+    cin >> ch;
+    cout << "char is:" << ch << endl;
     return 0;
 }

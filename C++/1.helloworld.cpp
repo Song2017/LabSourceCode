@@ -6,13 +6,13 @@ using namespace std;
 
 int main()
 {
-    vector<string> msg{"Hello", "C++", "World", "from", "VS Code", "and the C++ extension!"};
+    // vector<string> msg = {"Hello", "C++", "World", "from", "VS Code", "and the C++ extension!"};
 
-    for (const string &word : msg)
-    {
-        // output
-        cout << word << " ";
-    }
+    // for (const string &word : msg)
+    // {
+    //     // output
+    //     cout << word << " ";
+    // }
     cout << endl;
     // 算术运算符
     cout << 10 / 20 << endl;
@@ -52,8 +52,11 @@ int main()
     cout << endl;
     // sizeof
     cout << (sizeof(a)) << endl;
-    cout << (sizeof(char)); cout << (sizeof(short)); 
-    cout << (sizeof(int)); cout << (sizeof(float)); cout << (sizeof(double)); 
+    cout << (sizeof(char));
+    cout << (sizeof(short));
+    cout << (sizeof(int));
+    cout << (sizeof(float));
+    cout << (sizeof(double));
     cout << (a < b ? "xiao" : "da") << endl;
     cout << endl;
     // &取地址, *指针
