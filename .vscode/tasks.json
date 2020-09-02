@@ -6,10 +6,13 @@
 			"label": "clang++ build active file",
 			"command": "/usr/bin/clang++",
 			"args": [
-				"-std=c++17",
-				"-stdlib=libc++",
+				// "-std=c++17",
+				// "-stdlib=libc++",
 				"-g",
-				"${file}",
+				"${fileDirname}/*.cpp",
+				// "${file}",
+				// "-lstdc++",
+				// "-v",
 				"-o",
 				"${fileDirname}/${fileBasenameNoExtension}"
 			],

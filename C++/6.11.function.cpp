@@ -3,6 +3,8 @@
 
 using namespace std;
 
+int ret[1000];
+
 namespace space_test
 {
     int test(int a)
@@ -34,6 +36,17 @@ int ProcessNum(int a, int b, int (*p)(int a, int b))
     return result;
 }
 
+int Fib(int n)
+{
+    ret[0] = 0;
+    ret[1] = 1;
+    for (int i = 2; i <= n; i++)
+    {
+        ret[i] = ret[i - 1] + ret[i - 2];
+    }
+    return ret[n];
+}
+
 int main()
 {
     // 函数
@@ -55,5 +68,12 @@ int main()
     // 4. 命名空间, 本质上是划分了一个范围
     result = space_test::test(123);
     cout << "name space:" << result << endl;
+
+    // 4. 内联函数 inline int MaxValue(int a, int b)
+    // 空间换时间的方法, 直接将函数内部的汇编指令copy到主函数
+    // 5. 递归与数学归纳法
+    //  递归的优化: 尾递归, 循环, 动态规划(空间换时间)
+    cout << "fib 10:" << Fib(10) << endl;
+
     return 0;
 }

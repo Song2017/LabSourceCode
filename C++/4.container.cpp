@@ -18,7 +18,8 @@ int main()
         cout << arr[i] << " ";
     cout << endl;
     // 新型数组vector:面向对象方式的动态数组
-    vector<int> vec = {1, 2, 3, 4};
+    vector<int> vec;
+    vec = {1, 2, 3, 4};
     cout << "size is " << vec.size() << endl;
     cout << "capacity is " << vec.capacity() << endl;
     vec.push_back(9);
