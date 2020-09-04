@@ -70,12 +70,12 @@ document.addEventListener( 'keydown', function ( eventObject ) {
 });
 
 
-Example	Markup
-Checkbox	<input type="checkbox" id="checkbox"/><label for="checkbox">Checkbox</label>
+// Example	Markup
+// Checkbox	<input type="checkbox" id="checkbox"/><label for="checkbox">Checkbox</label>
 <input type="button" onclick="simulateClick();" value="Simulate click"/>
 <input type="button" onclick="addHandler();" value="Add a click handler that calls preventDefault"/>
 <input type="button" onclick="removeHandler();" value="Remove the click handler that calls preventDefault"/>
-Scripts used
+// Scripts used
 function preventDef(event) {
   event.preventDefault();
 }
