@@ -8,6 +8,32 @@
 #include <numeric>
 using namespace std;
 
+// 输入一个不存在重复字符的字符串，打印出字符串中字符的全排列。
+//比如：  "123"   3*2*1 = 3!
+// 传递引用, 指针, 修改原来的值
+void swap(char *a, char *b)
+{
+    char temp = *a;
+    *a = *b;
+    *b = temp;
+}
+void Permutation(char *pStr, char *pPosition)
+{
+    // 基准点
+    if (*pPosition == '\0')
+    {
+        cout << pStr << ". ";
+    }
+
+    for (char *pChar = pPosition; *pChar != '\0'; pChar++)
+    {
+        // f(123) = 1+f(23), f(23) = 2+f(3), f(3)  = 3  递归
+        swap(*pChar, *pPosition);
+        Permutation(pStr, pPosition + 1);
+        swap(*pChar, *pPosition);
+    }
+};
+
 int main()
 {
     // STL standard template library algrithm
@@ -27,4 +53,17 @@ int main()
     for_each(results, results + 5,
              [](int a) -> void { cout << a << endl; });
 
+    // 全排列
+    cout << "Permutation " << endl;
+    char test0[] = "123";
+    Permutation(test0, test0);
+    cout << endl;
+    cout << " next_permutation 初始值要有顺序 " << endl;
+    char test[] = "231";
+    do
+    {
+        cout << test[0] << ". " << test[1] << ". " << test[2] << endl;
+    } while (next_permutation(test, test + 3));
+
+    cout << " end " << endl;
 }
