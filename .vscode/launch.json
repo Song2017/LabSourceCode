@@ -28,7 +28,7 @@
             "name": "Python: Django",
             "type": "python",
             "request": "launch",
-            // "pythonPath": "C:/Users/503027010/Envs/py3/Scripts/python.exe",
+            // "python": "C:/Users/503027010/Envs/py3/Scripts/python.exe",
             "program": "${workspaceFolder}/Python/django-oracle/tc/manage.py",
             "console": "integratedTerminal",
             "args": [

@@ -31,7 +31,7 @@ void Test_shared_ptr()
         cout << ((wA2.get() != nullptr) ? (*wA2.get()) : -1) << endl; // 20
         cout << ((wA.get() != nullptr) ? (*wA.get()) : -1) << endl;   // 20
         cout << wA2.use_count() << endl;                              // 2
-        cout << wA.use_count() << endl;                               // 2
+        cout << wA.use_count() << endl;   a                            // 2
     }
     //cout << wA2.use_count() << endl;
     cout << wA.use_count() << endl;                             // 1
