@@ -1,7 +1,5 @@
 import datetime
-import threading
 import time
-from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
 def update_sku_quantity(sku_id: str, quantity: int):
@@ -18,15 +16,18 @@ def create_sku(sku_id: str):
 if __name__ == '__main__':
     print(datetime.datetime.now())
     # 创建一个sku需要1s
-    # 更新sku的数量需要2s
+    # 更新sku的数量需要2s, """更新sku前需要先创建sku"""
     # 创建3个sku并更新每个sku的数量最少需要多长时间?
     sku_ids = ["sku1", "sku2", "sku3"]
     sku_quantity = {"sku1": 1, "sku2": 2, "sku3": 3}
-
+    # todo
+    
     # answer
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    import threading
+
     executor = ThreadPoolExecutor(max_workers=3)
-    create_tasks = [executor.submit(
-        create_sku, sku_id) for sku_id in sku_ids]
+    create_tasks = [executor.submit(create_sku, sku_id) for sku_id in sku_ids]
     for future in as_completed(create_tasks):
         sku = future.result()
         task = threading.Thread(target=update_sku_quantity,
