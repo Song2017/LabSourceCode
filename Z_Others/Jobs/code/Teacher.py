@@ -12,6 +12,7 @@ class Teacher:
 
 
 if __name__ == "__main__":
+    # 请修改Teacher类
     s = Teacher()
     s._id = "345"
     assert s.worker_id() == "345"

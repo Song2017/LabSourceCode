@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: fluentd-elasticsearch
+  namespace: kube-system
+  labels:
+    k8s-app: fluentd-logging
+spec:
+  selector:
+    matchLabels:
+      name: fluentd-elasticsearch
+  template:
+    metadata:
+      labels:
+        name: fluentd-elasticsearch
+    spec:
+      # tolerations:
+      # - key: node-role.kubernetes.io/master
+      #   effect: NoSchedule
+      containers:
+      - name: fluentd-elasticsearch
+        image: k8s.gcr.io/fluentd-elasticsearch:1.20
+        resources:
+          limits:
+            memory: 100Mi
+          requests:
+            cpu: 50m
+            memory: 100Mi
+        volumeMounts:
+        - name: varlog
+          mountPath: /var/log
+        - name: varlibdockercontainers
+          mountPath: /var/lib/docker/containers
+          readOnly: true
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: varlog
+        hostPath:
+          path: /var/log
+      - name: varlibdockercontainers
+        hostPath:
+          path: /var/lib/docker/containers
+# kubectl create -f fluentd-elasticsearch.yaml
+# kubectl get pod -n kube-system -l name=fluentd-elasticsearch 
+# kubectl rollout history daemonset fluentd-elasticsearch -n kube-system
+# kubectl set image ds/fluentd-elasticsearch fluentd-elasticsearch=k8s.gcr.io/fluentd-elasticsearch:v2.2.0 --record -n=kube-system
+# kubectl rollout status ds/fluentd-elasticsearch -n kube-system
+ 
+ 
+
+# DaemonSet 的主要作用，是让你在 Kubernetes 集群里，运行一个 Daemon Pod。
+# 这个 Pod 有如下三个特征：
+# 这个 Pod 运行在 Kubernetes 集群里的每一个节点（Node）上；# 
+# 每个节点上只有一个这样的 Pod 实例；当有新的节点加入 Kubernetes 集群后，该 Pod 会自动地在新节点上被创建出来； # 
+# 而当旧节点被删除后，它上面的 Pod 也相应地会被回收掉。
+# 几个例子：
+# 各种网络插件的 Agent 组件，都必须运行在每一个节点上，用来处理这个节点上的容器网络；
+# 各种存储插件的 Agent 组件，也必须运行在每一个节点上，用来在这个节点上挂载远程存储目录，操作容器的 Volume 目录；
+# 各种监控组件和日志组件，也必须运行在每一个节点上，负责这个节点上的监控信息和日志搜集。
+# 更重要的是，跟其他编排对象不一样，DaemonSet 开始运行的时机，很多时候比整个 Kubernetes 集群出现的时机都要早。
+# ??? 如何保证每个 Node 上有且只有一个被管理的 Pod
+# 控制器模型 
+# ??? 如何在指定的 Node 上创建新 Pod
+# nodeAffinity(nodeSelector), DaemonSet 并不需要修改用户提交的 YAML 文件里的 Pod 模板，而是在向 Kubernetes 发起请求之前，直接修改根据模板生成的 Pod 对象
+# ??? DaemonSet 开始运行的时机，很多时候比整个 Kubernetes 集群出现的时机都要早
+# Toleration, 

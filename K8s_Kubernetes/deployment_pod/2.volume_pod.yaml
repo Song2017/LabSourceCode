@@ -27,7 +27,7 @@ spec:
       mountPath: "/projected-volume"
       readOnly: true
   volumes:
-  - name: mysql-cred
+  - name: -cred
     projected:
       sources:
       - secret:
