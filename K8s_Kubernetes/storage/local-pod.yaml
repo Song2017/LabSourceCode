@@ -1,0 +1,24 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: example-pv-pod
+spec:
+  volumes:
+    - name: example-pv-storage
+      persistentVolumeClaim:
+       claimName: example-local-claim
+  containers:
+    - name: example-pv-container
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: example-pv-storage
+
+# kubectl create -f local-pod.yaml 
+
+# kubectl exec -it example-pv-pod -- /bin/sh
+# cd /usr/share/nginx/html
+# touch test.txt

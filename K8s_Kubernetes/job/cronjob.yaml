@@ -1,0 +1,33 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: hello
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: hello
+            image: busybox
+            args:
+            - /bin/sh
+            - -c
+            - date; echo Hello from the Kubernetes cluster
+          restartPolicy: OnFailure
+
+# */1 * * * *
+# 这个 Cron 表达式里 */1 中的 * 表示从 0 开始，/ 表示“每”，1 表示偏移量。
+# 所以，它的意思就是：从 0 开始，每 1 个时间单位执行一次。
+# Cron 表达式中的五个部分分别代表：分钟、小时、日、月、星期
+
+# kubectl create -f ./cronjob.yaml
+# 一分钟后 kubectl get jobs
+# kubectl get cronjob hello
+
+# 由于定时任务的特殊性，很可能某个 Job 还没有执行完，另外一个新 Job 就产生了。
+# 可以通过 spec.concurrencyPolicy 字段来定义具体的处理策略。
+# concurrencyPolicy=Allow，这也是默认情况，这意味着这些 Job 可以同时存在；
+# concurrencyPolicy=Forbid，这意味着不会创建新的 Pod，该创建周期被跳过；
+# concurrencyPolicy=Replace，这意味着新产生的 Job 会替换旧的、没有执行完的 Job。

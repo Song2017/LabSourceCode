@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pi
+spec:
+  parallelism: 2
+  completions: 4
+  template:
+    spec:
+      containers:
+      - name: pi
+        image: resouer/ubuntu-bc
+        command: ["sh", "-c", "echo 'scale=5000; 4*a(1)' | bc -l "]
+      restartPolicy: Never
+  backoffLimit: 4
+
+# 离线业务”，或者叫作 Batch Job（计算业务）。这种业务在计算完成后就直接退出了
+#   restartPolicy 在 Job 对象里只允许被设置为 Never 和 OnFailure；而在 Deployment 对象里，restartPolicy 则只允许被设置为 Always。
+# kubectl create -f job.yaml
+# kubectl describe jobs/pi
+# kubectl get pods
+# kubectl get job
+# kubectl logs pi-mvrff

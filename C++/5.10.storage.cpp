@@ -31,7 +31,7 @@ void Test_shared_ptr()
         cout << ((wA2.get() != nullptr) ? (*wA2.get()) : -1) << endl; // 20
         cout << ((wA.get() != nullptr) ? (*wA.get()) : -1) << endl;   // 20
         cout << wA2.use_count() << endl;                              // 2
-        cout << wA.use_count() << endl;                               // 2
+        cout << wA.use_count() << endl;   a                            // 2
     }
     //cout << wA2.use_count() << endl;
     cout << wA.use_count() << endl;                             // 1
@@ -131,6 +131,7 @@ int main()
 
     // 智能指针 std:shared_ptr, std:weak_ptr
     // C++ 11判断指针是否为空 nullptr, 区别NULL(C)的二义性
+    
     // auto_ptr: auto_ptr	C++ 17中移除	拥有严格对象所有权语义的智能指针
     //      auto_ptr对象销毁时, 管理的对象也会自动delete
     //      所有权转移, 被管理对象被传递给另外的智能指针后, 原来的指针就不再拥有这个对象了

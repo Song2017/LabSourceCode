@@ -1,0 +1,34 @@
+# echo "admin" > user.txt
+# kubectl create secret generic user --from-file=./username.txt
+# kubectl get secrets
+
+# apiVersion: v1
+# kind: Secret
+# metadata:
+#   name: mysecret
+# type: Opaque
+# data:
+#   user: YWRtaW4=
+#   pass: MWYyZDFlMmU2N2Rm
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-projected-volume 
+spec:
+  containers:
+  - name: test-secret-volume
+    image: busybox
+    args:
+    - sleep
+    - "86400"
+    volumeMounts:
+    - name: mysql-cred
+      mountPath: "/projected-volume"
+      readOnly: true
+  volumes:
+  - name: -cred
+    projected:
+      sources:
+      - secret:
+          name: user

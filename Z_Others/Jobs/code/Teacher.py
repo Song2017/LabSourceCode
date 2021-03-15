@@ -1,54 +1,24 @@
-from cached_property import cached_property, threaded_cached_property
+class Teacher:
+    _id = '123'
 
+    def worker_id(self):
+        return self._id
 
-class Singleton(type):
-    """
-    An metaclass for singleton purpose.
-    Every singleton class should inherit from this class by
-        'metaclass=Singleton'
-    """
-    _instances = {}
+    def worker_id_number(self):
+        return self._id
 
-    def __call__(cls, *args, **kwargs):
-        if cls not in cls._instances:
-            cls._instances[cls] = \
-                super(Singleton, cls).__call__(*args, **kwargs)
-        import pdb
-        pdb.set_trace()
-        return cls._instances[cls]
-
-class Class:
-    name = "test"
-class Teacher():
-    _id = 'xxx'
-
-    def __init__(self):
-        print("init")
-
-    @threaded_cached_property
-    def id(self):
-        cla = Class()
-        return cla
-
-    @cached_property
-    def id2(self):
-        cla = self.id
-        cla.name="222"
-        return cla
+    def worker_id_cached(self):
+        return self._id
 
 
 if __name__ == "__main__":
+    # 请修改Teacher类
     s = Teacher()
-    # print("call1", s())
+    s._id = "345"
+    assert s.worker_id() == "345"
+    assert s.worker_id_number == "345"
+    assert s.worker_id_cached == "345"
 
-    print(id(s.id.name), s.id.name)
-    print(id(s.id2.name), s.id2.name)
-    # s._id = '***'
-    # print(s.id)
-    # print(s.id2)
-    # # print("call2", s())
-
-    # s = Teacher()
-    # print("---" * 10)
-    # print(s.id)
-    # print(s.id2)
+    s._id = "678"
+    assert s.worker_id_number == "678"
+    assert s.worker_id_cached == "345"

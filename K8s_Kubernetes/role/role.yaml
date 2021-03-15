@@ -1,0 +1,16 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: default
+  name: example-role
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "watch", "list"]
+
+# rules:
+# - apiGroups: [""]
+#   resources: ["configmaps"]
+#   resourceNames: ["my-config"]
+#   verbs: ["get"]
+# verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]

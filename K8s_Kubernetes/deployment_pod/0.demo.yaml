@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-svc
+  labels:
+    appname: myapp
+spec:
+  type: ClusterIP
+  ports:
+  - name: tomcat-http
+    port: 8080
+    targetPort: 8080
+  selector:
+    appname: myapp
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tomcat-deploy-v1.11.1
+  labels:
+    appname: myapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      appname: myapp
+      release: 1.11.1
+  template:
+    metadata:
+      name: myapp
+      labels:
+        appname: myapp
+        release: 1.11.1
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+    spec:
+      containers:
+      - name: myapp
+        image: tomcat:8.5.38-jre8
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "256Mi"
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          timeoutSeconds: 2
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 20
+          periodSeconds: 10
+  revisionHistoryLimit: 10
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate

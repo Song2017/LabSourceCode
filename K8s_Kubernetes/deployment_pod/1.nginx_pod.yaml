@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  # Pod 里的容器要共享 PID Namespace。
+  shareProcessNamespace: true
+  # 共享宿主机的 Namespace
+  hostNetwork: true
+  # hostIPC: true 
+  # hostPID: true
+  containers:
+  - name: c-nginx
+    image: nginx
+    lifecycle:      
+      postStart:        
+        exec:          
+          command: ["/bin/sh", "-c", "echo Hello from the postStart handler > /usr/share/message"]      
+      preStop:        
+        exec:          
+          command: ["/usr/sbin/nginx","-s","quit"]    
+  - name: c-shell
+    image: busybox
+    imagePullPolicy: IfNotPresent
+    stdin: true
+    tty: true
+
+# kubectl create -f 1.nginx_pod.yaml
+# kubectl attach -it nginx -c c-shell # ps ax
+ 

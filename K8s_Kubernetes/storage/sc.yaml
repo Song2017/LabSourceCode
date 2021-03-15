@@ -1,0 +1,32 @@
+# Rook 存储服务
+# apiVersion: ceph.rook.io/v1beta1
+# kind: Pool
+# metadata:
+#   name: replicapool
+#   namespace: rook-ceph
+# spec:
+#   replicated:
+#     size: 3
+# ---
+# apiVersion: storage.k8s.io/v1
+# kind: StorageClass
+# metadata:
+#   name: block-service
+# provisioner: ceph.rook.io/block
+# parameters:
+#   pool: replicapool
+#   #The value of "clusterNamespace" MUST be the same as the one in which your rook cluster exist
+#   clusterNamespace: rook-ceph
+
+
+# gce 存储服务
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: block-service
+provisioner: kubernetes.io/gce-pd
+parameters:
+  type: pd-ssd # 指的是这个 PV 的类型是“SSD 格式的 GCE 远程磁盘”
+
+
+# $ kubectl create -f sc.yaml
