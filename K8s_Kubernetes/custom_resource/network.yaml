@@ -1,0 +1,19 @@
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: networks.samplecrd.k8s.io
+spec:
+  group: samplecrd.k8s.io
+  version: v1
+  names:
+    kind: Network
+    plural: networks
+  scope: Namespaced
+# Network 对象的定义
+# 第一部分是，自定义资源类型的 API 描述，包括：组（Group）、版本（Version）、资源类型（Resource）等。
+# 这相当于告诉了计算机：兔子是哺乳动物。
+# 第二部分是，自定义资源类型的对象描述，包括：Spec、Status 等。这相当于告诉了计算机：兔子有长耳朵和三瓣嘴。
+
+# 接下来为这个 API 对象编写一个自定义控制器（Custom Controller）
+# 这样， Kubernetes 才能根据 Network API 对象的“增、删、改”操作，在真实环境中做出相应的响应。
+# 比如，“创建、删除、修改”真正的 Neutron 网络。而这，正是 Network 这个 API 对象所关注的“业务逻辑”。
